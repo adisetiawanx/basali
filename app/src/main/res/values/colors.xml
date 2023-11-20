@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Highlight Colors -->
+    <color name="HighlightDark">#FFC58940</color>
+    <color name="HighlightNormal">#FFE5BA73</color>
+    <color name="HighlightLight">#FFFAEAB1</color>
+    <color name="HighlightBackground">#FFFAF8F1</color>
+
+    <!-- Neutral Light Colors -->
+    <color name="NeutralLightDarkest">#FFC5C6CC</color>
+    <color name="NeutralLightDark">#FFD4D6DD</color>
+    <color name="NeutralLightMid">#FFE8E9F1</color>
+    <color name="NeutralLightLight">#FFF8F9FE</color>
+    <color name="NeutralLightLightest">#FFFFFFFF</color>
+
+    <!-- Neutral Dark Colors -->
+    <color name="NeutralDarkDarkest">#FF1F2024</color>
+    <color name="NeutralDarkDark">#FF2F3036</color>
+    <color name="NeutralDarkMid">#FF494A50</color>
+    <color name="NeutralDarkLight">#FF71727A</color>
+    <color name="NeutralDarkLightest">#FF8F9098</color>
+
+    <!-- Support Success Colors -->
+    <color name="SupportSuccessDark">#FF298267</color>
+    <color name="SupportSuccessMid">#FF3AC0A0</color>
+    <color name="SupportSuccessLight">#FFE7F4E8</color>
+
+    <!-- Support Warning Colors -->
+    <color name="SupportWarningDark">#FFE86339</color>
+    <color name="SupportWarningMid">#FFFFB37C</color>
+    <color name="SupportWarningLight">#FFFFF4E4</color>
+
+    <!-- Support Error Colors -->
+    <color name="SupportErrorDark">#FFED3241</color>
+    <color name="SupportErrorMid">#FFFF616D</color>
+    <color name="SupportErrorLight">#FFFFE2E5</color>
+
+</resources>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.confirm.ConfirmationActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/confirmation_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:text="@string/enter_confirmation_code"
+        android:textColor="@color/NeutralDarkDarkest"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:alpha="100" />
+
+    <TextView
+        android:id="@+id/confirmation_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="@string/confirmation_message"
+        android:textColor="@color/NeutralDarkLight"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        tools:alpha="100" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:alpha="100"
+        tools:layout_editor_absoluteX="0dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmEditTextLayout_1"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirmEditTextLayout_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_et_default"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmEditTextLayout_2"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirmEditTextLayout_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_et_default"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmEditTextLayout_3"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirmEditTextLayout_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_et_default"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmEditTextLayout_4"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirmEditTextLayout_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_et_default"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resendCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/resend_code"
+        android:textColor="@color/HighlightDark"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/continue_text"
+        android:background="@drawable/rounded_button_primary" />
+
+
+</LinearLayout>
