@@ -1,12 +1,22 @@
 import Express from "express";
+import Cors from "cors";
+
+import Config from "./config.js";
+import AuthRoutes from "./routes/auth.routes.js";
 
 const app = Express();
-const port = process.env.APP_PORT || 5000;
+
+app.use(Cors());
+app.use(Express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  return res.json({
+    msg: "Hello World",
+  });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.use("/api/auth", AuthRoutes);
+
+app.listen(Config.PORT, () => {
+  console.log(`Example app listening on port ${Config.PORT}`);
 });
