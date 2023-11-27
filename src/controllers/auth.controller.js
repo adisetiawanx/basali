@@ -27,13 +27,19 @@ const sendEmailVerification = async (email, uniqueCode) => {
 
 export const registerUser = async (req, res) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, confirmPassword, name } = req.body;
     const auth = Config.firebaseAuth;
     const clientAuth = Config.firebaseClientAuth;
 
-    if ((!email, !password, !name)) {
+    if ((!email, !password, !confirmPassword, !name)) {
       return res.status(400).json({
         msg: "Invalid parameters",
+      });
+    }
+
+    if (confirmPassword !== password) {
+      return res.status(400).json({
+        msg: "Password and Confirm Password does not match",
       });
     }
 
