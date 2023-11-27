@@ -29,6 +29,7 @@ export const registerUser = async (req, res) => {
   try {
     const { email, password, confirmPassword, name } = req.body;
     const auth = Config.firebaseAuth;
+
     const clientAuth = Config.firebaseClientAuth;
 
     if ((!email, !password, !confirmPassword, !name)) {
@@ -195,6 +196,23 @@ export const loginUser = async (req, res) => {
     return res.status(200).json({
       msg: "User has successfully logged in",
       token: jwtToken,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: error,
+    });
+  }
+};
+
+export const logoutUser = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const auth = Config.firebaseAuth;
+
+    await auth.revokeRefreshTokens(userId);
+
+    return res.json({
+      msg: "Logout success",
     });
   } catch (error) {
     return res.status(500).json({
