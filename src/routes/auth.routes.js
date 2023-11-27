@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   loginUser,
+  refreshAccessToken,
   registerUser,
   resendEmailVerificationCode,
   verifyEmailVerificationCode,
@@ -15,5 +16,6 @@ router.post("/login", loginUser);
 
 router.patch("/verify-email", verifyAuthToken, verifyEmailVerificationCode);
 router.patch("/resend-code", verifyAuthToken, resendEmailVerificationCode);
+router.put("/token", verifyAuthToken, refreshAccessToken);
 
 export default router;

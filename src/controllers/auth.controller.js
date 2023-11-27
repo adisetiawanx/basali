@@ -3,7 +3,7 @@ import Nodemailer from "nodemailer";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Config from "../config.js";
-import { generateUniqueCode } from "../utils.js";
+import { generateNewAccessToken, generateUniqueCode } from "../utils.js";
 
 const sendEmailVerification = async (email, uniqueCode) => {
   const transporter = Nodemailer.createTransport({
@@ -128,9 +128,12 @@ export const verifyEmailVerificationCode = async (req, res) => {
       isVerified: true,
     });
 
+    const jwtToken = await generateNewAccessToken(userId);
+
     return res.json({
       msg: "Email successfully verified",
       userId,
+      token: jwtToken,
     });
   } catch (error) {
     return res.status(500).json({
@@ -191,6 +194,23 @@ export const loginUser = async (req, res) => {
     const jwtToken = await credential.user.getIdToken();
     return res.status(200).json({
       msg: "User has successfully logged in",
+      token: jwtToken,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: error,
+    });
+  }
+};
+
+export const refreshAccessToken = async (req, res) => {
+  try {
+    const userId = req.userData.id;
+
+    const jwtToken = await generateNewAccessToken(userId);
+
+    return res.json({
+      msg: "successfully retrieved a new token",
       token: jwtToken,
     });
   } catch (error) {
