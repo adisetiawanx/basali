@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Basali Project</string>
+    <string name="app_name">Basali</string>
     <string name="title_home">Home</string>
     <string name="title_scanaksara">Scan Aksara</string>
     <string name="title_learn_aksara">Learn Aksara</string>
@@ -26,5 +26,6 @@
     <string name="confirmation_message">A 4-digit code was sent to lucasscott3@email.com</string>
     <string name="continue_text">Continue</string>
     <string name="resend_code">Resend code</string>
+    <string name="welcome_description">Learn Balinese Character</string>
 
 </resources>
