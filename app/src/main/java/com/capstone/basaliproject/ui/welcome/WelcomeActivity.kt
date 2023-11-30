@@ -42,10 +42,10 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (viewModel.getSession().isLogin) {
-            startActivity(Intent(this, MainActivity::class.java))
-
-        } else {
-
+//            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 
