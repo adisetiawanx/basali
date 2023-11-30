@@ -35,13 +35,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         viewModel.result.observe(this) {
-            if (it.token != null) {
-                val email = binding.edLoginEmail.text.toString()
-                viewModel.saveSession(UserModel(email, it.token))
+            if (it.token != null) { val email = binding.edLoginEmail.text.toString()
+                viewModel.saveSession(UserModel(it.token))
 
                 AlertDialog.Builder(this).apply {
                     setTitle("Berhasil Login!")
-                    setMessage("Selamat datang $email")
+                    setMessage("Selamat datang ")
                     setPositiveButton("Lanjut") { _, _ ->
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         ViewModelFactory.refreshObject()
@@ -66,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    //ini bug
     override fun onResume() {
         super.onResume()
         if (viewModel.getSession().isLogin) {

@@ -47,8 +47,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmEditTextLayout_1"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
             android:layout_marginEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -63,8 +63,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmEditTextLayout_2"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
             android:layout_marginEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,8 +79,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmEditTextLayout_3"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
             android:layout_marginEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -95,12 +95,44 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmEditTextLayout_4"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
             android:layout_marginEnd="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_confirmEditTextLayout_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_et_default"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmEditTextLayout_5"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirmEditTextLayout_5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_et_default"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmEditTextLayout_6"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
+            android:layout_marginEnd="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirmEditTextLayout_6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_et_default"

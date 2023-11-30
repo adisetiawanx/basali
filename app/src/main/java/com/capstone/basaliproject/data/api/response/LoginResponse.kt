@@ -15,26 +15,3 @@ data class LoginResponse(
 
 ) : Parcelable
 
-@Parcelize
-data class FailureResponse(
-	@field:SerializedName("msg")
-	val msg: Msg? = null
-) : Parcelable
-
-@Parcelize
-data class Msg(
-
-	@field:SerializedName("code")
-	val code: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("customData")
-	val customData: CustomData? = null
-) : Parcelable
-
-@Parcelize
-data class CustomData(
-	val any: String? = null
-) : Parcelable

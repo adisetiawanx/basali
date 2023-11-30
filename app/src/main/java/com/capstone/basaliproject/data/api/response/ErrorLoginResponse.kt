@@ -8,5 +8,5 @@ import com.google.gson.annotations.SerializedName
 data class ErrorLoginResponse(
 
 	@field:SerializedName("msg")
-	val msg: Msg? = null
+	val msg: String? = null
 ) : Parcelable
