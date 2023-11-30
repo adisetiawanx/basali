@@ -3,14 +3,19 @@ package com.capstone.basaliproject.ui.welcome
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.activity.viewModels
+import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityWelcomeBinding
+import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginActivity
+import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupActivity
 
 class WelcomeActivity : AppCompatActivity() {
+    private val viewModel by viewModels<LoginViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     private lateinit var binding: ActivityWelcomeBinding
 
@@ -22,28 +27,25 @@ class WelcomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         setupAction()
-        setupTextColor()
     }
 
     private fun setupAction() {
-        binding.loginButton.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
         binding.signUpButton.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
+
+        binding.loginButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
-    private fun setupTextColor(){
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-
-        when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
-            android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
-                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralDarkMid))
-            }
-            android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
-                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralLightLight))
-            }
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.getSession().isLogin) {
+//            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 
