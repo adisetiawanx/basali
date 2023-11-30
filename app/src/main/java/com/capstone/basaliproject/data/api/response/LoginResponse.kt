@@ -4,12 +4,8 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-sealed class LoginResponse<out T : Any> {
-	data class Success<out T : Any>(val data: T) : LoginResponse<T>()
-	data class Error(val error: Msg?) : LoginResponse<Nothing>()
-}
 @Parcelize
-data class SuccessResponse(
+data class LoginResponse(
 
 	@field:SerializedName("msg")
 	val msg: String? = null,

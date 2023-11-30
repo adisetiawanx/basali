@@ -35,9 +35,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         viewModel.result.observe(this) {
-            if (it.msg.equals("User has successfully logged in")) {
+            if (it.token != null) {
                 val email = binding.edLoginEmail.text.toString()
-                viewModel.saveSession(UserModel(email, it.token!!))
+                viewModel.saveSession(UserModel(email, it.token))
 
                 AlertDialog.Builder(this).apply {
                     setTitle("Berhasil Login!")
@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
             val json = """
                             {
                                 "email": "$email",
-                                "password": "$password",
+                                "password": "$password"
                             }
                         """.trimIndent()
 

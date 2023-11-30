@@ -2,7 +2,6 @@ package com.capstone.basaliproject.data.repo
 
 import com.capstone.basaliproject.data.api.response.LoginResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
-import com.capstone.basaliproject.data.api.response.SuccessResponse
 import com.capstone.basaliproject.data.api.retrofit.ApiService
 import com.capstone.basaliproject.data.pref.UserModel
 import com.capstone.basaliproject.data.pref.UserPreference
@@ -12,7 +11,7 @@ import okhttp3.RequestBody
 class UserRepository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService
-){
+) {
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
     }
@@ -29,7 +28,7 @@ class UserRepository private constructor(
         return apiService.register(raw)
     }
 
-    suspend fun login(raw: RequestBody): SuccessResponse {
+    suspend fun login(raw: RequestBody): LoginResponse {
         return apiService.login(raw)
     }
 
