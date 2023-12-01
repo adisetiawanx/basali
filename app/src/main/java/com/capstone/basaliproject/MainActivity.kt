@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.basaliproject.databinding.ActivityMainBinding
 import com.capstone.basaliproject.ui.Logout.LogOutViewModel
@@ -18,20 +20,20 @@ import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         setupBottomNav()
-
-
     }
     private fun setupBottomNav(){
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.navigation_home, R.id.navigation_scan, R.id.navigation_learn, R.id.navigation_settings
+        ).build()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val colorStateList = ColorStateList(
             arrayOf(
@@ -52,7 +54,5 @@ class MainActivity : AppCompatActivity() {
         navView.itemTextColor = colorStateList
     }
 
-    private fun setupAction() {
-        binding
-    }
+
 }

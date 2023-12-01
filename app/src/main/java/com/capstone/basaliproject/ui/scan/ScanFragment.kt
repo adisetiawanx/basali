@@ -1,16 +1,36 @@
 package com.capstone.basaliproject.ui.scan
 
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
+import androidx.annotation.StringRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.capstone.basaliproject.databinding.FragmentScanBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
 
 class ScanFragment : Fragment() {
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            com.capstone.basaliproject.R.string.tab_scan,
+            com.capstone.basaliproject.R.string.tab_history
+        )
+    }
     private var _binding: FragmentScanBinding? = null
+    private var menuItem: MenuItem? = null
+    private var searchView: SearchView? = null
 
     private val binding get() = _binding!!
 
@@ -19,16 +39,39 @@ class ScanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val scanViewModel = ViewModelProvider(this).get(ScanViewModel::class.java)
-
         _binding = FragmentScanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textScan
-        scanViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val toolbar = binding.toolbarScan
+        val mTitle = toolbar.findViewById<View>(com.capstone.basaliproject.R.id.toolbar_title) as TextView
+        val activity = requireActivity() as AppCompatActivity
+        activity.setSupportActionBar(toolbar)
+        mTitle.setText("Aksara")
+        activity.getSupportActionBar()?.setDisplayShowTitleEnabled(false);
 
+        // Setup ViewPager2 with Tabs
+        val viewPager: ViewPager2 = binding.viewPager
+        val tabs: TabLayout = binding.tabs
+        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity())
+        viewPager.adapter = sectionsPagerAdapter
+
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+
+
+
+        return root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(com.capstone.basaliproject.R.menu.custom_tab_scan_menu, menu)
+        menuItem = menu.findItem(com.capstone.basaliproject.R.menu.custom_tab_scan_menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

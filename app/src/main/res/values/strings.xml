@@ -27,5 +27,7 @@
     <string name="continue_text">Continue</string>
     <string name="resend_code">Resend code</string>
     <string name="welcome_description">Learn Balinese Character</string>
+    <string name="tab_scan">Aksara Gambar</string>
+    <string name="tab_history">History</string>
 
 </resources>
