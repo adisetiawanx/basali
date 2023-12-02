@@ -15,6 +15,7 @@ import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupActivity
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
+import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
 
 class HomeFragment : Fragment() {
     private val viewModel by viewModels<LoginViewModel> {
@@ -42,6 +43,8 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+        closeOnBackPressed()
+
         return root
     }
 

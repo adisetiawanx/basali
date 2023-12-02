@@ -63,8 +63,8 @@ class LoginActivity : AppCompatActivity() {
                 AlertDialog.Builder(this).apply {
                     setTitle("Gagal!")
                     setMessage("tidak bisa login")
-                    setPositiveButton("Lanjut") { _, _ ->
-                        finish()
+                    setPositiveButton("Coba lagi") { _, _ ->
+//                        finish()
                     }
                     create()
                     show()

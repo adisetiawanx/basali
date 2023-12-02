@@ -12,8 +12,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.capstone.basaliproject.databinding.ActivityMainBinding
 import com.capstone.basaliproject.ui.Logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
+import com.capstone.basaliproject.ui.home.HomeFragment
+import com.capstone.basaliproject.ui.learn.LearnFragment
 import com.capstone.basaliproject.ui.login.LoginActivity
 import com.capstone.basaliproject.ui.login.LoginViewModel
+import com.capstone.basaliproject.ui.scan.ScanFragment
+import com.capstone.basaliproject.ui.settings.SettingsFragment
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -52,7 +56,4 @@ class MainActivity : AppCompatActivity() {
         navView.itemTextColor = colorStateList
     }
 
-    private fun setupAction() {
-        binding
-    }
 }

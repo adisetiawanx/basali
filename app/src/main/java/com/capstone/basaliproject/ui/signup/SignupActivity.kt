@@ -60,7 +60,7 @@ class SignupActivity : AppCompatActivity() {
                     setTitle("Failed!")
                     setMessage("Account cannot be made")
                     setPositiveButton("Next") { _, _ ->
-                        finish()
+//                        finish()
                     }
                     create()
                     show()
