@@ -7,14 +7,13 @@
     tools:context=".ui.scan.TabScanFragment">
 
     <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:padding="10dp">
 
         <androidx.cardview.widget.CardView
@@ -22,37 +21,82 @@
             android:layout_height="@dimen/_280sdp"
             android:layout_margin="@dimen/_5sdp"
             android:elevation="1.0dp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            android:padding="@dimen/_20sdp"/>
-        
+            android:padding="@dimen/_20sdp"
+            app:cardCornerRadius="@dimen/_10sdp" />
+
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="280dp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/dashed_border">
 
-            <TextView
-                android:id="@+id/title_placeholder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:textStyle="bold"
-                android:layout_below="@id/placeholder"
-                android:text="Click Here To Pick Image" />
-            
             <ImageView
                 android:id="@+id/placeholder"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/cam_placeholder_logo"/>
-
+                android:layout_height="match_parent"
+                android:layout_margin="25dp"
+                android:src="@drawable/cam_placeholder_logo" />
         </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/scan_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="@string/successfully_written_balinese_script"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/scan_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_title"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/scan_description"
+        android:textStyle="normal"
+        android:gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_description">
+
+        <Button
+            android:id="@+id/capture_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/capture"
+            android:textSize="18sp"
+            android:background="@drawable/rounded_button_tertiary"/>
+
+        <Button
+            android:id="@+id/process_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="26dp"
+            android:background="@drawable/rounded_button_primary"
+            android:text="@string/process"
+            android:textSize="18sp"/>
     </LinearLayout>
 
 </RelativeLayout>

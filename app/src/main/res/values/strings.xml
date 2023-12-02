@@ -31,5 +31,14 @@
     <string name="tab_history">History</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="choose">Choose</string>
+    <string name="cancel">Cancel</string>
+    <string name="permission_request_granted">Permission request granted</string>
+    <string name="permission_request_denied">Permission request denied</string>
+    <string name="failed_to_display_the_camera">Failed to display the camera.</string>
+    <string name="successfully_written_balinese_script">Successfully written Balinese script?</string>
+    <string name="scan_description">Capture your handwritten Balinese script, upload it, and let the app detect the type of Balinese script you\'ve successfully written.</string>
+    <string name="process">Process</string>
+    <string name="capture">Capture</string>
 
 </resources>
