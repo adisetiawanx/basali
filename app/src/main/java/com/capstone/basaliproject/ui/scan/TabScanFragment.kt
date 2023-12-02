@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,10 +21,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabScanBinding
+import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.scan.CameraActivity.Companion.CAMERAX_RESULT
+import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 
 
 class TabScanFragment : Fragment() {
@@ -56,12 +60,75 @@ class TabScanFragment : Fragment() {
     ): View? {
         _binding = FragmentTabScanBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val processButton = binding.processButton
 
         binding.captureButton.setOnClickListener {
             showCustomDialog()
         }
 
+        processButton.setOnClickListener {
+            if (currentImageUri != null) {
+                // Process the image here
+                Toast.makeText(requireContext(), "Image processing logic goes here", Toast.LENGTH_SHORT).show()
+
+            } else {
+                // Show a message or take appropriate action when no image is selected
+                showWarning("Select Image!", "You havent selected image, please select one to process")
+            }
+        }
+
         return root
+    }
+
+    private fun updateCaptureButtonText() {
+        val captureButton = binding.captureButton
+        val tvClearImg = binding.tvClearImage
+
+        if (currentImageUri != null) {
+            // Change the text to "Edit" when an image is selected
+            captureButton.text = "Edit"
+            tvClearImg.isEnabled = true
+            tvClearImg.text = "Click Here To Reset"
+            tvClearImg.setOnClickListener {
+                //clear the selected image when click this textview
+                currentImageUri = null
+                binding.placeholder.setImageResource(R.drawable.cam_placeholder_logo)
+                if (currentImageUri != null){
+                    tvClearImg.isEnabled = false
+                    tvClearImg.visibility = View.INVISIBLE
+                }
+                captureButton.text = "Capture"
+            }
+        } else {
+            // Reset the text to "Capture" when no image is selected
+            captureButton.text = "Capture"
+            tvClearImg.isEnabled = false
+            tvClearImg.text = ""
+        }
+    }
+
+    private fun showWarning(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(requireContext())
+
+        val customView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnOk = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        btnOk.setOnClickListener {
+
+        }
+        val dialog = builder.create()
+        btnOk.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.show()
     }
 
     private fun showCustomDialog() {
@@ -116,8 +183,10 @@ class TabScanFragment : Fragment() {
         currentImageUri?.let {
             Log.d("Image URI", "showImage: $it")
             binding.placeholder.setImageURI(it)
+            updateCaptureButtonText()
         }
     }
+
 
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
