@@ -59,8 +59,12 @@ class ScanFragment : Fragment() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
+
+
+
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
+
                 tab.view.background = ContextCompat.getDrawable(
                     requireContext(),
                     com.capstone.basaliproject.R.drawable.tab_selected_background
@@ -72,12 +76,18 @@ class ScanFragment : Fragment() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
+                if (tab != null) {
+                    tab.view.background = ContextCompat.getDrawable(
+                        requireContext(),
+                        com.capstone.basaliproject.R.drawable.tab_selected_background
+                    )
+                }
             }
         })
-
-
-
+        val tabAtIndex0: TabLayout.Tab? = tabs.getTabAt(0)
+        if (tabAtIndex0 != null) {
+            tabAtIndex0.select()
+        }
         return root
     }
 

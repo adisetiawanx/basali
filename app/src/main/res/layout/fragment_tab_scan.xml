@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.scan.TabScanFragment">
 
-
-    <ImageView
-        android:id="@+id/previewImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:foregroundGravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358"
-        app:srcCompat="@drawable/cam_placeholder_logo" />
-
-    <Button
-        android:id="@+id/cameraButton"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/galleryButton"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView"
-        app:layout_constraintVertical_bias="0.123" />
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp">
 
-    <Button
-        android:id="@+id/galleryButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:elevation="2dp"
-        android:scaleType="fitCenter"
-        android:text="@string/gallery"
-        app:layout_constraintBottom_toBottomOf="@+id/cameraButton"
-        app:layout_constraintEnd_toStartOf="@+id/cameraButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cameraButton" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_280sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:elevation="1.0dp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:padding="@dimen/_20sdp"/>
+        
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/dashed_border">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/title_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:layout_below="@id/placeholder"
+                android:text="Click Here To Pick Image" />
+            
+            <ImageView
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/cam_placeholder_logo"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
