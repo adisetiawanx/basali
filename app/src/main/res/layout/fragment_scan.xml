@@ -33,6 +33,9 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/tab_layout_bg"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
         app:tabTextColor="@color/NeutralDarkDarkest"/>
 
     <androidx.viewpager2.widget.ViewPager2

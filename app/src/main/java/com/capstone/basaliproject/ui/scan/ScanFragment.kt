@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.basaliproject.databinding.FragmentScanBinding
@@ -30,7 +31,6 @@ class ScanFragment : Fragment() {
     }
     private var _binding: FragmentScanBinding? = null
     private var menuItem: MenuItem? = null
-    private var searchView: SearchView? = null
 
     private val binding get() = _binding!!
 
@@ -58,6 +58,23 @@ class ScanFragment : Fragment() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                tab.view.background = ContextCompat.getDrawable(
+                    requireContext(),
+                    com.capstone.basaliproject.R.drawable.tab_selected_background
+                )
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                tab?.view?.background = null
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                TODO("Not yet implemented")
+            }
+        })
 
 
 
