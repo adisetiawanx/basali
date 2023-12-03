@@ -9,6 +9,6 @@ const router = Router();
 
 router.get("/profile-user/:id", profileUser);
 router.put("/photo-profile/:id", updateProfilePhoto);
-router.post("/delete-photo/:id", deleteProfilePhoto);
+router.delete("/delete-photo/:id", deleteProfilePhoto);
 
 export default router;
