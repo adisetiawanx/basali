@@ -61,6 +61,12 @@ export const registerUser = async (req, res) => {
       verificationCode: uniqueCode,
     });
 
+    const profileDocumentRef = doc(Config.firebaseDB, "profile", user.uid);
+    await setDoc(profileDocumentRef, {
+    email: user.email,
+    name: user.displayName,
+    });
+
     const credential = await signInWithEmailAndPassword(
       clientAuth,
       email,

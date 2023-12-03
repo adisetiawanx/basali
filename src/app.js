@@ -3,6 +3,7 @@ import Cors from "cors";
 
 import Config from "./config.js";
 import AuthRoutes from "./routes/auth.routes.js";
+import ProfileRoutes from "./routes/profile.routes.js";
 
 const app = Express();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", AuthRoutes);
+app.use("/api/profile", ProfileRoutes);
 
 app.listen(Config.PORT, () => {
   console.log(`Example app listening on port ${Config.PORT}`);
