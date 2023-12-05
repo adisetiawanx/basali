@@ -27,5 +27,14 @@
     <string name="continue_text">Continue</string>
     <string name="resend_code">Resend code</string>
     <string name="welcome_description">Learn Balinese Character</string>
+    <string name="profile_image">Profile image</string>
+    <string name="welcome">Welcome,</string>
+    <string name="siti_badilah">Siti Badilah</string>
+    <string name="explore_your_aksara">Explore Your Aksara</string>
+    <string name="click_here_for_more_aksara">Click here for more Aksara</string>
+    <string name="history">History</string>
+    <string name="explore_aksara">Explore Aksara</string>
+    <string name="aksara_d">Aksara %d</string>
+    <string name="view">View</string>
 
 </resources>
