@@ -1,4 +1,4 @@
-package com.capstone.basaliproject.ui.scan
+package com.capstone.basaliproject.ui.scan.scanner
 
 import android.Manifest
 import android.content.Intent
@@ -21,13 +21,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabScanBinding
-import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.scan.CameraActivity.Companion.CAMERAX_RESULT
-import com.capstone.basaliproject.ui.welcome.WelcomeActivity
+import com.capstone.basaliproject.ui.scan.scanner.CameraActivity.Companion.CAMERAX_RESULT
 
 
 class TabScanFragment : Fragment() {
@@ -70,6 +68,9 @@ class TabScanFragment : Fragment() {
             if (currentImageUri != null) {
                 // Process the image here
                 Toast.makeText(requireContext(), "Image processing logic goes here", Toast.LENGTH_SHORT).show()
+                showResultPopUp("Its Wa aksara", "We know because have a similaritis “ikutin metode” yang dipake",
+                    currentImageUri!!
+                )
 
             } else {
                 // Show a message or take appropriate action when no image is selected
@@ -98,6 +99,7 @@ class TabScanFragment : Fragment() {
                     tvClearImg.visibility = View.INVISIBLE
                 }
                 captureButton.text = "Capture"
+                tvClearImg.text = ""
             }
         } else {
             // Reset the text to "Capture" when no image is selected
@@ -105,6 +107,32 @@ class TabScanFragment : Fragment() {
             tvClearImg.isEnabled = false
             tvClearImg.text = ""
         }
+    }
+
+    private fun showResultPopUp(titleFill: String, descFill: String, uri: Uri){
+        val builder = AlertDialog.Builder(requireContext())
+
+        val customView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_scan_result, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tvResultTitle)
+        val desc = customView.findViewById<TextView>(R.id.tvResultDesc)
+        val btnOk = customView.findViewById<Button>(R.id.btnDone)
+        val img = customView.findViewById<ImageView>(R.id.ivResultScan)
+
+        title.text = titleFill
+        desc.text = descFill
+        img.setImageURI(uri)
+
+        btnOk.setOnClickListener {
+
+        }
+        val dialog = builder.create()
+        btnOk.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.show()
     }
 
     private fun showWarning(titleFill: String, descFill: String) {

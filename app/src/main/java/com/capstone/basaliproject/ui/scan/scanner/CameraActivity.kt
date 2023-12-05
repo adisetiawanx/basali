@@ -1,4 +1,4 @@
-package com.capstone.basaliproject.ui.scan
+package com.capstone.basaliproject.ui.scan.scanner
 
 import android.content.Intent
 import android.os.Build
@@ -10,7 +10,6 @@ import android.view.Surface
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException

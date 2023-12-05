@@ -1,6 +1,5 @@
 package com.capstone.basaliproject.ui.scan
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -10,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.basaliproject.databinding.FragmentScanBinding
+import com.capstone.basaliproject.ui.scan.scanner.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -29,6 +27,7 @@ class ScanFragment : Fragment() {
             com.capstone.basaliproject.R.string.tab_history
         )
     }
+
     private var _binding: FragmentScanBinding? = null
     private var menuItem: MenuItem? = null
 
@@ -43,7 +42,8 @@ class ScanFragment : Fragment() {
         val root: View = binding.root
 
         val toolbar = binding.toolbarScan
-        val mTitle = toolbar.findViewById<View>(com.capstone.basaliproject.R.id.toolbar_title) as TextView
+        val mTitle =
+            toolbar.findViewById<View>(com.capstone.basaliproject.R.id.toolbar_title) as TextView
         val activity = requireActivity() as AppCompatActivity
         activity.setSupportActionBar(toolbar)
         mTitle.setText("Aksara")

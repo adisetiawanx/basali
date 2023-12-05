@@ -1,10 +1,9 @@
-package com.capstone.basaliproject.ui.scan
+package com.capstone.basaliproject.ui.scan.scanner
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.capstone.basaliproject.ui.home.HomeFragment
+import com.capstone.basaliproject.ui.scan.history.TabHistoryFragment
 
 class SectionsPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {

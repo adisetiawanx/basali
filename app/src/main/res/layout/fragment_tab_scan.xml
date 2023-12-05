@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.scan.TabScanFragment">
+    android:id="@+id/fragmentContainer"
+    tools:context=".ui.scan.scanner.TabScanFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -99,6 +100,7 @@
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
                 android:textColor="@color/HighlightDark"
                 android:text="@string/capture"
                 android:textSize="18sp"
@@ -112,6 +114,7 @@
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="26dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_button_primary"
                 android:text="@string/process"
                 android:textSize="18sp"/>
