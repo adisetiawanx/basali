@@ -2,13 +2,13 @@ import { Router } from "express";
 
 import {
     deleteProfilePhoto,
-    profileUser, updateProfilePhoto,
+    userProfile, updateProfilePhoto,
 } from "../controllers/profile.controller.js";
 
 const router = Router();
 
-router.get("/profile-user/:id", profileUser);
-router.put("/photo-profile/:id", updateProfilePhoto);
-router.delete("/delete-photo/:id", deleteProfilePhoto);
+router.get("/profile-user", userProfile);
+router.put("/photo-profile", updateProfilePhoto);
+router.delete("/delete-photo", deleteProfilePhoto);
 
 export default router;
