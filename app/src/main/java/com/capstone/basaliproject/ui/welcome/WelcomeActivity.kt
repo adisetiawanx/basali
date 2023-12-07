@@ -3,10 +3,12 @@ package com.capstone.basaliproject.ui.welcome
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityWelcomeBinding
 import com.capstone.basaliproject.ui.login.LoginActivity
 import com.capstone.basaliproject.ui.signup.SignupActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -35,5 +37,15 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finishAffinity()
         super.onBackPressed()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null){
+            startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+            finish()
+        }
     }
 }
