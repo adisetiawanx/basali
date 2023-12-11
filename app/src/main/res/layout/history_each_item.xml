@@ -49,6 +49,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/child_rv"
             android:layout_width="match_parent"
+            tools:listitem="@layout/learn_item"
             android:layout_height="wrap_content" />
     </RelativeLayout>
 </LinearLayout>

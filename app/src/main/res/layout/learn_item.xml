@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -25,21 +25,23 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageviewNested"
                 android:layout_width="80dp"
-                android:layout_height="160dp"
+                android:layout_height="171dp"
                 android:background="@drawable/rounded_corner_little"
+                android:maxHeight="160dp"
+                android:scaleType="centerCrop"
                 android:src="@color/HighlightLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/dateNested"
+                android:id="@+id/tv_desc"
                 android:layout_width="223dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:minLines="3"
                 android:textColor="#979797"
-                android:textSize="10sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="@+id/titleNested"
@@ -54,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="28dp"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageviewNested"
                 app:layout_constraintTop_toTopOf="parent"
@@ -64,6 +66,7 @@
                 android:id="@+id/btnView"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/dialog_bg_bordered"
@@ -71,7 +74,8 @@
                 android:textColor="@color/HighlightDark"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

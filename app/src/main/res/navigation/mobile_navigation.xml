@@ -46,5 +46,10 @@
         android:name="com.capstone.basaliproject.ui.scan.scanner.ScanResultFragment"
         android:label="fragment_scan_result"
         tools:layout="@layout/fragment_scan_result" />
+    <fragment
+        android:id="@+id/learnDetailFragment"
+        android:name="com.capstone.basaliproject.ui.learn.detail.LearnDetailFragment"
+        android:label="fragment_learn_detail"
+        tools:layout="@layout/fragment_learn_detail" />
 
 </navigation>
