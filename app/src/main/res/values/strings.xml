@@ -36,6 +36,19 @@
     <string name="explore_aksara">Explore Aksara</string>
     <string name="aksara_d">Aksara %d</string>
     <string name="view">View</string>
+    <string name="choose">Choose</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="successfully_written_balinese_script">Successfully Written Balinese script?</string>
+    <string name="scan_description">Capture your handwritten balinese script, upload it, and let the app detect the type of Balinese script you\'ve successfully written</string>
+    <string name="capture">Capture</string>
+    <string name="process">Process</string>
+    <string name="tab_scan">Aksara Gambar</string>
+    <string name="tab_history">History</string>
+    <string name="failed_to_display_the_camera">Failed to display the camera</string>
+    <string name="permission_request_granted">permission request granted</string>
+    <string name="permission_request_denied">permission request denied</string>
 
     <string-array name="aksara_name">
         <item>Aksara Wianjana</item>

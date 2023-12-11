@@ -34,11 +34,16 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
-        viewModel.getSession().observe(requireActivity()) { user ->
+        // Check if the fragment is attached to an activity
+        if (!isAdded) {
+            return super.onCreateView(inflater, container, savedInstanceState)
+        }
+
+        viewModel.getSession().observe(viewLifecycleOwner) { user ->
             if (!user.isLogin) {
-                startActivity(Intent(activity, WelcomeActivity::class.java))
+                startActivity(Intent(requireActivity(), WelcomeActivity::class.java))
             }
         }
 
@@ -58,18 +63,6 @@ class SettingsFragment : Fragment() {
 
     private fun setupAction() {
         binding.btnLogout.setOnClickListener {
-//            AlertDialog.Builder(requireContext()).apply {
-//                setTitle("Berhasil Logout!")
-//                setMessage("Anda telah logout")
-//                setPositiveButton("Lanjut") { _, _ ->
-//                    viewModel.logout()
-//                    val intent = Intent(requireActivity(), WelcomeActivity::class.java)
-//                    ViewModelFactory.refreshObject()
-//                    startActivity(intent)
-//                }
-//                create()
-//                show()
-//            }
             showCustomDialog("Warning!", "Yakin ingin logout?")
         }
     }

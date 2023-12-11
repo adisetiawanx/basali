@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:padding="20dp"
+    android:elevation="5dp"
+    android:layout_marginTop="30dp"
+    tools:layout_editor_absoluteX="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/choose"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ib_camera" />
+
+    <ImageButton
+        android:id="@+id/ib_camera"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/ic_baseline_camera_alt_24"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ib_gallery"/>
+
+    <ImageButton
+        android:id="@+id/ib_gallery"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_baseline_photo_24"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toEndOf="@id/ib_camera"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/camera"
+        app:layout_constraintTop_toBottomOf="@id/ib_camera"
+        app:layout_constraintStart_toStartOf="@id/ib_camera"
+        app:layout_constraintEnd_toEndOf="@id/ib_camera"/>
+
+    <TextView
+        android:id="@+id/tv_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery"
+        app:layout_constraintTop_toBottomOf="@id/ib_gallery"
+        app:layout_constraintStart_toStartOf="@id/ib_gallery"
+        app:layout_constraintEnd_toEndOf="@id/ib_gallery"/>
+
+    <TextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:background="@drawable/dialog_bg"
+        android:gravity="end"
+        android:text="@string/cancel"
+        android:textStyle="bold"
+        android:textColor="@color/HighlightDark"
+        app:layout_constraintTop_toBottomOf="@id/tv_gallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

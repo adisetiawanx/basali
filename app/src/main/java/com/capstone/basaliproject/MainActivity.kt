@@ -8,36 +8,32 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.basaliproject.databinding.ActivityMainBinding
 import com.capstone.basaliproject.ui.Logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.home.HomeFragment
-import com.capstone.basaliproject.ui.learn.LearnFragment
 import com.capstone.basaliproject.ui.login.LoginActivity
 import com.capstone.basaliproject.ui.login.LoginViewModel
-import com.capstone.basaliproject.ui.scan.ScanFragment
-import com.capstone.basaliproject.ui.settings.SettingsFragment
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+
 
         setupBottomNav()
-
-
     }
     private fun setupBottomNav(){
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.navigation_home, R.id.navigation_scan, R.id.navigation_learn, R.id.navigation_settings
+        ).build()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val colorStateList = ColorStateList(
             arrayOf(
@@ -57,5 +53,6 @@ class MainActivity : AppCompatActivity() {
         navView.isItemActiveIndicatorEnabled = false
         navView.itemTextColor = colorStateList
     }
+
 
 }
