@@ -10,14 +10,21 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.capstone.basaliproject.R
+import com.capstone.basaliproject.data.pref.AksaraModel
 import com.capstone.basaliproject.databinding.FragmentHomeBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupActivity
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
+import com.capstone.basaliproject.utils.ListAksaraAdapter
 import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
 
 class HomeFragment : Fragment() {
+    private lateinit var rvAksara: RecyclerView
+    private val list = ArrayList<AksaraModel>()
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -43,9 +50,34 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+
+        rvAksara = root.findViewById(R.id.rv_aksara)
+        rvAksara.setHasFixedSize(true)
+
+        list.addAll(getListAksara())
+        showRecyclerList()
+
         closeOnBackPressed()
 
         return root
+    }
+
+    private fun getListAksara(): ArrayList<AksaraModel> {
+        val dataName = resources.getStringArray(R.array.aksara_name)
+        val dataDescription = resources.getStringArray(R.array.aksara_descriptions)
+        val dataPhoto = resources.obtainTypedArray(R.array.aksara_photo)
+        val listAksara = ArrayList<AksaraModel>()
+        for (i in dataName.indices) {
+            val aksara = AksaraModel(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
+            listAksara.add(aksara)
+        }
+        return listAksara
+    }
+
+    private fun showRecyclerList() {
+        rvAksara.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val listAksaraAdapter = ListAksaraAdapter(list)
+        rvAksara.adapter = listAksaraAdapter
     }
 
     override fun onDestroyView() {

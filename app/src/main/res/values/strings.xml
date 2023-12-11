@@ -37,4 +37,34 @@
     <string name="aksara_d">Aksara %d</string>
     <string name="view">View</string>
 
+    <string-array name="aksara_name">
+        <item>Aksara Wianjana</item>
+        <item>Gantungan miwah Gempelan Aksara Wianjana</item>
+        <item>Aksara Swalalita</item>
+        <item>Penganggone Suara</item>
+        <item>Penganggone Tengenan</item>
+        <item>Aksara Suara</item>
+        <item>Angka Bali</item>
+    </string-array>
+
+    <string-array name="aksara_descriptions">
+        <item>Deskripsi Aksara Wianjana</item>
+        <item>Deskripsi Gantungan miwah Gempelan Aksara Wianjana</item>
+        <item>Deskripsi Aksara Swalalita</item>
+        <item>Deskripsi Penganggone Suara</item>
+        <item>Deskripsi Penganggone Tengenan</item>
+        <item>Deskripsi Aksara Suara</item>
+        <item>Deskripsi Angka Bali</item>
+    </string-array>
+
+    <integer-array name="aksara_photo">
+        <item>@drawable/aksara_wianjana</item>
+        <item>@drawable/gantungan</item>
+        <item>@drawable/aksara_swalalita</item>
+        <item>@drawable/pengangge_suara</item>
+        <item>@drawable/pengangge_tengenan</item>
+        <item>@drawable/aksara_suara</item>
+        <item>@drawable/angka_bali</item>
+    </integer-array>
+
 </resources>
