@@ -62,4 +62,6 @@ class LearnFragment : Fragment(), LearnAdapter.ItemClickListener {
         // Use findNavController to navigate to DetailFragment
         view.root.findNavController().navigate(R.id.learnDetailFragment, bundle)
     }
+
+
 }

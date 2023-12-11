@@ -1,33 +1,65 @@
 package com.capstone.basaliproject.utils
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.basaliproject.R
-import com.capstone.basaliproject.data.pref.AksaraModel
+import com.capstone.basaliproject.databinding.ItemAksaraHomeBinding
+import com.capstone.basaliproject.ui.home.HomeFragment
+import com.capstone.basaliproject.ui.learn.model.LearnModel
 
-class ListAksaraAdapter(private val listAksara: ArrayList<AksaraModel>) : RecyclerView.Adapter<ListAksaraAdapter.ListViewHolder>() {
+class ListAksaraAdapter(private val clickListener: HomeFragment) :
+    ListAdapter<LearnModel, ListAksaraAdapter.MyViewHolder>(ListAksaraAdapter.DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_aksara_home, parent, false)
-        return ListViewHolder(view)
-    }
+        interface ItemClickListener {
+            fun onItemClick(items: LearnModel, view: ItemAksaraHomeBinding)
+        }
 
-    override fun getItemCount(): Int = listAksara.size
+        companion object {
+            val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LearnModel>() {
+                override fun areItemsTheSame(oldItem: LearnModel, newItem: LearnModel): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val (name, description, photo) = listAksara[position]
-        holder.imgPhoto.setImageResource(photo)
-        holder.tvName.text = name
-        holder.tvDescription.text = description
-    }
+                override fun areContentsTheSame(
+                    oldItem: LearnModel,
+                    newItem: LearnModel
+                ): Boolean {
+                    return oldItem == newItem
+                }
+            }
+        }
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imgPhoto: ImageView = itemView.findViewById(R.id.iv_item_photo)
-        val tvName: TextView = itemView.findViewById(R.id.tv_item_name)
-        val tvDescription: TextView = itemView.findViewById(R.id.tv_item_description)
-    }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+            val binding = ItemAksaraHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return MyViewHolder(binding)
+        }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            val aksara = getItem(position)
+            holder.bind(aksara)
+            holder.itemView.setOnClickListener {
+                clickListener.onItemClick(aksara, holder.binding)
+            }
+            holder.binding.btnView.setOnClickListener {
+                clickListener.onItemClick(aksara, holder.binding)
+            }
+        }
+
+        class MyViewHolder(val binding: ItemAksaraHomeBinding) :
+            RecyclerView.ViewHolder(binding.root) {
+            fun bind(learnItem: LearnModel) {
+
+                binding.apply {
+                    ivItemPhoto.setImageResource(learnItem.image)
+                    tvItemName.text = learnItem.title
+                    tvItemDescription.text = learnItem.desc
+                    btnView.setOnClickListener {
+
+                    }
+
+                }
+            }
+        }
 }

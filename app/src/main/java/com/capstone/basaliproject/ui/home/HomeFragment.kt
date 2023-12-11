@@ -1,33 +1,35 @@
 package com.capstone.basaliproject.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.data.pref.AksaraModel
 import com.capstone.basaliproject.databinding.FragmentHomeBinding
+import com.capstone.basaliproject.databinding.ItemAksaraHomeBinding
+import com.capstone.basaliproject.databinding.LearnItemBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
+import com.capstone.basaliproject.ui.learn.LearnViewModel
+import com.capstone.basaliproject.ui.learn.model.LearnModel
 import com.capstone.basaliproject.ui.login.LoginViewModel
-import com.capstone.basaliproject.ui.signup.SignupActivity
-import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.capstone.basaliproject.utils.ListAksaraAdapter
 import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
+import com.dicoding.picodiploma.loginwithanimation.view.story.LearnAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
     private lateinit var rvAksara: RecyclerView
     private val list = ArrayList<AksaraModel>()
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
+    private lateinit var aksaraAdapter: ListAksaraAdapter
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -46,42 +48,40 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+        // Initialize the adapter
+        aksaraAdapter = ListAksaraAdapter(this)
 
-        rvAksara = root.findViewById(R.id.rv_aksara)
-        rvAksara.setHasFixedSize(true)
+        // Set the RecyclerView's adapter
+        binding.rvAksara.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvAksara.adapter = aksaraAdapter
 
-        list.addAll(getListAksara())
-        showRecyclerList()
+        val learnViewModel = ViewModelProvider(this).get(LearnViewModel::class.java)
+
+        // Observe the data from ViewModel and submit it to the adapter
+        learnViewModel.learnData.observe(viewLifecycleOwner, { data ->
+            aksaraAdapter.submitList(data)
+        })
 
         closeOnBackPressed()
 
         return root
     }
 
-    private fun getListAksara(): ArrayList<AksaraModel> {
-        val dataName = resources.getStringArray(R.array.aksara_name)
-        val dataDescription = resources.getStringArray(R.array.aksara_descriptions)
-        val dataPhoto = resources.obtainTypedArray(R.array.aksara_photo)
-        val listAksara = ArrayList<AksaraModel>()
-        for (i in dataName.indices) {
-            val aksara = AksaraModel(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
-            listAksara.add(aksara)
-        }
-        return listAksara
-    }
-
-    private fun showRecyclerList() {
-        rvAksara.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        val listAksaraAdapter = ListAksaraAdapter(list)
-        rvAksara.adapter = listAksaraAdapter
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(items: LearnModel, view: ItemAksaraHomeBinding) {
+        // Handle item click here
+        val bundle = Bundle().apply {
+            putInt("id", items.id)
+            putInt("image", items.image)
+            putString("title", items.title)
+            putString("desc", items.desc)
+        }
+
+        // Use findNavController to navigate to DetailFragment
+        view.root.findNavController().navigate(R.id.learnDetailFragment, bundle)
     }
 }
