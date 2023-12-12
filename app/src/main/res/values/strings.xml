@@ -51,6 +51,10 @@
     <string name="permission_request_denied">permission request denied</string>
     <string name="aksara">Aksara</string>
     <string name="back">Back</string>
+    <string name="notifications">Notifications</string>
+    <string name="notification_setting">Notification Setting</string>
+    <string name="language">Language</string>
+    <string name="logout">Logout</string>
 
     <string-array name="aksara_name">
         <item>Aksara Wianjana</item>

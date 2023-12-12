@@ -49,10 +49,6 @@ class SettingsFragment : Fragment() {
         val root: View = binding.root
         setupAction()
 
-        val textView: TextView = binding.textSettings
-        settingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
 
     }
