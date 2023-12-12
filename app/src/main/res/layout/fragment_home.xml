@@ -10,14 +10,15 @@
         android:id="@+id/cl_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginTop="12dp"
             android:layout_marginStart="28dp"
             android:contentDescription="@string/profile_image"
-            android:src="@drawable/ic_baseline_account_box_24"
+            android:src="@tools:sample/avatars"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
