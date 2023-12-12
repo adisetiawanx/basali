@@ -24,17 +24,8 @@ import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
 import com.dicoding.picodiploma.loginwithanimation.view.story.LearnAdapter
 
 class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
-    private lateinit var rvAksara: RecyclerView
-    private val list = ArrayList<AksaraModel>()
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(requireContext())
-    }
     private lateinit var aksaraAdapter: ListAksaraAdapter
-
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
