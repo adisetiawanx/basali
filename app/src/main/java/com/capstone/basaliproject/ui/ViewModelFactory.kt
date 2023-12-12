@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.basaliproject.data.di.Injection
 import com.capstone.basaliproject.data.repo.UserRepository
-import com.capstone.basaliproject.ui.Logout.LogOutViewModel
+import com.capstone.basaliproject.ui.logout.LogOutViewModel
 import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupViewModel
 

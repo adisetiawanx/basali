@@ -1,4 +1,4 @@
-package com.capstone.basaliproject.ui.Logout
+package com.capstone.basaliproject.ui.logout
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

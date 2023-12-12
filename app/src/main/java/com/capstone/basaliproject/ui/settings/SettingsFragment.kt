@@ -10,17 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentSettingsBinding
-import com.capstone.basaliproject.ui.Logout.LogOutViewModel
+import com.capstone.basaliproject.ui.logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.login.LoginActivity
-import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 
 class SettingsFragment : Fragment() {
@@ -47,7 +43,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        val settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        val settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -94,7 +90,7 @@ class SettingsFragment : Fragment() {
         btnNo.setOnClickListener {
             dialog.cancel()
         }
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 }

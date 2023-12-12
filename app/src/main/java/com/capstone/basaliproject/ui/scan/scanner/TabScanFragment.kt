@@ -22,10 +22,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabScanBinding
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity.Companion.CAMERAX_RESULT
+
 class TabScanFragment : Fragment() {
     private var _binding: FragmentTabScanBinding? = null
     private val binding get() = _binding!!

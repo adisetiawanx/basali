@@ -12,7 +12,6 @@ import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentLearnBinding
 import com.capstone.basaliproject.databinding.LearnItemBinding
 import com.capstone.basaliproject.ui.learn.model.LearnModel
-import com.dicoding.picodiploma.loginwithanimation.view.story.LearnAdapter
 
 class LearnFragment : Fragment(), LearnAdapter.ItemClickListener {
 
@@ -37,9 +36,9 @@ class LearnFragment : Fragment(), LearnAdapter.ItemClickListener {
         val learnViewModel = ViewModelProvider(this).get(LearnViewModel::class.java)
 
         // Observe the data from ViewModel and submit it to the adapter
-        learnViewModel.learnData.observe(viewLifecycleOwner, { data ->
+        learnViewModel.learnData.observe(viewLifecycleOwner) { data ->
             learnAdapter.submitList(data)
-        })
+        }
 
 
         return root

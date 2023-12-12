@@ -49,6 +49,8 @@
     <string name="failed_to_display_the_camera">Failed to display the camera</string>
     <string name="permission_request_granted">permission request granted</string>
     <string name="permission_request_denied">permission request denied</string>
+    <string name="aksara">Aksara</string>
+    <string name="back">Back</string>
 
     <string-array name="aksara_name">
         <item>Aksara Wianjana</item>

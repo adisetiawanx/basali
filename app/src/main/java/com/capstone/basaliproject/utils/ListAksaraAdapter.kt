@@ -10,7 +10,7 @@ import com.capstone.basaliproject.ui.home.HomeFragment
 import com.capstone.basaliproject.ui.learn.model.LearnModel
 
 class ListAksaraAdapter(private val clickListener: HomeFragment) :
-    ListAdapter<LearnModel, ListAksaraAdapter.MyViewHolder>(ListAksaraAdapter.DIFF_CALLBACK) {
+    ListAdapter<LearnModel, ListAksaraAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
         interface ItemClickListener {
             fun onItemClick(items: LearnModel, view: ItemAksaraHomeBinding)

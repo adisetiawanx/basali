@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentScanResultBinding
-import com.capstone.basaliproject.databinding.FragmentTabScanBinding
 
 class ScanResultFragment : Fragment() {
     private var _binding: FragmentScanResultBinding? = null

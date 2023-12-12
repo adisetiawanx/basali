@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabHistoryBinding
 
 class TabHistoryFragment : Fragment() {
@@ -16,13 +15,13 @@ class TabHistoryFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var mList: List<DataModel>
     private lateinit var adapter: ItemAdapter
-    val mutableList = ArrayList<DataModel>()
+    private val mutableList = ArrayList<DataModel>()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentTabHistoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
