@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.basaliproject.R
-import com.capstone.basaliproject.databinding.FragmentLearnBinding
 import com.capstone.basaliproject.databinding.FragmentLearnDetailBinding
 import com.capstone.basaliproject.ui.learn.karakter.KarakterAdapter
 import com.capstone.basaliproject.ui.learn.karakter.KarakterViewModel
@@ -30,7 +29,7 @@ class LearnDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLearnDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -58,7 +57,7 @@ class LearnDetailFragment : Fragment() {
         }
 
         // Initialize your ViewModel
-        viewModel = ViewModelProvider(this).get(KarakterViewModel::class.java)
+        viewModel = ViewModelProvider(this)[KarakterViewModel::class.java]
 
         // Initialize your RecyclerView and Adapter
         adapter = KarakterAdapter() // replace with your actual adapter
@@ -66,16 +65,25 @@ class LearnDetailFragment : Fragment() {
         binding.rvKarakter.adapter = adapter
 
         when (id) {
-            1 -> viewModel.swaraData.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-            2 -> viewModel.wyanjanaData.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-            5 -> viewModel.gantunganData.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-            6 -> viewModel.angkaData.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-            7 -> viewModel.tengenanData.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-            8 -> viewModel.ardhaswaraData.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+            1 -> viewModel.swaraData.observe(viewLifecycleOwner) { adapter.submitList(it) }
+            2 -> viewModel.wyanjanaData.observe(viewLifecycleOwner) { adapter.submitList(it) }
+            5 -> viewModel.gantunganData.observe(viewLifecycleOwner) { adapter.submitList(it) }
+            6 -> viewModel.angkaData.observe(viewLifecycleOwner) { adapter.submitList(it) }
+            7 -> viewModel.tengenanData.observe(viewLifecycleOwner) { adapter.submitList(it) }
+            8 -> viewModel.ardhaswaraData.observe(viewLifecycleOwner) { adapter.submitList(it) }
         }
 
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val toolbarBackButton: ImageButton = view.findViewById(R.id.toolbar_back)
+        toolbarBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onDestroyView() {

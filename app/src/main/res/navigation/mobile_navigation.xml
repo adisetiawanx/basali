@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_learnDetailFragment"
             app:destination="@id/learnDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tabHistoryFragment"
+            app:destination="@id/tabHistoryFragment" />
     </fragment>
 
     <fragment
@@ -55,5 +58,10 @@
         android:name="com.capstone.basaliproject.ui.learn.detail.LearnDetailFragment"
         android:label="fragment_learn_detail"
         tools:layout="@layout/fragment_learn_detail" />
+    <fragment
+        android:id="@+id/tabHistoryFragment"
+        android:name="com.capstone.basaliproject.ui.scan.history.TabHistoryFragment"
+        android:label="fragment_tab_history"
+        tools:layout="@layout/fragment_tab_history" />
 
 </navigation>

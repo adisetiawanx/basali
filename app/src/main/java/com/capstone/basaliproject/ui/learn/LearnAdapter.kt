@@ -1,4 +1,4 @@
-package com.dicoding.picodiploma.loginwithanimation.view.story
+package com.capstone.basaliproject.ui.learn
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.basaliproject.databinding.LearnItemBinding
-import com.capstone.basaliproject.ui.learn.LearnFragment
 import com.capstone.basaliproject.ui.learn.model.LearnModel
 
 class LearnAdapter(private val clickListener: LearnFragment) :

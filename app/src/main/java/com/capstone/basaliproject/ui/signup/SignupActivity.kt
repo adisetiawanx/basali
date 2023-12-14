@@ -15,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivitySignupBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.confirm.ConfirmationActivity
 import com.capstone.basaliproject.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -87,7 +86,7 @@ class SignupActivity : AppCompatActivity() {
         }
 
         val dialog = builder.create()
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 

@@ -74,6 +74,7 @@ dependencies {
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
 
     implementation ("com.github.dhaval2404:imagepicker:2.1")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     // CameraX Library
     implementation("androidx.camera:camera-camera2:1.3.0")

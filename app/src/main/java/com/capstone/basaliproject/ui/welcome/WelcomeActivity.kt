@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.capstone.basaliproject.MainActivity
-import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityWelcomeBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginActivity

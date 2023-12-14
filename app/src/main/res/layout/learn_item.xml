@@ -28,11 +28,12 @@
                 android:layout_height="171dp"
                 android:background="@drawable/rounded_corner_little"
                 android:maxHeight="160dp"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
                 android:src="@color/HighlightLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/aksara_wianjana"/>
 
             <TextView
                 android:id="@+id/tv_desc"

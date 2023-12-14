@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentScanBinding
 import com.capstone.basaliproject.ui.scan.scanner.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -23,8 +24,8 @@ class ScanFragment : Fragment() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            com.capstone.basaliproject.R.string.tab_scan,
-            com.capstone.basaliproject.R.string.tab_history
+            R.string.tab_scan,
+            R.string.tab_history
         )
     }
 
@@ -43,11 +44,11 @@ class ScanFragment : Fragment() {
 
         val toolbar = binding.toolbarScan
         val mTitle =
-            toolbar.findViewById<View>(com.capstone.basaliproject.R.id.toolbar_title) as TextView
+            toolbar.findViewById<View>(R.id.toolbar_title) as TextView
         val activity = requireActivity() as AppCompatActivity
         activity.setSupportActionBar(toolbar)
-        mTitle.setText("Aksara")
-        activity.getSupportActionBar()?.setDisplayShowTitleEnabled(false);
+        mTitle.text = getString(R.string.aksara)
+        activity.supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // Setup ViewPager2 with Tabs
         val viewPager: ViewPager2 = binding.viewPager
@@ -67,7 +68,7 @@ class ScanFragment : Fragment() {
 
                 tab.view.background = ContextCompat.getDrawable(
                     requireContext(),
-                    com.capstone.basaliproject.R.drawable.tab_selected_background
+                    R.drawable.tab_selected_background
                 )
             }
 
@@ -79,15 +80,12 @@ class ScanFragment : Fragment() {
                 if (tab != null) {
                     tab.view.background = ContextCompat.getDrawable(
                         requireContext(),
-                        com.capstone.basaliproject.R.drawable.tab_selected_background
+                        R.drawable.tab_selected_background
                     )
                 }
             }
         })
-        val tabAtIndex0: TabLayout.Tab? = tabs.getTabAt(0)
-        if (tabAtIndex0 != null) {
-            tabAtIndex0.select()
-        }
+        tabs.getTabAt(0)?.select()
         return root
     }
 
@@ -97,8 +95,8 @@ class ScanFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(com.capstone.basaliproject.R.menu.custom_tab_scan_menu, menu)
-        menuItem = menu.findItem(com.capstone.basaliproject.R.menu.custom_tab_scan_menu)
+        inflater.inflate(R.menu.custom_tab_scan_menu, menu)
+        menuItem = menu.findItem(R.menu.custom_tab_scan_menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 }
