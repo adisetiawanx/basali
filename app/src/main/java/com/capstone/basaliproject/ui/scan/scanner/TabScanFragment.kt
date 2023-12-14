@@ -166,6 +166,7 @@ class TabScanFragment : Fragment() {
         val cameraButton = customView.findViewById<ImageButton>(R.id.ib_camera)
         val galleryButton = customView.findViewById<ImageButton>(R.id.ib_gallery)
         val cancelButton = customView.findViewById<TextView>(R.id.btn_cancel)
+        val drawButton = customView.findViewById<ImageButton>(R.id.ib_draw)
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
@@ -180,6 +181,10 @@ class TabScanFragment : Fragment() {
         galleryButton.setOnClickListener{
             startGallery()
             dialog.dismiss()
+        }
+
+        drawButton.setOnClickListener {
+
         }
 
         cancelButton.setOnClickListener {
