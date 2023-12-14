@@ -75,6 +75,12 @@
     <string name="yes">IYA</string>
     <string name="ok">OK</string>
 
+    <string name="repeating_alarm">Pengaturan Notifikasi</string>
+    <string name="set_repeating_alarm">Atur notifikasi harian</string>
+    <string name="cancel_alarm">Batalkan Notifikasi</string>
+    <string name="alarm_time">Waktu Notifikasi</string>
+    <string name="alarm_message">Pesan Notifikasi</string>
+
     <string name="pangangge_swara">Panganggĕ Swara</string>
     <string name="desc_pangangge_swara">Aksara swara (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ}}) adalah aksara yang digunakan untuk suku kata yang tidak memiliki konsonan di awal, atau dalam kata lain suku kata yang hanya terdiri vokal. Aksara Bali memiliki 14 aksara vokal yang diwarisi dari tradisi tulis Sanskerta.</string>
 
@@ -98,5 +104,10 @@
 
     <string name="pangangge_ardhaswara">Panganggĕ Ardhaswara</string>
     <string name="desc_pangangge_ardhaswara">Panganggĕ ardhaswara (ᬧᬗᬗ᭄ᬕᭂᬳᬃᬥᬲ᭄ᬯᬭ) digunakan untuk menuliskan gugus konsonan semivokal dalam satu suku kata.</string>
+
+    <string name="notifications_permission_granted">Izin pemberitahuan diberikan</string>
+    <string name="notifications_permission_rejected">Izin notifikasi ditolak</string>
+    <string name="repeating_alarm_set_up">Notifikasi harian diaktifkan</string>
+    <string name="notification_is_cancelled">Notifikasi harian dibatalkan</string>
 
 </resources>

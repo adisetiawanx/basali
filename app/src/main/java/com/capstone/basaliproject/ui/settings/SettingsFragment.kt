@@ -55,6 +55,9 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupAction() {
+        binding.itemNotifications.setOnClickListener {
+            startActivity(Intent(requireActivity(), NotificationActivity::class.java))
+        }
         binding.itemLanguage.setOnClickListener {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }

@@ -41,8 +41,11 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.learnDetailFragment -> hideBottomNav()
-                else -> showBottomNav()
+                R.id.navigation_home -> showBottomNav()
+                R.id.navigation_learn -> showBottomNav()
+                R.id.navigation_scan -> showBottomNav()
+                R.id.navigation_settings -> showBottomNav()
+                else -> hideBottomNav()
             }
         }
     }

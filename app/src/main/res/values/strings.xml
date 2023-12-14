@@ -76,6 +76,12 @@
     <string name="yes">YES</string>
     <string name="ok">OK</string>
 
+    <string name="repeating_alarm">Notification Setting</string>
+    <string name="set_repeating_alarm">Set Daily Notification</string>
+    <string name="cancel_alarm">Cancel Notification</string>
+    <string name="alarm_time">Notification Time</string>
+    <string name="alarm_message">Notification message</string>
+
     <string name="pangangge_swara">Panganggĕ Swara</string>
     <string name="desc_pangangge_swara">Swara script (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ}}) is a script used for syllables that do not have a consonant at the beginning, or in other words syllables that only consist of vowels. The Balinese script has 14 vowel characters inherited from the Sanskrit writing tradition.</string>
 
@@ -99,5 +105,9 @@
 
     <string name="pangangge_ardhaswara">Panganggĕ Ardhaswara</string>
     <string name="desc_pangangge_ardhaswara">Panganggĕ ardhaswara (ᬧᬗᬗ᭄ᬕᭂᬳᬃᬥᬲ᭄ᬯᬭ) is used to write semivowel consonant clusters in one syllable.</string>
+    <string name="notifications_permission_granted">Notifications permission granted</string>
+    <string name="notifications_permission_rejected">Notifications permission rejected</string>
+    <string name="repeating_alarm_set_up">Daily notification set up</string>
+    <string name="notification_is_cancelled">Daily notification is cancelled</string>
 
 </resources>
