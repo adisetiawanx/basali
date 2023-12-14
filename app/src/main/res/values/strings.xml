@@ -55,35 +55,49 @@
     <string name="notification_setting">Notification Setting</string>
     <string name="language">Language</string>
     <string name="logout">Logout</string>
+    <string name="warning">Warning!</string>
+    <string name="yakin_ingin_logout">Are you sure you want to Logout?</string>
+    <string name="edit">Edit</string>
+    <string name="click_here_to_reset">Click Here To Reset</string>
+    <string name="image_processing_logic_goes_here">Image processing logic goes here</string>
+    <string name="its_wa_aksara">Its Wa aksara</string>
+    <string name="we_know_because_have_a_similaritis_ikutin_metode_yang_dipake">We know because have a similaritis “ikutin metode” yang dipake</string>
+    <string name="select_image">Select Image!</string>
+    <string name="you_havent_selected_image_please_select_one_to_process">You havent selected image, please select one to process</string>
+    <string name="failed_to_take_picture">Failed to take picture.</string>
+    <string name="failed">Failed!</string>
+    <string name="account_cannot_be_made">Account cannot be made</string>
+    <string name="next">Next</string>
+    <string name="yeah">Yeah!</string>
+    <string name="register_success_go_to_login_page">Register success! Go to Login page</string>
+    <string name="alert">Alert</string>
+    <string name="thanks_for_watching">Thanks For Watching!</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="ok">OK</string>
 
-    <string-array name="aksara_name">
-        <item>Aksara Wianjana</item>
-        <item>Gantungan miwah Gempelan Aksara Wianjana</item>
-        <item>Aksara Swalalita</item>
-        <item>Penganggone Suara</item>
-        <item>Penganggone Tengenan</item>
-        <item>Aksara Suara</item>
-        <item>Angka Bali</item>
-    </string-array>
+    <string name="pangangge_swara">Panganggĕ Swara</string>
+    <string name="desc_pangangge_swara">Swara script (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ}}) is a script used for syllables that do not have a consonant at the beginning, or in other words syllables that only consist of vowels. The Balinese script has 14 vowel characters inherited from the Sanskrit writing tradition.</string>
 
-    <string-array name="aksara_descriptions">
-        <item>Deskripsi Aksara Wianjana</item>
-        <item>Deskripsi Gantungan miwah Gempelan Aksara Wianjana</item>
-        <item>Deskripsi Aksara Swalalita</item>
-        <item>Deskripsi Penganggone Suara</item>
-        <item>Deskripsi Penganggone Tengenan</item>
-        <item>Deskripsi Aksara Suara</item>
-        <item>Deskripsi Angka Bali</item>
-    </string-array>
+    <string name="aksara_wyanjana">Aksara Wyañjana</string>
+    <string name="desc_aksara_wyanjana">Wyañjana script (ᬳᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ) is a consonant script with the inherent vowel /a/. As a script derived from Brahmi, the Balinese script has 33 wyañjana scripts to write the 33 consonant sounds used in Sanskrit and Kawi.</string>
 
-    <integer-array name="aksara_photo">
-        <item>@drawable/aksara_wianjana</item>
-        <item>@drawable/gantungan</item>
-        <item>@drawable/aksara_swalalita</item>
-        <item>@drawable/pengangge_suara</item>
-        <item>@drawable/pengangge_tengenan</item>
-        <item>@drawable/aksara_suara</item>
-        <item>@drawable/angka_bali</item>
-    </integer-array>
+    <string name="aksara_swalalita">Aksara Swalalita</string>
+    <string name="desc_aksara_swalalita">Swalalita script is the script used to write Kawi language, Central Balinese language, Sanskrit and is used to write Kidung, Kakawin Parwa and Sloka.</string>
+
+    <string name="aksara_modre">Aksara Modre</string>
+    <string name="desc_aksara_modre">Modre script (ᬳᬓ᭄ᬱᬭᬫᭀᬤ᭄ᬭᬾ}}) is a sacred script that is mainly used in the religious field for ceremonies, spells, tattoos and other sacred functions. This type of script has various forms, but is generally characterized by the presence of ulu candra or ulu ricĕm diacritics. A discussion of the appearance and types of modre can be found in the lontar with the title krakah or griguh.</string>
+
+    <string name="aksara_gantungan">Aksara Gantungan</string>
+    <string name="desc_aksara_gantungan">The vowels attached to each basic character can be turned off by using the adĕg-adĕg diactric. However, adĕg-adĕg is normally not used in the middle of words or, so to write closed syllables in the middle of words and sentences, the hanging form (ᬕᬦ᭄ᬢᬸᬗᬦ᭄) or gempelan (ᬕᬾᬫ᭄ᬧᬾᬮᬦ᭄) which belongs to each basic script is used; The hanger is attached under the basic character while the gempelan is attached to the side of the basic character. In contrast to adĕg-adĕg, hanger/gempelan not only mutes the consonant it accompanies but also indicates the next consonant. For example, the character ma (ᬫ) is accompanied by the form of the pair from pa (᭄ᬧ) to mpa (ᬫ᭄ᬧ).</string>
+
+    <string name="aksara_angka">Aksara Angka</string>
+    <string name="desc_aksara_angka">Balinese script has its own number symbols which act like Arabic numbers, but some of its forms have the same form as several Balinese scripts, for example the number 2 ᭒ with the swara la lĕnga ᬍ}} script. Because of this similarity in form, numbers used in the middle of a sentence need to be surrounded by scribbled punctuation marks to clarify their function as symbols for numbers. For example, "the 23rd of Ruwah" is written ᬢᬗ᭄ᬕᬮ᭄᭞᭒᭓᭞ᬭᬸᬯᬄ}}. This bracket can be ignored if the function of the number symbol is clear from the context, for example the page number in the corner of the paper.</string>
+
+    <string name="pangangge_tengenan">Panganggĕ Tĕngĕnan</string>
+    <string name="desc_pangangge_tengenan">Panganggĕ tĕngĕnan (ᬧᬗᬗ᭄ᬕᭂᬢᭂᬗᭂᬦᬦ᭄) is used to close a syllable with a consonant.</string>
+
+    <string name="pangangge_ardhaswara">Panganggĕ Ardhaswara</string>
+    <string name="desc_pangangge_ardhaswara">Panganggĕ ardhaswara (ᬧᬗᬗ᭄ᬕᭂᬳᬃᬥᬲ᭄ᬯᬭ) is used to write semivowel consonant clusters in one syllable.</string>
 
 </resources>

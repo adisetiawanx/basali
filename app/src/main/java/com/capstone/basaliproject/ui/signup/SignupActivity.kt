@@ -41,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
         //sementara intent ke login bukan ke verif code
         viewModel.result.observe(this) {
             if (it.token != null) {
-                val email = binding.edRegisterEmail.text
+//                val email = binding.edRegisterEmail.text
 //                AlertDialog.Builder(this).apply {
 //                    setTitle("Yeah!")
 //                    setMessage("The verification code has been sent to your email $email")
@@ -56,9 +56,9 @@ class SignupActivity : AppCompatActivity() {
 
             } else {
                 AlertDialog.Builder(this).apply {
-                    setTitle("Failed!")
-                    setMessage("Account cannot be made")
-                    setPositiveButton("Next") { _, _ ->
+                    setTitle(getString(R.string.failed))
+                    setMessage(getString(R.string.account_cannot_be_made))
+                    setPositiveButton(getString(R.string.next)) { _, _ ->
 //                        finish()
                     }
                     create()
@@ -77,8 +77,8 @@ class SignupActivity : AppCompatActivity() {
         val desc = customView.findViewById<TextView>(R.id.tv_desc)
         val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
 
-        title.text = "Yeah!"
-        desc.text = "Register success! Go to Login page"
+        title.text = getString(R.string.yeah)
+        desc.text = getString(R.string.register_success_go_to_login_page)
         btnNext.setOnClickListener {
             val intent = Intent(this@SignupActivity, LoginActivity::class.java)
             startActivity(intent)

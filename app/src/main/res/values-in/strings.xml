@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Basali</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_scanaksara">Pindai Aksara</string>
+    <string name="title_learn_aksara">Belajar Aksara</string>
+    <string name="title_settings">Pengaturan</string>
+    <string name="hello_blank_fragment">Halo fragment</string>
+    <string name="login_image">Awan</string>
+    <string name="login_image_2">Landak</string>
+    <string name="login_welcome">Selamat Datang!</string>
+    <string name="email_error">Masukkan Email yang benar!</string>
+    <string name="password_error">Password harus terdiri dari minimal 8 karakter.</string>
+    <string name="login">Masuk</string>
+    <string name="not_a_member">Bukan anggota?</string>
+    <string name="register_now">Daftar sekarang</string>
+    <string name="email_address">Alamat Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Daftar</string>
+    <string name="register_image_1">Gambar Pendaftaran</string>
+    <string name="signup_message">Buat akun untuk memulai</string>
+    <string name="name">Nama</string>
+    <string name="already_have_an_account">Sudah punya akun?</string>
+    <string name="confirm_password">Konfirmasi Password</string>
+    <string name="enter_confirmation_code">Masukkan kode konfirmasi</string>
+    <string name="confirmation_message">Kode 4 digit telah dikirim ke lucasscott3@email.com</string>
+    <string name="continue_text">Lanjutkan</string>
+    <string name="resend_code">Kirim ulang kode</string>
+    <string name="welcome_description">Pelajari Aksara Bali</string>
+    <string name="profile_image">Gambar Profil</string>
+    <string name="welcome">Selamat datang,</string>
+    <string name="siti_badilah">Siti Badilah</string>
+    <string name="explore_your_aksara">Jelajahi Aksara Anda</string>
+    <string name="click_here_for_more_aksara">Klik di sini untuk lebih banyak Aksara</string>
+    <string name="history">Riwayat</string>
+    <string name="explore_aksara">Jelajahi Aksara</string>
+    <string name="aksara_d">Aksara %d</string>
+    <string name="view">Lihat</string>
+    <string name="choose">Pilih</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="cancel">Batal</string>
+    <string name="successfully_written_balinese_script">Berhasil menulis skrip Bali?</string>
+    <string name="scan_description">Ambil gambar tulisan tangan aksara Bali Anda, unggah, dan biarkan aplikasi mendeteksi jenis aksara Bali yang telah Anda tulis dengan sukses</string>
+    <string name="capture">Ambil Gambar</string>
+    <string name="process">Proses</string>
+    <string name="tab_scan">Aksara Gambar</string>
+    <string name="tab_history">Riwayat</string>
+    <string name="failed_to_display_the_camera">Gagal menampilkan kamera</string>
+    <string name="permission_request_granted">Permintaan izin disetujui</string>
+    <string name="permission_request_denied">Permintaan izin ditolak</string>
+    <string name="aksara">Aksara</string>
+    <string name="back">Kembali</string>
+    <string name="notifications">Notifikasi</string>
+    <string name="notification_setting">Pengaturan Notifikasi</string>
+    <string name="language">Bahasa</string>
+    <string name="logout">Keluar</string>
+    <string name="warning">Peringatan!</string>
+    <string name="yakin_ingin_logout">Yakin ingin logout?</string>
+    <string name="edit">Ubah</string>
+    <string name="click_here_to_reset">Klik disini untuk mengatur ulang</string>
+    <string name="image_processing_logic_goes_here">Logika pemrosesan gambar sedang dilakukan</string>
+    <string name="its_wa_aksara">Itu adalah aksara Wa</string>
+    <string name="we_know_because_have_a_similaritis_ikutin_metode_yang_dipake">Kami mengetahuinya karena memiliki kesamaan “ikutin metode” yang dipakai</string>
+    <string name="select_image">Pilih gambar!</string>
+    <string name="you_havent_selected_image_please_select_one_to_process">Anda belum memilih gambar, silakan pilih salah satu untuk diproses</string>
+    <string name="failed_to_take_picture">Gagal mengambil gambar.</string>
+    <string name="failed">Gagal!</string>
+    <string name="account_cannot_be_made">Akun tidak dapat dibuat</string>
+    <string name="next">Berikutnya</string>
+    <string name="yeah">Yeah!</string>
+    <string name="register_success_go_to_login_page">Pendaftaran sukses! Silakan masuk menggunakan akun yang sudah Anda daftarkan</string>
+    <string name="alert">Peringatan!</string>
+    <string name="thanks_for_watching">Terima kasih telah menonton!</string>
+    <string name="no">TIDAK</string>
+    <string name="yes">IYA</string>
+    <string name="ok">OK</string>
+
+    <string name="pangangge_swara">Panganggĕ Swara</string>
+    <string name="desc_pangangge_swara">Aksara swara (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ}}) adalah aksara yang digunakan untuk suku kata yang tidak memiliki konsonan di awal, atau dalam kata lain suku kata yang hanya terdiri vokal. Aksara Bali memiliki 14 aksara vokal yang diwarisi dari tradisi tulis Sanskerta.</string>
+
+    <string name="aksara_wyanjana">Aksara Wyañjana</string>
+    <string name="desc_aksara_wyanjana">Aksara wyañjana (ᬳᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ) adalah aksara konsonan dengan vokal inheren /a/. Sebagai salah satu aksara turunan Brahmi, aksara Bali memiliki 33 aksara wyañjana untuk menuliskan 33 bunyi konsonan yang digunakan dalam bahasa Sanskerta dan Kawi.</string>
+
+    <string name="aksara_swalalita">Aksara Swalalita</string>
+    <string name="desc_aksara_swalalita">Aksara Swalalita adalah aksara yang digunakan untuk menulis Bahasa Kawi, Bahasa Bali Tengahan, Bahasa Sansekerta dan digunakan untuk menulis Kidung, Kakawin Parwa dan Sloka.</string>
+
+    <string name="aksara_modre">Aksara Modre</string>
+    <string name="desc_aksara_modre">Aksara modre (ᬳᬓ᭄ᬱᬭᬫᭀᬤ᭄ᬭᬾ}}) adalah aksara suci yang terutama dipakai dalam bidang keagamaan untuk upacara, mantra, rajah, dan fungsi-fungsi keramat lainnya. Aksara tipe ini memiliki berbagai macam rupa, tetapi umumnya ditandai dengan adanya diakritik ulu candra atau ulu ricĕm. Pembahasan mengenai rupa dan jenis modre dapat ditemukan pada lontar dengan judul krakah atau griguh.</string>
+
+    <string name="aksara_gantungan">Aksara Gantungan</string>
+    <string name="desc_aksara_gantungan">Vokal inheren dari tiap aksara dasar dapat dimatikan dengan penggunaan diaktrik adĕg-adĕg. Akan tetapi, adĕg-adĕg normalnya tidak digunakan di tengah kata atau kalimat, sehingga untuk menuliskan suku kata tertutup di tengah kata dan kalimat, digunakanlah bentuk gantungan (ᬕᬦ᭄ᬢᬸᬗᬦ᭄) atau gempelan (ᬕᬾᬫ᭄ᬧᬾᬮᬦ᭄) yang dimiliki oleh setiap aksara dasar; gantungan melekat di bawah aksara dasar sementara gempelan melekat di samping aksara dasar. Berbeda dengan adĕg-adĕg, gantungan/gempelan tidak hanya mematikan konsonan yang diiringinya tetapi juga menunjukkan konsonan selanjutnya. Sebagai contoh, aksara ma (ᬫ) yang diiringi bentuk pasangan dari pa (᭄ᬧ) menjadi mpa (ᬫ᭄ᬧ).</string>
+
+    <string name="aksara_angka">Aksara Angka</string>
+    <string name="desc_aksara_angka">Aksara Bali memiliki lambang bilangannya sendiri yang berlaku selayaknya angka Arab, namun sebagian bentuknya memiliki rupa yang persis sama dengan beberapa aksara Bali, semisal angka 2 ᭒ dengan aksara swara la lĕnga ᬍ}}. Karena persamaan bentuk ini, angka yang digunakan di tengah kalimat perlu diapit dengan tanda baca carik untuk memperjelas fungsinya sebagai lambang bilangan. Semisal, \"tanggal 23 Ruwah\" ditulis ᬢᬗ᭄ᬕᬮ᭄᭞᭒᭓᭞ᬭᬸᬯᬄ}}. Pengapit ini dapat diabaikan apabila fungsi lambang bilangan sudah jelas dari konteks, misal nomor halaman di pojok lontar.</string>
+
+    <string name="pangangge_tengenan">Panganggĕ Tĕngĕnan</string>
+    <string name="desc_pangangge_tengenan">Panganggĕ tĕngĕnan (ᬧᬗᬗ᭄ᬕᭂᬢᭂᬗᭂᬦᬦ᭄) digunakan untuk menutup suatu suku kata dengan konsonan.</string>
+
+    <string name="pangangge_ardhaswara">Panganggĕ Ardhaswara</string>
+    <string name="desc_pangangge_ardhaswara">Panganggĕ ardhaswara (ᬧᬗᬗ᭄ᬕᭂᬳᬃᬥᬲ᭄ᬯᬭ) digunakan untuk menuliskan gugus konsonan semivokal dalam satu suku kata.</string>
+
+</resources>

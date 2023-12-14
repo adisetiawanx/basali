@@ -53,7 +53,7 @@ class TabScanFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTabScanBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val processButton = binding.processButton
@@ -65,14 +65,18 @@ class TabScanFragment : Fragment() {
         processButton.setOnClickListener {
             if (currentImageUri != null) {
                 // Process the image here
-                Toast.makeText(requireContext(), "Image processing logic goes here", Toast.LENGTH_SHORT).show()
-                showResultPopUp("Its Wa aksara", "We know because have a similaritis “ikutin metode” yang dipake",
+                Toast.makeText(requireContext(),
+                    getString(R.string.image_processing_logic_goes_here), Toast.LENGTH_SHORT).show()
+                    showResultPopUp(
+                        getString(R.string.its_wa_aksara),
+                        getString(R.string.we_know_because_have_a_similaritis_ikutin_metode_yang_dipake),
                     currentImageUri!!
                 )
 
             } else {
                 // Show a message or take appropriate action when no image is selected
-                showWarning("Select Image!", "You havent selected image, please select one to process")
+                showWarning(getString(R.string.select_image),
+                    getString(R.string.you_havent_selected_image_please_select_one_to_process))
             }
         }
 
@@ -85,9 +89,9 @@ class TabScanFragment : Fragment() {
 
         if (currentImageUri != null) {
             // Change the text to "Edit" when an image is selected
-            captureButton.text = "Edit"
+            captureButton.text = getString(R.string.edit)
             tvClearImg.isEnabled = true
-            tvClearImg.text = "Click Here To Reset"
+            tvClearImg.text = getString(R.string.click_here_to_reset)
             tvClearImg.setOnClickListener {
                 //clear the selected image when click this textview
                 currentImageUri = null
@@ -96,12 +100,12 @@ class TabScanFragment : Fragment() {
                     tvClearImg.isEnabled = false
                     tvClearImg.visibility = View.INVISIBLE
                 }
-                captureButton.text = "Capture"
+                captureButton.text = getString(R.string.capture)
                 tvClearImg.text = ""
             }
         } else {
             // Reset the text to "Capture" when no image is selected
-            captureButton.text = "Capture"
+            captureButton.text = getString(R.string.capture)
             tvClearImg.isEnabled = false
             tvClearImg.text = ""
         }
@@ -129,7 +133,7 @@ class TabScanFragment : Fragment() {
         btnOk.setOnClickListener {
             dialog.cancel()
         }
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -153,7 +157,7 @@ class TabScanFragment : Fragment() {
         btnOk.setOnClickListener {
             dialog.cancel()
         }
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -186,7 +190,7 @@ class TabScanFragment : Fragment() {
             dialog.dismiss()
         }
 
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 

@@ -19,6 +19,6 @@ object Injection {
     }
 
     fun resetIntance() {
-        UserRepository.resetIntance()
+        UserRepository.resetInstance()
     }
 }
