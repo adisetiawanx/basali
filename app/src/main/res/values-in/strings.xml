@@ -109,5 +109,7 @@
     <string name="notifications_permission_rejected">Izin notifikasi ditolak</string>
     <string name="repeating_alarm_set_up">Notifikasi harian diaktifkan</string>
     <string name="notification_is_cancelled">Notifikasi harian dibatalkan</string>
+    <string name="change_profile_picture">Ubah foto profil</string>
+    <string name="delete">Hapus</string>
 
 </resources>

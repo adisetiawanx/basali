@@ -43,26 +43,28 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
-                    android:layout_width="82dp"
-                    android:layout_height="82dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
                     android:contentDescription="@string/profile_image"
-                    tools:src="@tools:sample/avatars"
+                    android:src="@drawable/w_hedgehog_hug"
                     android:layout_gravity="center_horizontal"/>
 
                 <ImageButton
                     android:id="@+id/edit_profile"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="46dp"
                     android:layout_marginBottom="6dp"
                     android:background="@drawable/circle_background"
-                    android:layout_gravity="center|bottom" />
+                    android:layout_gravity="center|bottom"
+                    android:contentDescription="@string/change_profile_picture" />
 
                 <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="13dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginBottom="14dp"
                     android:layout_gravity="center|bottom"
                     android:src="@drawable/ic_baseline_edit_24"/>
 
@@ -82,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/notifications"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:padding="16dp"
                     android:layout_weight="1"/>
 
@@ -114,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/language"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:padding="16dp"
                     android:layout_weight="1"/>
 
@@ -146,7 +148,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/logout"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:padding="16dp"
                     android:layout_weight="1"/>
 

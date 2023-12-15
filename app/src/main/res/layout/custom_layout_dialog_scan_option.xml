@@ -74,8 +74,28 @@
         app:layout_constraintEnd_toEndOf="@id/ib_gallery"/>
 
     <TextView
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:background="@drawable/dialog_bg"
+        android:gravity="end"
+        android:text="@string/delete"
+        android:textStyle="bold"
+        android:textColor="@color/HighlightDark"
+        android:alpha="0"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/tv_gallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <TextView
         android:id="@+id/btn_cancel"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -86,6 +106,7 @@
         android:text="@string/cancel"
         android:textStyle="bold"
         android:textColor="@color/HighlightDark"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintTop_toBottomOf="@id/tv_gallery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
