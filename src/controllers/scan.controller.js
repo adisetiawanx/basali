@@ -1,30 +1,51 @@
 import { doc, getDocs, getDoc, updateDoc, addDoc, setDoc, query, where, collection, serverTimestamp } from "firebase/firestore";
 import Config from "../config.js";
 import { verifyAuthToken } from "../middlewares/authenticated.middleware.js";
+import * as tf from "@tensorflow/tfjs";
+import * as tfnode from "@tensorflow/tfjs-node";
+
+const handler = tfnode.io.fileSystem("C:/Dokumen/Bangkit/Capstone/basali/src/modelpbconvertgraph/model.json");
+const model = await tf.loadGraphModel(handler);
+
+import multer from 'multer';
+const storage = multer.memoryStorage();
+const imageUpload = multer({ storage: storage });
 
 export const UserScannedAksara = async (req, res) => {
   try {
     await verifyAuthToken(req, res, async () => {
-      const { scannedAksara } = req.body;
-      const userId = req.userData.id;
+      imageUpload.single("image")(req, res, async () => {
+        const userId = req.userData.id;
 
-      if (!scannedAksara) {
-        return res.status(400).json({
-          msg: "Missing scannedAksara in the request body",
+        if (!req.file) {
+          return res.status(400).json({
+            msg: "Missing scannedAksara or image in the request body",
+          });
+        }
+
+        const scansCollectionRef = collection(doc(Config.firebaseDB, 'scanAksara', userId), 'scans');
+        const newScanDocRef = await addDoc(scansCollectionRef, {
+          timestamp: serverTimestamp(),
         });
-      }
 
-      const scansCollectionRef = collection(doc(Config.firebaseDB, 'scanAksara', userId), 'scans');
+        const imageBuffer = req.file.buffer;
 
-      const newScanDocRef = await addDoc(scansCollectionRef, {
-        scanned_aksara: scannedAksara,
-        timestamp: serverTimestamp(),
-      });
+        const classification = await Config.aksaraClassify(model, imageBuffer);
+        console.log("Prediction:", classification);
 
-      return res.json({
-        msg: "Successfully added scan result to history",
-        scanId: newScanDocRef.id,
-        userId: userId,
+        // Get the result based on the predicted class
+        const result = await Config.aksaraClassifyClass(classification);
+        console.log("Result:", result);
+
+        // For now, let's assume you want to add the result to the scanned document
+        await updateDoc(newScanDocRef, { predictionResult: result.result });
+
+        return res.json({
+          msg: "Successfully added scan result to history",
+          scanId: newScanDocRef.id,
+          userId: userId,
+          prediction: result.result,
+        });
       });
     });
   } catch (error) {

@@ -1,6 +1,5 @@
 import { Router } from "express";
 
-
 import {
     UserScannedAksara, getUserHistoriesScanByUserId, getUserHistoryById,
 } from "../controllers/scan.controller.js";
