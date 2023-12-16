@@ -4,6 +4,8 @@ import multer from "multer";
 import Config from "../config.js";
 
 const db = Config.firebaseFirestore;
+const bucket = Config.bucketStorage;
+
 const model = await tf.loadGraphModel(Config.modelUrl);
 
 const storage = multer.memoryStorage();
@@ -32,22 +34,37 @@ export const UserScannedAksara = async (req, res) => {
       // Get the result based on the predicted class
       const result = await Config.aksaraClassifyClass(classification);
 
-      await db
-        .collection("users")
-        .doc(userId)
-        .collection("scannedAksara")
-        .add({
-          scannedAt: new Date(Date.now()),
-          predictionResult: result.result,
-        });
+      const uniqueFileName = `${Date.now()}_${req.file.originalname}`;
+      const uploadedImageUrl = `https://storage.googleapis.com/basali-bucket/scan/${uniqueFileName}`;
+      const blob = bucket.file(`scan/${uniqueFileName}`);
+      const stream = blob.createWriteStream();
 
-      return res.json({
-        msg: "Successfully added scan result to history",
-        userId: userId,
-        data: {
-          prediction: result.result,
-        },
+      stream.on("error", (e) => {
+        res.status(500).json({
+          msg: "Failed to upload image",
+        });
       });
+      stream.on("finish", async () => {
+        await db
+          .collection("users")
+          .doc(userId)
+          .collection("scannedAksara")
+          .add({
+            scannedAt: new Date(Date.now()),
+            predictionResult: result.result,
+            imageUrl: uploadedImageUrl,
+          });
+
+        return res.json({
+          msg: "Successfully added scan result to history",
+          userId: userId,
+          data: {
+            prediction: result.result,
+            imageUrl: uploadedImageUrl,
+          },
+        });
+      });
+      stream.end(req.file.buffer);
     });
   } catch (error) {
     return res.status(500).json({
@@ -117,6 +134,7 @@ export const getUserHistoryById = async (req, res) => {
     const historyScanData = {
       scannedAt,
       predictionResult: historyScan.data().predictionResult,
+      imageUrl: historyScan.data().imageUrl,
     };
 
     return res.json({

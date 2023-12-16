@@ -43,7 +43,6 @@ export const updateProfilePhoto = async (req, res) => {
   try {
     const userId = req.userData.id;
 
-    let uploadedImageUrl = null;
     imageUpload.single("image")(req, res, async () => {
       if (!req.file) {
         return res.status(400).json({
@@ -51,7 +50,7 @@ export const updateProfilePhoto = async (req, res) => {
         });
       }
       const uniqueFileName = `${Date.now()}_${req.file.originalname}`;
-      uploadedImageUrl = `https://storage.googleapis.com/basali-bucket/images/${uniqueFileName}`;
+      const uploadedImageUrl = `https://storage.googleapis.com/basali-bucket/images/${uniqueFileName}`;
       const blob = bucket.file(`images/${uniqueFileName}`);
       const stream = blob.createWriteStream();
 
