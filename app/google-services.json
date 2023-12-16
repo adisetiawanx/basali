@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "548512934569",
-    "firebase_url": "https://basali-project-bcc5a-default-rtdb.firebaseio.com",
-    "project_id": "basali-project-bcc5a",
-    "storage_bucket": "basali-project-bcc5a.appspot.com"
+    "project_number": "848768689187",
+    "project_id": "basali-app",
+    "storage_bucket": "basali-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:548512934569:android:d30490197425917e8117b8",
+        "mobilesdk_app_id": "1:848768689187:android:b586a1a9f2a965660ebd96",
         "android_client_info": {
           "package_name": "com.capstone.basaliproject"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAJOSOBajnChVa-wbXTRESfHSNZvhjZgvc"
+          "current_key": "AIzaSyDCmjkce8LqqgthYskeGFWRFBUEE5wQC1c"
         }
       ],
       "services": {
