@@ -1,52 +1,70 @@
-import { doc, getDocs, getDoc, updateDoc, addDoc, setDoc, query, where, collection, serverTimestamp } from "firebase/firestore";
-import Config from "../config.js";
-import { verifyAuthToken } from "../middlewares/authenticated.middleware.js";
 import * as tf from "@tensorflow/tfjs";
-import * as tfnode from "@tensorflow/tfjs-node";
+import multer from "multer";
 
-const handler = tfnode.io.fileSystem("C:/Dokumen/Bangkit/Capstone/basali/src/modelpbconvertgraph/model.json");
-const model = await tf.loadGraphModel(handler);
+import Config from "../config.js";
 
-import multer from 'multer';
+const db = Config.firebaseFirestore;
+const bucket = Config.bucketStorage;
+
+const model = await tf.loadGraphModel(Config.modelUrl);
+
 const storage = multer.memoryStorage();
-const imageUpload = multer({ storage: storage });
+const imageUpload = multer({
+  storage: storage,
+  limits: {
+    fieldSize: 5 * 1024 * 1024,
+  },
+});
 
 export const UserScannedAksara = async (req, res) => {
   try {
-    await verifyAuthToken(req, res, async () => {
-      imageUpload.single("image")(req, res, async () => {
-        const userId = req.userData.id;
+    imageUpload.single("image")(req, res, async () => {
+      const userId = req.userData.id;
 
-        if (!req.file) {
-          return res.status(400).json({
-            msg: "Missing scannedAksara or image in the request body",
-          });
-        }
-
-        const scansCollectionRef = collection(doc(Config.firebaseDB, 'scanAksara', userId), 'scans');
-        const newScanDocRef = await addDoc(scansCollectionRef, {
-          timestamp: serverTimestamp(),
+      if (!req.file) {
+        return res.status(400).json({
+          msg: "Missing image in the request body",
         });
+      }
 
-        const imageBuffer = req.file.buffer;
+      const imageBuffer = req.file.buffer;
 
-        const classification = await Config.aksaraClassify(model, imageBuffer);
-        console.log("Prediction:", classification);
+      const classification = await Config.aksaraClassify(model, imageBuffer);
 
-        // Get the result based on the predicted class
-        const result = await Config.aksaraClassifyClass(classification);
-        console.log("Result:", result);
+      // Get the result based on the predicted class
+      const result = await Config.aksaraClassifyClass(classification);
 
-        // For now, let's assume you want to add the result to the scanned document
-        await updateDoc(newScanDocRef, { predictionResult: result.result });
+      const uniqueFileName = `${Date.now()}_${req.file.originalname}`;
+      const uploadedImageUrl = `https://storage.googleapis.com/basali-bucket/scan/${uniqueFileName}`;
+      const blob = bucket.file(`scan/${uniqueFileName}`);
+      const stream = blob.createWriteStream();
+
+      stream.on("error", (e) => {
+        res.status(500).json({
+          msg: "Failed to upload image",
+        });
+      });
+      stream.on("finish", async () => {
+        await db
+          .collection("users")
+          .doc(userId)
+          .collection("scannedAksara")
+          .add({
+            scannedAt: new Date(Date.now()),
+            predictionResult: result.result,
+            imageUrl: uploadedImageUrl,
+          });
 
         return res.json({
           msg: "Successfully added scan result to history",
-          scanId: newScanDocRef.id,
           userId: userId,
-          prediction: result.result,
+          data: {
+            prediction: result.result,
+            imageUrl: uploadedImageUrl,
+          },
         });
       });
+      stream.end(req.file.buffer);
     });
   } catch (error) {
     return res.status(500).json({
@@ -57,24 +75,32 @@ export const UserScannedAksara = async (req, res) => {
 
 export const getUserHistoriesScanByUserId = async (req, res) => {
   try {
-    await verifyAuthToken(req, res, async () => {
-      const userId = req.userData.id;
+    const userId = req.userData.id;
 
-      const scansCollectionRef = collection(doc(Config.firebaseDB, 'scanAksara', userId), 'scans');
-      const historySnapshot = await getDocs(scansCollectionRef);
+    const historiesScannedAksara = await db
+      .collection("users")
+      .doc(userId)
+      .collection("scannedAksara")
+      .get();
 
-      if (!historySnapshot.empty) {
-        const historyData = historySnapshot.docs.map(doc => {
-          const data = doc.data();
-          const timestamp = data.timestamp.toDate().toISOString();
-          return { scanned_aksara: data.scanned_aksara, timestamp };
-        });
-        return res.json(historyData);
-      } else {
-        return res.status(400).json({
-          msg : "History not found",
-        });
-      }
+    const historiesData = [];
+
+    historiesScannedAksara.forEach((scannedAkasara) => {
+      const predictionResult = scannedAkasara.data().predictionResult;
+      const scannedAt = new Date(
+        scannedAkasara.data().scannedAt._seconds * 1000 +
+          scannedAkasara.data().scannedAt._nanoseconds / 1000000
+      ).toDateString();
+
+      historiesData.push({
+        predictionResult,
+        scannedAt,
+      });
+    });
+
+    return res.json({
+      msg: "Successfully retrieved the user's aksara scan history",
+      data: historiesData,
     });
   } catch (error) {
     return res.status(500).json({
@@ -85,26 +111,35 @@ export const getUserHistoriesScanByUserId = async (req, res) => {
 
 export const getUserHistoryById = async (req, res) => {
   try {
-    await verifyAuthToken(req, res, async () => {
-      const userId = req.userData.id;
-      const historyId = req.params.id;
+    const userId = req.userData.id;
+    const historyId = req.params.id;
 
-      const historyDocumentRef = doc(Config.firebaseDB, 'scanAksara', userId, 'scans', historyId);
+    const historyScan = await db
+      .collection("users")
+      .doc(userId)
+      .collection("scannedAksara")
+      .doc(historyId)
+      .get();
 
-      const historySnapshot = await getDoc(historyDocumentRef);
+    if (!historyScan.exists) {
+      return res.status(400).json({
+        msg: "History scan not found",
+      });
+    }
+    const scannedAt = new Date(
+      historyScan.data().scannedAt._seconds * 1000 +
+        historyScan.data().scannedAt._nanoseconds / 1000000
+    ).toDateString();
 
-      if (historySnapshot.exists()) {
-        const historyData = {
-          scanned_aksara: historySnapshot.data().scanned_aksara,
-          timestamp: historySnapshot.data().timestamp.toDate().toISOString(),
-        };
+    const historyScanData = {
+      scannedAt,
+      predictionResult: historyScan.data().predictionResult,
+      imageUrl: historyScan.data().imageUrl,
+    };
 
-        return res.json(historyData);
-      } else {
-        return res.status(404).json({
-          msg: "History not found",
-        });
-      }
+    return res.json({
+      msg: "Successfully retrieved the user's aksara scan history",
+      data: historyScanData,
     });
   } catch (error) {
     return res.status(500).json({

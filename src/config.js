@@ -1,16 +1,44 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import Admin from "firebase-admin";
 import Dotenv from "dotenv";
 import Fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import * as tfnode from "@tensorflow/tfjs-node";
+import { Storage } from "@google-cloud/storage";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const serviceAccountKeyPath = path.join(__dirname, "serviceAccountKey.json");
+
+Dotenv.config();
+
+const {
+  APP_PORT,
+  APP_GMAIL_EMAIL,
+  APP_GMAIL_PASSWORD,
+  APP_PROJECT_ID,
+  APP_BUCKET_NAME,
+  APP_MODEL_URL,
+} = process.env;
+
+const storage = new Storage({
+  projectId: APP_PROJECT_ID,
+  keyFilename: serviceAccountKeyPath,
+});
+const bucketStorage = storage.bucket(APP_BUCKET_NAME);
+
+const serviceAccount = JSON.parse(Fs.readFileSync(serviceAccountKeyPath));
+
+const firebaseAdmin = Admin.initializeApp({
+  credential: Admin.credential.cert(serviceAccount),
+});
+const firebaseAuth = firebaseAdmin.auth();
+const firebaseFirestore = firebaseAdmin.firestore();
 
 function aksaraClassify(model, imageBuffer) {
   const tensor = tfnode.node
-    .decodeImage(imageBuffer, 3)  // Specify 3 channels to decode RGB images
+    .decodeImage(imageBuffer, 3) // Specify 3 channels to decode RGB images
     .resizeNearestNeighbor([150, 150])
     .expandDims()
     .toFloat()
@@ -18,14 +46,18 @@ function aksaraClassify(model, imageBuffer) {
 
   // Ensure that the shape matches the expected shape [-1, 150, 150, 3]
   if (tensor.shape[3] !== 3) {
-    throw new Error(`Expected 3 channels in the image, but found ${tensor.shape[3]} channels.`);
+    throw new Error(
+      `Expected 3 channels in the image, but found ${tensor.shape[3]} channels.`
+    );
   }
 
   return model.predict(tensor).data();
 }
 
 function aksaraClassifyClass(aksaraClassifyResult) {
-  const aksaraClassifyClass = aksaraClassifyResult.indexOf(Math.max(...aksaraClassifyResult));
+  const aksaraClassifyClass = aksaraClassifyResult.indexOf(
+    Math.max(...aksaraClassifyResult)
+  );
   let result = {};
 
   if (aksaraClassifyClass === 0) {
@@ -144,53 +176,15 @@ function aksaraClassifyClass(aksaraClassifyResult) {
   return result;
 }
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const ServiceAccount = JSON.parse(
-  Fs.readFileSync(path.join(__dirname, "serviceAccountKey.json"))
-);
-
-Dotenv.config();
-
-const {
-  APP_PORT,
-  APP_GMAIL_EMAIL,
-  APP_GMAIL_PASSWORD,
-  FIREBASE_API_KEY,
-  FIREBASE_AUTH_DOMAIN,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_STORAGE_BUCKET,
-  FIREBASE_MESSAGING_SENDER_ID,
-  FIREBASE_APP_ID,
-  FIREBASE_MEASUREMENT_ID,
-} = process.env;
-
-const firebaseAuth = Admin.initializeApp({
-  credential: Admin.credential.cert(ServiceAccount),
-}).auth();
-
-const firebaseApp = initializeApp({
-  apiKey: FIREBASE_API_KEY,
-  authDomain: FIREBASE_AUTH_DOMAIN,
-  projectId: FIREBASE_PROJECT_ID,
-  storageBucket: FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
-  appId: FIREBASE_APP_ID,
-  measurementId: FIREBASE_MEASUREMENT_ID,
-});
-
-const firebaseDB = getFirestore();
-const firebaseClientAuth = getAuth();
-
 export default {
   PORT: APP_PORT,
   gmailEmail: APP_GMAIL_EMAIL,
   gmailPassword: APP_GMAIL_PASSWORD,
-  firebaseApp,
-  firebaseDB,
+  firebaseFirestore,
   firebaseAuth,
-  firebaseClientAuth,
+  bucketStorage,
+
+  modelUrl: APP_MODEL_URL,
   aksaraClassify,
   aksaraClassifyClass,
 };

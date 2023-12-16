@@ -1,9 +1,10 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import Nodemailer from "nodemailer";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Config from "../config.js";
-import { generateNewAccessToken, generateUniqueCode } from "../utils.js";
+import { generateUniqueCode } from "../utils.js";
+
+const auth = Config.firebaseAuth;
+const db = Config.firebaseFirestore;
 
 const sendEmailVerification = async (email, uniqueCode) => {
   const transporter = Nodemailer.createTransport({
@@ -28,9 +29,6 @@ const sendEmailVerification = async (email, uniqueCode) => {
 export const registerUser = async (req, res) => {
   try {
     const { email, password, confirmPassword, name } = req.body;
-    const auth = Config.firebaseAuth;
-
-    const clientAuth = Config.firebaseClientAuth;
 
     if ((!email, !password, !confirmPassword, !name)) {
       return res.status(400).json({
@@ -53,31 +51,23 @@ export const registerUser = async (req, res) => {
     const uniqueCode = generateUniqueCode();
     await sendEmailVerification(user.email, uniqueCode);
 
-    const userDocumentRef = doc(Config.firebaseDB, "users", user.uid);
-    await setDoc(userDocumentRef, {
-      email: user.email,
-      isVerified: false,
-      name: user.displayName,
-      verificationCode: uniqueCode,
-    });
-
-    const profileDocumentRef = doc(Config.firebaseDB, "profile", user.uid);
-    await setDoc(profileDocumentRef, {
-    email: user.email,
-    name: user.displayName,
-    });
-
-    const credential = await signInWithEmailAndPassword(
-      clientAuth,
-      email,
-      password
-    );
-    const jwtToken = await credential.user.getIdToken();
+    await db
+      .collection("users")
+      .doc(user.uid)
+      .create({
+        email: user.email,
+        isVerified: false,
+        name: user.displayName,
+        verificationCode: uniqueCode,
+        photo: {
+          name: null,
+          url: null,
+        },
+      });
 
     return res.status(201).json({
       msg: "The verification code has been sent to your email",
       userId: user.uid,
-      token: jwtToken,
     });
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
@@ -102,7 +92,6 @@ export const registerUser = async (req, res) => {
 
 export const verifyEmailVerificationCode = async (req, res) => {
   try {
-    const auth = Config.firebaseAuth;
     const { code } = req.body;
     const userId = req.userData.id;
 
@@ -112,8 +101,16 @@ export const verifyEmailVerificationCode = async (req, res) => {
       });
     }
 
-    const userDocumentRef = doc(Config.firebaseDB, "users", userId);
-    const userData = (await getDoc(userDocumentRef)).data();
+    const userDoc = await db.collection("users").doc(userId).get();
+
+    if (!userDoc.exists) {
+      return res.status(400).json({
+        msg: "User not found",
+        userId,
+      });
+    }
+
+    const userData = userDoc.data();
 
     if (userData.isVerified === true) {
       return res.status(200).json({
@@ -131,16 +128,14 @@ export const verifyEmailVerificationCode = async (req, res) => {
     await auth.updateUser(userId, {
       emailVerified: true,
     });
-    await updateDoc(userDocumentRef, {
+
+    await db.collection("users").doc(userId).update({
       isVerified: true,
     });
-
-    const jwtToken = await generateNewAccessToken(userId);
 
     return res.json({
       msg: "Email successfully verified",
       userId,
-      token: jwtToken,
     });
   } catch (error) {
     return res.status(500).json({
@@ -157,8 +152,16 @@ export const resendEmailVerificationCode = async (req, res) => {
 
     await sendEmailVerification(email, uniqueCode);
 
-    const userDocumentRef = doc(Config.firebaseDB, "users", userId);
-    const userData = (await getDoc(userDocumentRef)).data();
+    const userDoc = await db.collection("users").doc(userId).get();
+
+    if (!userDoc.exists) {
+      return res.status(400).json({
+        msg: "User not found",
+        userId,
+      });
+    }
+
+    const userData = userDoc.data();
 
     if (userData.isVerified === true) {
       return res.status(200).json({
@@ -167,75 +170,13 @@ export const resendEmailVerificationCode = async (req, res) => {
       });
     }
 
-    await updateDoc(userDocumentRef, {
+    await db.collection("users").doc(userId).update({
       verificationCode: uniqueCode,
     });
 
     return res.json({
       msg: "The verification code was successfully resent",
       userId,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      msg: error,
-    });
-  }
-};
-
-export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const clientAuth = Config.firebaseClientAuth;
-
-    if ((!email, !password)) {
-      return res.status(400).json({
-        msg: "Invalid parameters",
-      });
-    }
-    const credential = await signInWithEmailAndPassword(
-      clientAuth,
-      email,
-      password
-    );
-
-    const jwtToken = await credential.user.getIdToken();
-    return res.status(200).json({
-      msg: "User has successfully logged in",
-      token: jwtToken,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      msg: error,
-    });
-  }
-};
-
-export const logoutUser = async (req, res) => {
-  try {
-    const userId = req.userId;
-    const auth = Config.firebaseAuth;
-
-    await auth.revokeRefreshTokens(userId);
-
-    return res.json({
-      msg: "Logout success",
-    });
-  } catch (error) {
-    return res.status(500).json({
-      msg: error,
-    });
-  }
-};
-
-export const refreshAccessToken = async (req, res) => {
-  try {
-    const userId = req.userData.id;
-
-    const jwtToken = await generateNewAccessToken(userId);
-
-    return res.json({
-      msg: "successfully retrieved a new token",
-      token: jwtToken,
     });
   } catch (error) {
     return res.status(500).json({

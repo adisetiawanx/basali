@@ -1,5 +1,3 @@
-import { jwtDecode } from "jwt-decode";
-
 import Config from "../config.js";
 
 export const verifyAuthToken = async (req, res, next) => {
@@ -27,13 +25,9 @@ export const verifyAuthToken = async (req, res, next) => {
         msg: "Invalid token",
       });
     } else if (error.code === "auth/id-token-expired") {
-      //using this method so that clients no longer need to apply the firebase SDK (unsafe and not recommended)
-      const decodedToken = jwtDecode(req.authToken);
-      req.userData = {
-        id: decodedToken.user_id,
-        email: decodedToken.email,
-      };
-      next();
+      return res.status(400).json({
+        msg: "Token has expired",
+      });
     } else {
       return res.status(500).json({
         msg: error,
