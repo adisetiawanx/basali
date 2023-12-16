@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", AuthRoutes);
-app.use("/api/profile", ProfileRoutes);
+app.use("/api/user", ProfileRoutes);
 app.use("/api/scan", ScanRoutes);
 
 app.listen(Config.PORT, () => {

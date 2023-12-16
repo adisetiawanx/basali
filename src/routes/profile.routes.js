@@ -1,14 +1,16 @@
 import { Router } from "express";
 
 import {
-    deleteProfilePhoto,
-    userProfile, updateProfilePhoto,
+  deleteProfilePhoto,
+  userProfile,
+  updateProfilePhoto,
 } from "../controllers/profile.controller.js";
+import { verifyAuthToken } from "../middlewares/authenticated.middleware.js";
 
 const router = Router();
 
-router.get("/profile-user", userProfile);
-router.put("/photo-profile", updateProfilePhoto);
-router.delete("/delete-photo", deleteProfilePhoto);
+router.get("/profile", verifyAuthToken, userProfile);
+router.put("/profile/photo", verifyAuthToken, updateProfilePhoto);
+router.delete("/profile/photo", verifyAuthToken, deleteProfilePhoto);
 
 export default router;

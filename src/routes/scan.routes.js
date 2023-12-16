@@ -1,13 +1,16 @@
 import { Router } from "express";
 
 import {
-    UserScannedAksara, getUserHistoriesScanByUserId, getUserHistoryById,
+  UserScannedAksara,
+  getUserHistoriesScanByUserId,
+  getUserHistoryById,
 } from "../controllers/scan.controller.js";
+import { verifyAuthToken } from "../middlewares/authenticated.middleware.js";
 
 const router = Router();
 
-router.post("/scan-aksara", UserScannedAksara);
-router.get("/scan-aksara", getUserHistoriesScanByUserId);
-router.get("/scan-aksara/:id", getUserHistoryById);
+router.post("/aksara", verifyAuthToken, UserScannedAksara);
+router.get("/aksara", verifyAuthToken, getUserHistoriesScanByUserId);
+router.get("/aksara/:id", verifyAuthToken, getUserHistoryById);
 
 export default router;
