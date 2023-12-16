@@ -18,7 +18,6 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="28dp"
             android:contentDescription="@string/profile_image"
-            android:src="@tools:sample/avatars"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

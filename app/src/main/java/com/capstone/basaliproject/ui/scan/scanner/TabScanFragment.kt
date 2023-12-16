@@ -1,12 +1,16 @@
 package com.capstone.basaliproject.ui.scan.scanner
 
 import android.Manifest
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,14 +23,18 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabScanBinding
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity.Companion.CAMERAX_RESULT
+import java.io.File
+import java.io.FileOutputStream
 
 class TabScanFragment : Fragment() {
+    private val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1
     private var _binding: FragmentTabScanBinding? = null
     private val binding get() = _binding!!
     var path: String? = null
@@ -184,7 +192,8 @@ class TabScanFragment : Fragment() {
         }
 
         drawButton.setOnClickListener {
-
+            drawCustomDialog()
+            dialog.dismiss()
         }
 
         cancelButton.setOnClickListener {
@@ -230,6 +239,63 @@ class TabScanFragment : Fragment() {
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+    }
+
+
+    //drawing
+    private fun drawCustomDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+
+        val customView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_draw_dialog, null)
+        builder.setView(customView)
+
+        val drawingView = customView.findViewById<com.mihir.drawingcanvas.drawingView>(R.id.drawing_view)
+        val btnSave = customView.findViewById<Button>(R.id.btnSave)
+        val reset = customView.findViewById<TextView>(R.id.tvReset)
+        val dialog = builder.create()
+
+        reset.setOnClickListener {
+            drawingView.clearDrawingBoard()
+        }
+
+        btnSave.setOnClickListener {
+            // Enable the drawing cache
+            drawingView.isDrawingCacheEnabled = true
+
+            // Get the bitmap from the drawing cache
+            val bitmap = drawingView.drawingCache
+
+            // Create a ContentValues object
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, getRandomString(5))
+                put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            }
+
+            // Get a Uri for the file
+            val uri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+            // Open an OutputStream and write to the file
+            if (uri != null) {
+                requireContext().contentResolver.openOutputStream(uri).use { outputStream ->
+                    if (outputStream != null) {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 85, outputStream)
+                        currentImageUri = uri
+                        showImage()
+                    }
+                }
+            }
+            dialog.dismiss()
+        }
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.show()
+    }
+
+    fun getRandomString(length: Int) : String {
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+        return (1..length)
+            .map { allowedChars.random() }
+            .joinToString("")
     }
 
 }
