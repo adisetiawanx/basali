@@ -3,6 +3,7 @@ import multer from "multer";
 
 import Config from "../config.js";
 
+const db = Config.firebaseFirestore;
 const model = await tf.loadGraphModel(Config.modelUrl);
 
 const storage = multer.memoryStorage();

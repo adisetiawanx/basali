@@ -41,8 +41,7 @@ export const userProfile = async (req, res) => {
 
 export const updateProfilePhoto = async (req, res) => {
   try {
-    // const userId = req.userData.id;
-    const userId = "SmEH5jKqehbbl09ofLY4dDjcQQV2";
+    const userId = req.userData.id;
 
     let uploadedImageUrl = null;
     imageUpload.single("image")(req, res, async () => {
@@ -92,8 +91,7 @@ export const updateProfilePhoto = async (req, res) => {
 
 export const deleteProfilePhoto = async (req, res) => {
   try {
-    // const userId = req.userData.id;
-    const userId = "SmEH5jKqehbbl09ofLY4dDjcQQV2";
+    const userId = req.userData.id;
 
     const userData = await db.collection("users").doc(userId).get();
     const photoName = userData.data().photo.name;
