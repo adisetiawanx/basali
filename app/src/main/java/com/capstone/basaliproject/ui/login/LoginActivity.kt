@@ -22,6 +22,7 @@ import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityLoginBinding
 import com.capstone.basaliproject.ui.home.HomeFragment
+import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
@@ -83,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                 showCustomDialog("Welcome!", "$email")
             } else {
                 Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
-                showCustomDialog("Login Failed!", "Authentication failed or account didnt exist")
+                showCustomDialogFailed("Login Failed!", "Authentication failed or account didnt exist")
             }
         })
 
@@ -159,6 +160,30 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val dialog = builder.create()
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.show()
+    }
+
+    private fun showCustomDialogFailed(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(this)
+        val customView =
+            LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+        val dialog = builder.create()
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+        btnNext.setOnClickListener {
+            edEmail.text = ""
+            edPassword.text = ""
+            dialog.dismiss()
+        }
+
+
         dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
         dialog.show()
     }
