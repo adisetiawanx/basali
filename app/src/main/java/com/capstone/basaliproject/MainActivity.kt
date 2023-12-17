@@ -61,14 +61,6 @@ class MainActivity : AppCompatActivity() {
         binding.navView.visibility = View.VISIBLE
     }
 
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null){
-            startActivity(Intent(this@MainActivity, WelcomeActivity::class.java))
-            finish()
-        }
-    }
+
 
 }

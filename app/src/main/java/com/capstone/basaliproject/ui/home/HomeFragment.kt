@@ -1,5 +1,6 @@
 package com.capstone.basaliproject.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.capstone.basaliproject.databinding.FragmentHomeBinding
 import com.capstone.basaliproject.databinding.ItemAksaraHomeBinding
 import com.capstone.basaliproject.ui.learn.LearnViewModel
 import com.capstone.basaliproject.ui.learn.model.LearnModel
+import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.capstone.basaliproject.utils.ListAksaraAdapter
 import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
 import com.google.firebase.auth.FirebaseAuth

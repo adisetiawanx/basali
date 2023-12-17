@@ -15,7 +15,7 @@ class EmailEditText : TextInputEditText {
 
     private var backgroundDefault: Drawable? = null
     private var backgroundError: Drawable? = null
-    private var isError: Boolean = false
+    var isError: Boolean = false
 
     constructor(context: Context) : super(context) {
         init()

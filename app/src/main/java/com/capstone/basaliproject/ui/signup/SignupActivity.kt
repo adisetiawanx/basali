@@ -92,8 +92,79 @@ class SignupActivity : AppCompatActivity() {
             val email = binding.edRegisterEmail.text.toString()
             val password = binding.edRegisterPassword.text.toString()
             val confirmPassword = binding.edRegisterComfirmPassword.text.toString()
+            val emailError = binding.edRegisterEmail.isError
+            val passwordError = binding.edRegisterPassword.isError
 
-            val json = """
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
+                val builder = AlertDialog.Builder(this)
+                val customView = LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
+                builder.setView(customView)
+                val dialog = builder.create()
+
+                val title = customView.findViewById<TextView>(R.id.tv_title)
+                val desc = customView.findViewById<TextView>(R.id.tv_desc)
+                val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
+
+                title.text = "Failed!"
+                desc.text = "Please fill all the field"
+                btnNext.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.show()
+            } else if (emailError) {
+                val builder = AlertDialog.Builder(this)
+                val customView = LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
+                builder.setView(customView)
+                val dialog = builder.create()
+
+                val title = customView.findViewById<TextView>(R.id.tv_title)
+                val desc = customView.findViewById<TextView>(R.id.tv_desc)
+                val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
+
+                title.text = "Failed!"
+                desc.text = "please use the correct email"
+                btnNext.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.show()
+            } else if (passwordError) {
+                val builder = AlertDialog.Builder(this)
+                val customView = LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
+                builder.setView(customView)
+                val dialog = builder.create()
+
+                val title = customView.findViewById<TextView>(R.id.tv_title)
+                val desc = customView.findViewById<TextView>(R.id.tv_desc)
+                val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
+
+                title.text = "Failed!"
+                desc.text = "Password is less than 8 character"
+                btnNext.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.show()
+            } else if (!confirmPassword.equals(password)) {
+                val builder = AlertDialog.Builder(this)
+                val customView = LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
+                builder.setView(customView)
+                val dialog = builder.create()
+
+                val title = customView.findViewById<TextView>(R.id.tv_title)
+                val desc = customView.findViewById<TextView>(R.id.tv_desc)
+                val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
+
+                title.text = "Failed!"
+                desc.text = "Confirmation password is not match"
+                btnNext.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.show()
+            } else {
+                val json = """
                             {
                                 "email": "$email",
                                 "password": "$password",
@@ -102,10 +173,11 @@ class SignupActivity : AppCompatActivity() {
                             }
                         """.trimIndent()
 
-            val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+                val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
 
-            lifecycleScope.launch {
-                viewModel.register(requestBody)
+                lifecycleScope.launch {
+                    viewModel.register(requestBody)
+                }
             }
         }
     }
