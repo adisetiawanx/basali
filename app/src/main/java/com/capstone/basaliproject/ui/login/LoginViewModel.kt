@@ -18,6 +18,19 @@ class LoginViewModel : ViewModel() {
             .addOnCompleteListener { task ->
                 _isLoading.value = false
                 _isLoginSuccessful.value = task.isSuccessful
+
+                if (task.isSuccessful) {
+                    val user = FirebaseAuth.getInstance().currentUser
+                    user?.getIdToken(false)?.addOnCompleteListener { idTask ->
+                        if (idTask.isSuccessful) {
+                            val idToken = idTask.result?.token
+                            // Use idToken as needed
+                        } else {
+                            // Handle error in idToken retrieval
+                        }
+                    }
+                }
             }
     }
+
 }
