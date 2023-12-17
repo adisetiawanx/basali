@@ -1,26 +1,16 @@
 package com.capstone.basaliproject
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
+import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.basaliproject.databinding.ActivityMainBinding
-import com.capstone.basaliproject.ui.Logout.LogOutViewModel
-import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.login.LoginActivity
-import com.capstone.basaliproject.ui.login.LoginViewModel
-import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupBottomNav()
-
-
     }
     private fun setupBottomNav(){
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -50,9 +38,24 @@ class MainActivity : AppCompatActivity() {
         navView.itemIconTintList = colorStateList
         navView.isItemActiveIndicatorEnabled = false
         navView.itemTextColor = colorStateList
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_home -> showBottomNav()
+                R.id.navigation_learn -> showBottomNav()
+                R.id.navigation_scan -> showBottomNav()
+                R.id.navigation_settings -> showBottomNav()
+                else -> hideBottomNav()
+            }
+        }
     }
 
-    private fun setupAction() {
-        binding
+    private fun hideBottomNav() {
+        binding.navView.visibility = View.GONE
     }
+
+    private fun showBottomNav() {
+        binding.navView.visibility = View.VISIBLE
+    }
+
 }

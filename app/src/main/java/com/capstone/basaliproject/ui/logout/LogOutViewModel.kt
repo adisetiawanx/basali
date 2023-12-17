@@ -1,4 +1,4 @@
-package com.capstone.basaliproject.ui.Logout
+package com.capstone.basaliproject.ui.logout
 
 import android.content.Intent
 import androidx.core.content.ContextCompat.startActivity
@@ -17,17 +17,4 @@ class LogOutViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val _isLogOut = MutableLiveData<Boolean>()
     val isLogOut: LiveData<Boolean> = _isLogOut
-    fun getSession() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null){
-            _isLogOut.value = false
-        }
-    }
-
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
-    }
-
 }

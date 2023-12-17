@@ -1,4 +1,4 @@
-package com.capstone.basaliproject.ui.scan
+package com.capstone.basaliproject.ui.scan.scanner
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

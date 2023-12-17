@@ -9,13 +9,24 @@
         android:id="@+id/navigation_home"
         android:name="com.capstone.basaliproject.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_learnDetailFragment"
+            app:destination="@id/learnDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tabHistoryFragment"
+            app:destination="@id/tabHistoryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_scan"
         android:name="com.capstone.basaliproject.ui.scan.ScanFragment"
         android:label="@string/title_scanaksara"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_navigation_scan_to_tabScanFragment"
+            app:destination="@id/tabScanFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_learn"
@@ -28,5 +39,29 @@
         android:name="com.capstone.basaliproject.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/tabScanFragment"
+        android:name="com.capstone.basaliproject.ui.scan.scanner.TabScanFragment"
+        android:label="fragment_tab_scan"
+        tools:layout="@layout/fragment_tab_scan" >
+        <action
+            android:id="@+id/action_tabScanFragment_to_scanResultFragment"
+            app:destination="@id/scanResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanResultFragment"
+        android:name="com.capstone.basaliproject.ui.scan.scanner.ScanResultFragment"
+        android:label="fragment_scan_result"
+        tools:layout="@layout/fragment_scan_result" />
+    <fragment
+        android:id="@+id/learnDetailFragment"
+        android:name="com.capstone.basaliproject.ui.learn.detail.LearnDetailFragment"
+        android:label="fragment_learn_detail"
+        tools:layout="@layout/fragment_learn_detail" />
+    <fragment
+        android:id="@+id/tabHistoryFragment"
+        android:name="com.capstone.basaliproject.ui.scan.history.TabHistoryFragment"
+        android:label="fragment_tab_history"
+        tools:layout="@layout/fragment_tab_history" />
 
 </navigation>

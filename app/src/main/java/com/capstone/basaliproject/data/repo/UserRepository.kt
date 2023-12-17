@@ -43,7 +43,7 @@ class UserRepository private constructor(
                 instance ?: UserRepository(userPreference, apiService)
             }.also { instance = it }
 
-        fun resetIntance() {
+        fun resetInstance() {
             instance = null
         }
     }

@@ -38,7 +38,6 @@ class SignupActivity : AppCompatActivity() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
 
-
         //sementara intent ke login bukan ke verif code
         viewModel.result.observe(this) {
             if (it.userId != null) {
