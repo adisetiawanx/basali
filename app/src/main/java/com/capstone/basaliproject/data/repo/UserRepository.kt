@@ -2,6 +2,7 @@ package com.capstone.basaliproject.data.repo
 
 import com.capstone.basaliproject.data.api.response.LoginResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
+import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
 import com.capstone.basaliproject.data.api.retrofit.ApiService
 import com.capstone.basaliproject.data.pref.UserModel
 import com.capstone.basaliproject.data.pref.UserPreference
@@ -30,6 +31,10 @@ class UserRepository private constructor(
 
     suspend fun login(raw: RequestBody): LoginResponse {
         return apiService.login(raw)
+    }
+
+    suspend fun updateProfilePhoto(raw: RequestBody): UpdatePhotoResponse {
+        return apiService.updateProfilePhoto(raw)
     }
 
     companion object {

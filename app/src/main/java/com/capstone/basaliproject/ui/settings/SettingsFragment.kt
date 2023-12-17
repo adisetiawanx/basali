@@ -20,6 +20,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -30,12 +31,21 @@ import com.capstone.basaliproject.databinding.FragmentSettingsBinding
 import com.capstone.basaliproject.ui.logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity
+import com.capstone.basaliproject.ui.signup.SignupViewModel
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 class SettingsFragment : Fragment() {
     private lateinit var auth : FirebaseAuth
     private val viewModel by viewModels<LogOutViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
+    private val viewModelSetting by viewModels<SettingsViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
     private var _binding: FragmentSettingsBinding? = null
@@ -44,6 +54,7 @@ class SettingsFragment : Fragment() {
     private val uriKey = "profile_uri"
     private var currentImageUri: Uri? = null
     var path: String? = null
+
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -82,7 +93,7 @@ class SettingsFragment : Fragment() {
             return super.onCreateView(inflater, container, savedInstanceState)
         }
 
-        val settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
+
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -227,6 +238,14 @@ class SettingsFragment : Fragment() {
             binding.profileImage.setImageURI(it)
 
             saveImageUriToSharedPreferences(it.toString())
+
+            // Create a RequestBody from the image file
+            val file = File(it.path)
+            val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+            // Call the updateProfilePhoto function from the ViewModel
+            viewModelSetting.updateProfilePhoto(requestFile)
         }
     }
 
