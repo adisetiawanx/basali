@@ -10,14 +10,15 @@
         android:id="@+id/cl_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginTop="12dp"
             android:layout_marginStart="28dp"
+            android:src="@drawable/cam_placeholder_logo"
             android:contentDescription="@string/profile_image"
-            android:src="@drawable/ic_baseline_account_box_24"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -142,18 +143,19 @@
                 android:id="@+id/rv_aksara"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:scrollbarSize="0dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="24dp"
                 android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:padding="10dp"
+                android:scrollbarSize="0dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
                 tools:listitem="@layout/item_aksara_home" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

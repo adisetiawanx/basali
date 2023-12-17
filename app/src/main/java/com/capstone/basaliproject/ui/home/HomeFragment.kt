@@ -15,12 +15,14 @@ import com.capstone.basaliproject.ui.learn.LearnViewModel
 import com.capstone.basaliproject.ui.learn.model.LearnModel
 import com.capstone.basaliproject.utils.ListAksaraAdapter
 import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
 
     private lateinit var aksaraAdapter: ListAksaraAdapter
 
     private var _binding: FragmentHomeBinding? = null
+    private lateinit var auth : FirebaseAuth
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -52,6 +54,16 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         historyButton()
 
         closeOnBackPressed()
+
+        auth = FirebaseAuth.getInstance()
+
+        val tvName = binding.tvName
+        // Set tvName text to the logged account display name
+        val user = auth.currentUser
+        if (user != null) {
+            val name = user.displayName
+            tvName.text = name
+        }
 
         return root
     }

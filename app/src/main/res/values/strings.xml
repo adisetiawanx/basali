@@ -112,5 +112,7 @@
     <string name="change_profile_picture">Change profile picture</string>
     <string name="delete">Delete</string>
     <string name="default_web_client_id">" "</string>
+    <string name="draw">Draw</string>
+    <string name="or_login_with">Continue with Google</string>
 
 </resources>

@@ -34,6 +34,7 @@ import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingsFragment : Fragment() {
+    private lateinit var auth : FirebaseAuth
     private val viewModel by viewModels<LogOutViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -92,6 +93,19 @@ class SettingsFragment : Fragment() {
         // Setup profile picture
         binding.editProfile.setOnClickListener {
             showEditPictureDialog()
+        }
+
+        //display name and email user
+        auth = FirebaseAuth.getInstance()
+        val tvName = binding.tvName
+        val tvEmail = binding.tvEmail
+        // Set tvName text to the logged account display name
+        val user = auth.currentUser
+        if (user != null) {
+            val name = user.displayName
+            val email = user.email
+            tvName.text = name
+            tvEmail.text = email
         }
 
         return root

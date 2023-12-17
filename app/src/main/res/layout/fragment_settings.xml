@@ -70,6 +70,25 @@
 
             </FrameLayout>
 
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:text="display name"/>
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textStyle="italic"
+                tools:text="email@gmail.com"/>
+
             <LinearLayout
                 android:id="@+id/item_notifications"
                 android:layout_width="match_parent"
