@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityLoginBinding
+import com.capstone.basaliproject.ui.confirm.ConfirmationActivity
 import com.capstone.basaliproject.ui.home.HomeFragment
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -80,13 +81,22 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.isLoginSuccessful.observe(this, Observer { isSuccessful ->
             if (isSuccessful) {
-                val email = edEmail.text.toString()
-                showCustomDialog("Welcome!", "$email")
+                viewModel.isEmailVerified.observe(this, Observer { isEmailVerified ->
+                    if (isEmailVerified == false) {
+                        // Navigate to ConfirmationActivity
+                        showCustomDialogVerify("Verify your email!", "Click to verify the email")
+                    } else {
+                        val email = edEmail.text.toString()
+                        showCustomDialog("Welcome!", email)
+                    }
+                })
             } else {
                 Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 showCustomDialogFailed("Login Failed!", "Authentication failed or account didnt exist")
             }
         })
+
+
 
         //google sign in
         auth = FirebaseAuth.getInstance()
@@ -155,6 +165,29 @@ class LoginActivity : AppCompatActivity() {
         desc.text = descFill
         btnNext.setOnClickListener {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val dialog = builder.create()
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.show()
+    }
+
+    private fun showCustomDialogVerify(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(this)
+        val customView =
+            LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+        btnNext.setOnClickListener {
+            val intent = Intent(this@LoginActivity, ConfirmationActivity::class.java)
             startActivity(intent)
             finish()
         }
