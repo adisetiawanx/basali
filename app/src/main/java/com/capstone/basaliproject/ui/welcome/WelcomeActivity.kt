@@ -3,8 +3,11 @@ package com.capstone.basaliproject.ui.welcome
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import com.capstone.basaliproject.MainActivity
+import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityWelcomeBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginActivity
@@ -26,6 +29,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        setupWelcomeTextColor()
         setupAction()
     }
 
@@ -36,6 +40,19 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
+    private fun setupWelcomeTextColor(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+        when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
+            android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
+                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralDarkMid))
+            }
+            android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
+                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralLightLight))
+            }
         }
     }
 

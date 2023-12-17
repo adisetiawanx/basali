@@ -161,10 +161,14 @@ class SettingsFragment : Fragment() {
 
         val cameraButton = customView.findViewById<ImageButton>(R.id.ib_camera)
         val galleryButton = customView.findViewById<ImageButton>(R.id.ib_gallery)
+        val drawButton = customView.findViewById<ImageButton>(R.id.ib_draw)
+        val tvDraw = customView.findViewById<TextView>(R.id.tv_draw)
         val deleteButton = customView.findViewById<TextView>(R.id.btn_delete)
         val cancelButton = customView.findViewById<TextView>(R.id.btn_cancel)
 
         deleteButton.alpha = 1f
+        drawButton.alpha = 0f
+        tvDraw.alpha = 0f
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)

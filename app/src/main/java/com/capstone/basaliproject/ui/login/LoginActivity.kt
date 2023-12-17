@@ -1,7 +1,6 @@
 package com.capstone.basaliproject.ui.login
 
 import android.app.Activity
-import android.content.ContentProviderClient
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -16,13 +15,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityLoginBinding
-import com.capstone.basaliproject.ui.home.HomeFragment
-import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
@@ -42,14 +39,15 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         context = this
 
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        setupLoginTextColor()
+
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         edEmail = binding.edLoginEmail
         edPassword = binding.edLoginPassword
@@ -60,33 +58,37 @@ class LoginActivity : AppCompatActivity() {
             val email = edEmail.text.toString()
             val password = edPassword.text.toString()
             if (email.isEmpty()) {
-                edEmail.error = "Email tidak boleh kosong"
+                edEmail.error = getString(R.string.email_cannot_be_empty)
                 edEmail.requestFocus()
             } else if (password.isEmpty()) {
-                edPassword.error = "Password tidak boleh kosong"
+                edPassword.error = getString(R.string.password_cannot_be_empty)
                 edPassword.requestFocus()
             } else {
                 viewModel.login(email, password)
             }
         }
 
-        viewModel.isLoading.observe(this, Observer { isLoading ->
+        viewModel.isLoading.observe(this) { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
             }
-        })
+        }
 
-        viewModel.isLoginSuccessful.observe(this, Observer { isSuccessful ->
+        viewModel.isLoginSuccessful.observe(this) { isSuccessful ->
             if (isSuccessful) {
                 val email = edEmail.text.toString()
-                showCustomDialog("Welcome!", "$email")
+                showCustomDialog(getString(R.string.welcome), email)
             } else {
-                Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
-                showCustomDialogFailed("Login Failed!", "Authentication failed or account didnt exist")
+                Toast.makeText(context,
+                    getString(R.string.authentication_failed), Toast.LENGTH_SHORT).show()
+                showCustomDialogFailed(
+                    getString(R.string.login_failed),
+                    getString(R.string.authentication_failed_or_account_didn_t_exist)
+                )
             }
-        })
+        }
 
         //google sign in
         auth = FirebaseAuth.getInstance()
@@ -134,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener{
             if (it.isSuccessful){
-                showCustomDialog("Welcome!", "${account.displayName}")
+                showCustomDialog(getString(R.string.welcome), "${account.displayName}")
             }else{
                 Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -160,7 +162,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val dialog = builder.create()
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -178,13 +180,30 @@ class LoginActivity : AppCompatActivity() {
         title.text = titleFill
         desc.text = descFill
         btnNext.setOnClickListener {
-            edEmail.text = ""
-            edPassword.text = ""
             dialog.dismiss()
         }
 
 
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+    }
+
+    private fun setupLoginTextColor(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+        when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
+            android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
+                findViewById<TextView>(R.id.titleTextView).setTextColor(getColor(R.color.black))
+                findViewById<TextView>(R.id.emailTextView).setTextColor(getColor(R.color.NeutralDarkDark))
+                findViewById<TextView>(R.id.passwordTextView).setTextColor(getColor(R.color.NeutralDarkDark))
+                findViewById<TextView>(R.id.tv_askToRegister).setTextColor(getColor(R.color.NeutralDarkLight))
+            }
+            android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
+                findViewById<TextView>(R.id.titleTextView).setTextColor(getColor(R.color.NeutralLightDark))
+                findViewById<TextView>(R.id.emailTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.passwordTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.tv_askToRegister).setTextColor(getColor(R.color.NeutralDarkLightest))
+            }
+        }
     }
 }
