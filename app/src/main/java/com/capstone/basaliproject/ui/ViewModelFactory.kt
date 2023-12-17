@@ -16,9 +16,6 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                LoginViewModel(repository) as T
-            }
             modelClass.isAssignableFrom(LogOutViewModel::class.java) -> {
                 LogOutViewModel(repository) as T
             }

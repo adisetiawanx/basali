@@ -143,10 +143,10 @@
         android:id="@+id/tv_askToRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/not_a_member"
-        android:textSize="12sp"
         android:textColor="@color/NeutralDarkLight"
-        android:layout_marginTop="20dp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@id/loginButton"
         app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="@id/loginButton"
@@ -157,13 +157,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="@string/register_now"
+        android:textColor="@color/HighlightDark"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:textColor="@color/HighlightDark"
         app:layout_constraintStart_toEndOf="@id/tv_askToRegister"
         app:layout_constraintTop_toBottomOf="@id/loginButton" />
+
+
+    <ImageButton
+        android:id="@+id/google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button_tertiary"
+        android:padding="20dp"
+        android:src="@drawable/googlelogo"
+        app:layout_constraintEnd_toEndOf="@+id/tv_toRegister"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="@+id/tv_askToRegister"
+        app:layout_constraintTop_toBottomOf="@+id/tv_askToRegister" />
+
+    <ImageButton
+        android:id="@+id/facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/rounded_button_blue"
+        android:padding="20dp"
+        android:src="@drawable/facebooklogo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="@+id/tv_toRegister"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/google" />
 
     <ProgressBar
         android:id="@+id/progressBar"

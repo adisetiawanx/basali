@@ -22,6 +22,7 @@ import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginActivity
 import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsFragment : Fragment() {
     private val viewModel by viewModels<LogOutViewModel> {
@@ -36,9 +37,9 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel.getSession().observe(requireActivity()) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(activity, WelcomeActivity::class.java))
+        viewModel.isLogOut.observe(requireActivity()) { isLogout ->
+            if (isLogout) {
+                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
             }
         }
 
@@ -58,18 +59,6 @@ class SettingsFragment : Fragment() {
 
     private fun setupAction() {
         binding.btnLogout.setOnClickListener {
-//            AlertDialog.Builder(requireContext()).apply {
-//                setTitle("Berhasil Logout!")
-//                setMessage("Anda telah logout")
-//                setPositiveButton("Lanjut") { _, _ ->
-//                    viewModel.logout()
-//                    val intent = Intent(requireActivity(), WelcomeActivity::class.java)
-//                    ViewModelFactory.refreshObject()
-//                    startActivity(intent)
-//                }
-//                create()
-//                show()
-//            }
             showCustomDialog("Warning!", "Yakin ingin logout?")
         }
     }
@@ -89,9 +78,9 @@ class SettingsFragment : Fragment() {
         desc.text = descFill
 
         btnYes.setOnClickListener {
-            viewModel.logout()
-            val intent = Intent(requireActivity(), WelcomeActivity::class.java)
-            ViewModelFactory.refreshObject()
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(requireContext(), WelcomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "848768689187",
+    "project_id": "basali-app",
+    "storage_bucket": "basali-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848768689187:android:b586a1a9f2a965660ebd96",
+        "android_client_info": {
+          "package_name": "com.capstone.basaliproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848768689187-l1hc4eh9pvg6kfnburnom2iie91f5mco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.basaliproject",
+            "certificate_hash": "76fcaf9d753005c68262dfae9e7eb52c21a8b5e6"
+          }
+        },
+        {
+          "client_id": "848768689187-k5e7v8dhmuv0lm7nkt30nth86e2vrsoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCmjkce8LqqgthYskeGFWRFBUEE5wQC1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848768689187-k5e7v8dhmuv0lm7nkt30nth86e2vrsoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

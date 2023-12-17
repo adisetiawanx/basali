@@ -11,6 +11,7 @@ import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginActivity
 import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class WelcomeActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
@@ -39,19 +40,19 @@ class WelcomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (viewModel.getSession().isLogin) {
-//            startActivity(Intent(this, MainActivity::class.java))
-            val intent = Intent(this@WelcomeActivity, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         finishAffinity()
         super.onBackPressed()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null){
+            startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+            finish()
+        }
     }
 }

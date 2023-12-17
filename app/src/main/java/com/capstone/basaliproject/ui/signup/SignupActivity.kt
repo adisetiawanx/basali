@@ -41,18 +41,8 @@ class SignupActivity : AppCompatActivity() {
 
         //sementara intent ke login bukan ke verif code
         viewModel.result.observe(this) {
-            if (it.token != null) {
+            if (it.userId != null) {
                 val email = binding.edRegisterEmail.text
-//                AlertDialog.Builder(this).apply {
-//                    setTitle("Yeah!")
-//                    setMessage("The verification code has been sent to your email $email")
-//                    setPositiveButton("Next") { _, _ ->
-//                        val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-//                        startActivity(intent)
-//                    }
-//                    create()
-//                    show()
-//                }
                 showCustomDialog()
 
             } else {

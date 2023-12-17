@@ -27,5 +27,6 @@
     <string name="continue_text">Continue</string>
     <string name="resend_code">Resend code</string>
     <string name="welcome_description">Learn Balinese Character</string>
+    <string name="default_web_client_id">-</string>
 
 </resources>
