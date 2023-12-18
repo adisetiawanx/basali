@@ -81,8 +81,8 @@
     <string name="alarm_time">Waktu Notifikasi</string>
     <string name="alarm_message">Pesan Notifikasi</string>
 
-    <string name="pangangge_swara">Panganggĕ Swara</string>
-    <string name="desc_pangangge_swara">Aksara swara (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ}}) adalah aksara yang digunakan untuk suku kata yang tidak memiliki konsonan di awal, atau dalam kata lain suku kata yang hanya terdiri vokal. Aksara Bali memiliki 14 aksara vokal yang diwarisi dari tradisi tulis Sanskerta.</string>
+    <string name="pangangge_swara">Aksara Swara</string>
+    <string name="desc_pangangge_swara">Aksara swara (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ  ) adalah aksara yang digunakan untuk suku kata yang tidak memiliki konsonan di awal, atau dalam kata lain suku kata yang hanya terdiri vokal. Aksara Bali memiliki 14 aksara vokal yang diwarisi dari tradisi tulis Sanskerta.</string>
 
     <string name="aksara_wyanjana">Aksara Wyañjana</string>
     <string name="desc_aksara_wyanjana">Aksara wyañjana (ᬳᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ) adalah aksara konsonan dengan vokal inheren /a/. Sebagai salah satu aksara turunan Brahmi, aksara Bali memiliki 33 aksara wyañjana untuk menuliskan 33 bunyi konsonan yang digunakan dalam bahasa Sanskerta dan Kawi.</string>

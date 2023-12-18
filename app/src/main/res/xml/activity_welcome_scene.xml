@@ -490,9 +490,10 @@
             android:layout_width="140dp"
             motion:layout_constraintTop_toBottomOf="@+id/tvDescMenu3"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="16dp"
             android:id="@+id/loginButton"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            motion:layout_constraintEnd_toStartOf="@+id/pb" />
         <Constraint
             android:layout_height="wrap_content"
             motion:layout_constraintStart_toStartOf="parent"
@@ -524,6 +525,21 @@
                 motion:attributeName="crossfade"
                 motion:customFloatValue="0" />
         </Constraint>
+        <Constraint
+            android:id="@+id/guidelineVertical"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintGuide_percent="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="@+id/loginButton"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="140dp"
+            android:id="@+id/signUpButton"
+            motion:layout_constraintStart_toEndOf="@+id/pb" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu3"
