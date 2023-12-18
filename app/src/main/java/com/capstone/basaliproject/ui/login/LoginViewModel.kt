@@ -12,6 +12,9 @@ class LoginViewModel : ViewModel() {
     private val _isLoginSuccessful = MutableLiveData<Boolean>()
     val isLoginSuccessful: LiveData<Boolean> = _isLoginSuccessful
 
+    private val _isEmailVerified = MutableLiveData<Boolean>()
+    val isEmailVerified: LiveData<Boolean> = _isEmailVerified
+
     fun login(email: String, password: String) {
         _isLoading.value = true
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
@@ -21,14 +24,10 @@ class LoginViewModel : ViewModel() {
 
                 if (task.isSuccessful) {
                     val user = FirebaseAuth.getInstance().currentUser
-                    user?.getIdToken(false)?.addOnCompleteListener { idTask ->
-                        if (idTask.isSuccessful) {
-                            val idToken = idTask.result?.token
-                            // Use idToken as needed
-                        } else {
-                            // Handle error in idToken retrieval
-                        }
-                    }
+                    _isEmailVerified.value = user?.isEmailVerified
+//                    if (user?.isEmailVerified == false){
+//                        FirebaseAuth.getInstance().signOut()
+//                    }
                 }
             }
     }

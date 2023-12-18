@@ -111,6 +111,8 @@
     <string name="notification_is_cancelled">Notifikasi harian dibatalkan</string>
     <string name="change_profile_picture">Ubah foto profil</string>
     <string name="delete">Hapus</string>
+    <string name="draw">Draw</string>
+    <string name="or_login_with">Continue with Google</string>
     <string name="please_fill_all_the_field">Please fill all the field</string>
     <string name="please_use_the_correct_email">please use the correct email</string>
     <string name="confirmation_password_is_not_match">Confirmation password is not match</string>
@@ -120,5 +122,15 @@
     <string name="authentication_failed">Authentication failed.</string>
     <string name="login_failed">Login Failed!</string>
     <string name="authentication_failed_or_account_didn_t_exist">Authentication failed or account didn\'t exist</string>
+    <string name="msg_token_fmt">Your token is: %1$s</string>
+    <string name="verify_your_email">Verify your email!</string>
+    <string name="click_to_verify_the_email">Click to verify the email</string>
+    <string name="verify_success">Verify success!</string>
+    <string name="click_to_continue">click to continue</string>
+    <string name="verify_failed">Verify failed!</string>
+    <string name="click_to_retry">click to retry</string>
+    <string name="a_6_digit_code_was_sent_to">A 6-digit code was sent to %1$s</string>
+    <string name="resend_success">Resend success!</string>
+    <string name="the_code_has_been_resent_to">the code has been resent to %1$s</string>
 
 </resources>

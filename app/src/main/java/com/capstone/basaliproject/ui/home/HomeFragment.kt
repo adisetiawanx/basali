@@ -17,7 +17,9 @@ import com.capstone.basaliproject.ui.learn.model.LearnModel
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.capstone.basaliproject.utils.ListAksaraAdapter
 import com.capstone.basaliproject.utils.SetupUtils.Companion.closeOnBackPressed
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
 
@@ -93,4 +95,16 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         // Use findNavController to navigate to DetailFragment
         view.root.findNavController().navigate(R.id.learnDetailFragment, bundle)
     }
+
+    override fun onStart() {
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser != null) {
+            if (!currentUser.isEmailVerified) {
+                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+                FirebaseAuth.getInstance().signOut()
+            }
+        }
+        super.onStart()
+    }
+
 }
