@@ -27,7 +27,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/aksara_swalalita" />
+            tools:src="@drawable/aksara_swalalita"
+            android:contentDescription="@string/your_work_image" />
+
+        <TextView
+            android:id="@+id/tvResultDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/good_job_we_have_detected_that_it_is"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultTitle" />
 
         <TextView
             android:id="@+id/tvResultTitle"
@@ -44,19 +58,6 @@
             app:layout_constraintTop_toBottomOf="@+id/ivResultScan"
             tools:text="Its a Wa aksara" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tvResultDesc"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:textColor="@color/black"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tvResultTitle"-->
-<!--            tools:text="We know because have a similaritis “ikutin metode” yang dipake" />-->
-
         <Button
             android:id="@+id/btnDone"
             android:layout_width="match_parent"
@@ -64,7 +65,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="22dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="@string/done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
