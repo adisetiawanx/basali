@@ -9,13 +9,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="#00FFFFFF">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:layout_marginTop="12dp"
             android:layout_marginStart="28dp"
             android:src="@drawable/cam_placeholder_logo"
             android:contentDescription="@string/profile_image"
@@ -26,7 +28,7 @@
             android:id="@+id/tv_welcome"
             android:layout_width="174dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="2dp"
             android:text="@string/welcome"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -63,7 +65,7 @@
                 android:id="@+id/iv_explore"
                 android:layout_width="match_parent"
                 android:layout_height="145dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
                 android:src="@drawable/ic_baseline_rectangle_24"

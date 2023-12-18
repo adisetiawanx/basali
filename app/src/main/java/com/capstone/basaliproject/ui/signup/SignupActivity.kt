@@ -11,11 +11,11 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivitySignupBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.confirm.ConfirmationActivity
 import com.capstone.basaliproject.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -32,16 +32,17 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupSignupTextColor()
         setupAction()
 
         viewModel.isLoading.observe(this) {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
 
-        //sementara intent ke login bukan ke verif code
+        // sementara intent ke login bukan ke verif code
         viewModel.result.observe(this) {
             if (it.userId != null) {
-                val email = binding.edRegisterEmail.text
+                binding.edRegisterEmail.text
                 showCustomDialog()
 
             } else {
@@ -67,8 +68,8 @@ class SignupActivity : AppCompatActivity() {
         val desc = customView.findViewById<TextView>(R.id.tv_desc)
         val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
 
-        title.text = "Yeah!"
-        desc.text = "Register success! Go to Login page"
+        title.text = getString(R.string.yeah)
+        desc.text = getString(R.string.register_success_go_to_login_page)
         btnNext.setOnClickListener {
             val intent = Intent(this@SignupActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -76,7 +77,7 @@ class SignupActivity : AppCompatActivity() {
         }
 
         val dialog = builder.create()
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -105,12 +106,12 @@ class SignupActivity : AppCompatActivity() {
                 val desc = customView.findViewById<TextView>(R.id.tv_desc)
                 val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
 
-                title.text = "Failed!"
-                desc.text = "Please fill all the field"
+                title.text = getString(R.string.failed)
+                desc.text = getString(R.string.please_fill_all_the_field)
                 btnNext.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             } else if (emailError) {
                 val builder = AlertDialog.Builder(this)
@@ -122,12 +123,12 @@ class SignupActivity : AppCompatActivity() {
                 val desc = customView.findViewById<TextView>(R.id.tv_desc)
                 val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
 
-                title.text = "Failed!"
-                desc.text = "please use the correct email"
+                title.text = getString(R.string.failed)
+                desc.text = getString(R.string.please_use_the_correct_email)
                 btnNext.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             } else if (passwordError) {
                 val builder = AlertDialog.Builder(this)
@@ -139,14 +140,14 @@ class SignupActivity : AppCompatActivity() {
                 val desc = customView.findViewById<TextView>(R.id.tv_desc)
                 val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
 
-                title.text = "Failed!"
-                desc.text = "Password is less than 8 character"
+                title.text = getString(R.string.failed)
+                desc.text = getString(R.string.password_is_less_than_8_character)
                 btnNext.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-            } else if (!confirmPassword.equals(password)) {
+            } else if (confirmPassword != password) {
                 val builder = AlertDialog.Builder(this)
                 val customView = LayoutInflater.from(this).inflate(R.layout.custom_layout_dialog_1_option, null)
                 builder.setView(customView)
@@ -156,12 +157,12 @@ class SignupActivity : AppCompatActivity() {
                 val desc = customView.findViewById<TextView>(R.id.tv_desc)
                 val btnNext = customView.findViewById<Button>(R.id.ok_btn_id)
 
-                title.text = "Failed!"
-                desc.text = "Confirmation password is not match"
+                title.text = getString(R.string.failed)
+                desc.text = getString(R.string.confirmation_password_is_not_match)
                 btnNext.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             } else {
                 val json = """
@@ -178,6 +179,31 @@ class SignupActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     viewModel.register(requestBody)
                 }
+            }
+        }
+    }
+
+    private fun setupSignupTextColor(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+        when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
+            android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
+                findViewById<TextView>(R.id.titleTextView).setTextColor(getColor(R.color.NeutralDarkDarkest))
+                findViewById<TextView>(R.id.messageTextView).setTextColor(getColor(R.color.NeutralDarkLight))
+                findViewById<TextView>(R.id.nameTextView).setTextColor(getColor(R.color.NeutralDarkDark))
+                findViewById<TextView>(R.id.emailTextView).setTextColor(getColor(R.color.NeutralDarkDark))
+                findViewById<TextView>(R.id.passwordTextView).setTextColor(getColor(R.color.NeutralDarkDark))
+                findViewById<TextView>(R.id.confirmPasswordTextView).setTextColor(getColor(R.color.NeutralDarkDark))
+                findViewById<TextView>(R.id.tv_askToLogin).setTextColor(getColor(R.color.NeutralDarkLight))
+            }
+            android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
+                findViewById<TextView>(R.id.titleTextView).setTextColor(getColor(R.color.NeutralLightDark))
+                findViewById<TextView>(R.id.messageTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.nameTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.emailTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.passwordTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.confirmPasswordTextView).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.tv_askToLogin).setTextColor(getColor(R.color.NeutralDarkLightest))
             }
         }
     }

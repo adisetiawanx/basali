@@ -15,12 +15,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
 import com.capstone.basaliproject.databinding.ActivityConfirmationBinding
@@ -35,10 +33,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
 
 class ConfirmationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityConfirmationBinding
@@ -54,30 +48,37 @@ class ConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(ConfirmationViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ConfirmationViewModel::class.java]
+
+        setupConfirmationTextColor()
         setupAction()
         setupEditText()
 
-        viewModel.isLoading.observe(this, Observer { isLoading ->
+        viewModel.isLoading.observe(this) { isLoading ->
             if (isLoading) {
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE
             }
-        })
+        }
 
         viewModel.isSuccess.observe(this) {isSuccess ->
             if (isSuccess) {
-                viewModel.navigateToMain.observe(this, Observer { navigate ->
+                viewModel.navigateToMain.observe(this) { navigate ->
                     if (navigate) {
-                        showCustomDialog("Verify success!", "click to continue")
+                        showCustomDialog(
+                            getString(R.string.verify_success),
+                            getString(R.string.click_to_continue)
+                        )
                         viewModel.doneNavigating()
                     } else {
-
+                        Log.d("Navigation", "Navigation failed: navigate is false")
                     }
-                })
+                }
             } else {
-                showCustomDialogFailed("Verify failed!", "click to retry")
+                showCustomDialogFailed(
+                    getString(R.string.verify_failed),
+                    getString(R.string.click_to_retry))
             }
         }
 
@@ -88,7 +89,7 @@ class ConfirmationActivity : AppCompatActivity() {
             email = user.email.toString()
         }
 
-        binding.confirmationMessage.text = "A 6-digit code was sent to $email"
+        binding.confirmationMessage.text = getString(R.string.a_6_digit_code_was_sent_to, email)
     }
 
     private fun setupEditText() {
@@ -156,11 +157,14 @@ class ConfirmationActivity : AppCompatActivity() {
                                     if (user != null) {
                                         email = user.email.toString()
                                     }
-                                    showCustomDialogResend("Resend success!", "the code has been resent to $email")
-                                    val confirmationResponse = response?.msg
+                                    showCustomDialogResend(getString(R.string.resend_success),
+                                        getString(
+                                            R.string.the_code_has_been_resent_to, email
+                                        ))
+                                    val confirmationResponse = response.msg
                                     Log.d(
                                         "ConfirmationActivity",
-                                        "Code successfully resent: ${confirmationResponse}"
+                                        "Code successfully resent: $confirmationResponse"
                                     )
                                 } else {
                                     binding.progressBar.visibility = View.GONE
@@ -178,19 +182,6 @@ class ConfirmationActivity : AppCompatActivity() {
         binding.continueButton.setOnClickListener {
             val progressBar = findViewById<ProgressBar>(R.id.progressBar)
             progressBar.visibility = View.VISIBLE
-
-//            val edConfirm1 =
-//                findViewById<TextInputEditText>(R.id.ed_confirmEditTextLayout_1).text.toString()
-//            val edConfirm2 =
-//                findViewById<TextInputEditText>(R.id.ed_confirmEditTextLayout_2).text.toString()
-//            val edConfirm3 =
-//                findViewById<TextInputEditText>(R.id.ed_confirmEditTextLayout_3).text.toString()
-//            val edConfirm4 =
-//                findViewById<TextInputEditText>(R.id.ed_confirmEditTextLayout_4).text.toString()
-//            val edConfirm5 =
-//                findViewById<TextInputEditText>(R.id.ed_confirmEditTextLayout_5).text.toString()
-//            val edConfirm6 =
-//                findViewById<TextInputEditText>(R.id.ed_confirmEditTextLayout_6).text.toString()
 
             val verifCode = "${edConfirm1.text.toString()}${edConfirm2.text.toString()}${edConfirm3.text.toString()}${edConfirm4.text.toString()}${edConfirm5.text.toString()}${edConfirm6.text.toString()}"
             Log.d("ConfirmationActivity", verifCode)
@@ -218,7 +209,7 @@ class ConfirmationActivity : AppCompatActivity() {
         }
 
         val dialog = builder.create()
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -238,7 +229,7 @@ class ConfirmationActivity : AppCompatActivity() {
         btnNext.setOnClickListener {
             dialog.dismiss()
         }
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -260,8 +251,23 @@ class ConfirmationActivity : AppCompatActivity() {
         }
 
 
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+    }
+
+    private fun setupConfirmationTextColor(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+        when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
+            android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
+                findViewById<TextView>(R.id.confirmation_title).setTextColor(getColor(R.color.black))
+                findViewById<TextView>(R.id.confirmation_message).setTextColor(getColor(R.color.NeutralDarkLight))
+            }
+            android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
+                findViewById<TextView>(R.id.confirmation_title).setTextColor(getColor(R.color.NeutralLightDark))
+                findViewById<TextView>(R.id.confirmation_message).setTextColor(getColor(R.color.NeutralLightLight))
+            }
+        }
     }
 
 

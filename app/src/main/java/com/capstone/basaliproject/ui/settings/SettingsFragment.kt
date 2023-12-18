@@ -20,18 +20,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentSettingsBinding
 import com.capstone.basaliproject.ui.logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity
-import com.capstone.basaliproject.ui.signup.SignupViewModel
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -86,7 +84,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        val view = layoutInflater.inflate(R.layout.fragment_settings, container, false)
+//        val view = layoutInflater.inflate(R.layout.fragment_settings, container, false)
 
         // Check if the fragment is attached to an activity
         if (!isAdded) {
@@ -130,6 +128,9 @@ class SettingsFragment : Fragment() {
         binding.itemLanguage.setOnClickListener {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
+        binding.itemMode.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_navigation_settings_to_themeFragment)
+        }
         binding.itemLogout.setOnClickListener {
             showCustomDialog(getString(R.string.warning), getString(R.string.yakin_ingin_logout))
         }
@@ -172,10 +173,14 @@ class SettingsFragment : Fragment() {
 
         val cameraButton = customView.findViewById<ImageButton>(R.id.ib_camera)
         val galleryButton = customView.findViewById<ImageButton>(R.id.ib_gallery)
+        val drawButton = customView.findViewById<ImageButton>(R.id.ib_draw)
+        val tvDraw = customView.findViewById<TextView>(R.id.tv_draw)
         val deleteButton = customView.findViewById<TextView>(R.id.btn_delete)
         val cancelButton = customView.findViewById<TextView>(R.id.btn_cancel)
 
         deleteButton.alpha = 1f
+        drawButton.alpha = 0f
+        tvDraw.alpha = 0f
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)

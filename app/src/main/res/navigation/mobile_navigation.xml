@@ -38,7 +38,11 @@
         android:id="@+id/navigation_settings"
         android:name="com.capstone.basaliproject.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_themeFragment"
+            app:destination="@id/themeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tabScanFragment"
         android:name="com.capstone.basaliproject.ui.scan.scanner.TabScanFragment"
@@ -63,5 +67,10 @@
         android:name="com.capstone.basaliproject.ui.scan.history.TabHistoryFragment"
         android:label="fragment_tab_history"
         tools:layout="@layout/fragment_tab_history" />
+    <fragment
+        android:id="@+id/themeFragment"
+        android:name="com.capstone.basaliproject.ui.settings.ThemeFragment"
+        android:label="fragment_theme"
+        tools:layout="@layout/fragment_theme" />
 
 </navigation>

@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import okhttp3.RequestBody
 
 class SettingsViewModel(private val userRepository: UserRepository) : ViewModel() {
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is settings Fragment"
     }
