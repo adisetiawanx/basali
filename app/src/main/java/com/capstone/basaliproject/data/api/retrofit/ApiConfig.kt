@@ -1,5 +1,6 @@
 package com.capstone.basaliproject.data.api.retrofit
 
+import com.capstone.basaliproject.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,7 +22,7 @@ object ApiConfig {
             .addInterceptor(authInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://basali-service-cpzubjc2ba-et.a.run.app")
+            .baseUrl(BuildConfig.KEY_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
