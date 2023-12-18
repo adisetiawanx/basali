@@ -153,5 +153,12 @@
     <string name="display">Display</string>
     <string name="switch_camera">Switch camera</string>
     <string name="take_picture">Take picture</string>
+    <string name="error_posting_image">Error posting image: %1$s</string>
+    <string name="invalid_scan_result">Invalid scan result</string>
+    <string name="error">Error</string>
+    <string name="failed_to_process_the_image">Failed to process the image</string>
+    <string name="your_work_image">Your work image</string>
+    <string name="good_job_we_have_detected_that_it_is">Good job! We have detected that it is</string>
+    <string name="draw_dialog_desc">Want to test your Balinese script character writing skills? draw your handwriting below.</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.capstone.basaliproject.ui.scan.scanner
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,22 +23,32 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabScanBinding
+import com.capstone.basaliproject.reduceFileImage
+import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity.Companion.CAMERAX_RESULT
-import java.io.File
-import java.io.FileOutputStream
+import com.capstone.basaliproject.uriToFile
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 class TabScanFragment : Fragment() {
-    private val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1
     private var _binding: FragmentTabScanBinding? = null
     private val binding get() = _binding!!
     var path: String? = null
     private var currentImageUri: Uri? = null
+
+    private val scanViewModel by viewModels<ScanViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -65,31 +74,27 @@ class TabScanFragment : Fragment() {
     ): View {
         _binding = FragmentTabScanBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val processButton = binding.processButton
 
         binding.captureButton.setOnClickListener {
             showCustomDialog()
         }
 
-        processButton.setOnClickListener {
-            if (currentImageUri != null) {
-                // Process the image here
-                Toast.makeText(requireContext(),
-                    getString(R.string.image_processing_logic_goes_here), Toast.LENGTH_SHORT).show()
-                    showResultPopUp(
-                        getString(R.string.its_wa_aksara),
-                        getString(R.string.we_know_because_have_a_similaritis_ikutin_metode_yang_dipake),
-                    currentImageUri!!
-                )
+        binding.processButton.setOnClickListener {
+            uploadImage()
+        }
 
-            } else {
-                // Show a message or take appropriate action when no image is selected
-                showWarning(getString(R.string.select_image),
-                    getString(R.string.you_havent_selected_image_please_select_one_to_process))
-            }
+        if (savedInstanceState != null) {
+            currentImageUri = savedInstanceState.getParcelable(KEY_CURRENT_IMAGE_URI)
+            showImage()
         }
 
         return root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        scanViewModel.saveInstanceState(currentImageUri)
+        outState.putParcelable(KEY_CURRENT_IMAGE_URI, currentImageUri)
     }
 
     private fun updateCaptureButtonText() {
@@ -120,20 +125,83 @@ class TabScanFragment : Fragment() {
         }
     }
 
-    private fun showResultPopUp(titleFill: String, descFill: String, uri: Uri){
+    private fun showImage() {
+        currentImageUri?.let {
+            Log.d("Image URI", "showImage: $it")
+            binding.placeholder.setImageURI(it)
+            updateCaptureButtonText()
+        }
+    }
+
+    private fun uploadImage() {
+        if (currentImageUri != null) {
+            // Process the image here
+            val pb = binding.progressBar
+            pb.visibility = View.VISIBLE
+
+            lifecycleScope.launch {
+                currentImageUri?.let { uri ->
+                    val imageFile = uriToFile(uri, requireContext()).reduceFileImage()
+                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                    val multipartBody = MultipartBody.Part.createFormData(
+                        "image", imageFile.name, requestImageFile
+                    )
+                    postImage(multipartBody)
+                }
+            }
+        } else {
+            // Show a message or take appropriate action when no image is selected
+            showWarning(getString(R.string.select_image),
+                getString(R.string.you_havent_selected_image_please_select_one_to_process))
+        }
+    }
+
+    private fun postImage(file: MultipartBody.Part) {
+        val pb = binding.progressBar
+        pb.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            val apiService = scanViewModel.getApiServiceWithToken()
+
+            if (apiService != null) {
+                try {
+                    val response = apiService.postImageToScan(file)
+
+                    val imageUrl = response.data?.imageUrl
+                    val prediction = response.data?.prediction
+
+                    if (!imageUrl.isNullOrEmpty() && !prediction.isNullOrEmpty()) {
+                        pb.visibility = View.GONE
+                        showResultPopUp(prediction, imageUrl)
+                    } else {
+                        pb.visibility = View.GONE
+                        showWarning(getString(R.string.error), getString(R.string.invalid_scan_result))
+                    }
+                }
+                catch (e: Exception) {
+                    pb.visibility = View.GONE
+                    Log.e("ScanViewModel", "Error posting image: ${e.message}")
+                    showWarning(getString(R.string.error),
+                        getString(R.string.failed_to_process_the_image))
+                }
+            }
+        }
+    }
+
+    private fun showResultPopUp(titleFill: String, uri: String){
         val builder = AlertDialog.Builder(requireContext())
 
         val customView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_scan_result, null)
         builder.setView(customView)
 
         val title = customView.findViewById<TextView>(R.id.tvResultTitle)
-        val desc = customView.findViewById<TextView>(R.id.tvResultDesc)
         val btnOk = customView.findViewById<Button>(R.id.btnDone)
         val img = customView.findViewById<ImageView>(R.id.ivResultScan)
 
         title.text = titleFill
-        desc.text = descFill
-        img.setImageURI(uri)
+
+        Glide.with(requireContext())
+            .load(currentImageUri)
+            .into(img)
 
         btnOk.setOnClickListener {
 
@@ -224,14 +292,6 @@ class TabScanFragment : Fragment() {
         }
     }
 
-    private fun showImage() {
-        currentImageUri?.let {
-            Log.d("Image URI", "showImage: $it")
-            binding.placeholder.setImageURI(it)
-            updateCaptureButtonText()
-        }
-    }
-
 
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -240,10 +300,6 @@ class TabScanFragment : Fragment() {
             currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
             showImage()
         }
-    }
-
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 
 
@@ -256,6 +312,7 @@ class TabScanFragment : Fragment() {
 
         val drawingView = customView.findViewById<com.mihir.drawingcanvas.drawingView>(R.id.drawing_view)
         val btnSave = customView.findViewById<Button>(R.id.btnSave)
+        val btnCancel = customView.findViewById<Button>(R.id.btnCancel)
         val reset = customView.findViewById<TextView>(R.id.tvReset)
         val dialog = builder.create()
 
@@ -263,6 +320,10 @@ class TabScanFragment : Fragment() {
             drawingView.clearDrawingBoard()
             val color = R.color.HighlightDark
             drawingView.setBrushColor(color)
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
         }
 
         btnSave.setOnClickListener {
@@ -294,15 +355,23 @@ class TabScanFragment : Fragment() {
             }
             dialog.dismiss()
         }
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
-    fun getRandomString(length: Int) : String {
+    private fun getRandomString(length: Int) : String {
         val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
         return (1..length)
             .map { allowedChars.random() }
             .joinToString("")
     }
+
+    companion object {
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        private const val KEY_CURRENT_IMAGE_URI = "key_current_image_uri"
+    }
+
 
 }

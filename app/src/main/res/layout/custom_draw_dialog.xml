@@ -20,6 +20,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="20dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/draw_dialog_desc"/>
+
         <com.mihir.drawingcanvas.drawingView
             android:id="@+id/drawing_view"
             android:layout_width="match_parent"
@@ -44,13 +52,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="22dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:text="@string/save"
+            android:background="@drawable/dialog_bg_filled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="22dp"
+            android:background="@drawable/rounded_button_tertiary"
+            android:textColor="@color/HighlightDark"
+            android:layout_marginTop="8dp"
+            android:text="@string/cancel"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

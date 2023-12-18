@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.basaliproject.data.di.Injection
 import com.capstone.basaliproject.data.repo.UserRepository
 import com.capstone.basaliproject.ui.logout.LogOutViewModel
+import com.capstone.basaliproject.ui.scan.scanner.ScanViewModel
 import com.capstone.basaliproject.ui.settings.SettingsViewModel
 import com.capstone.basaliproject.ui.signup.SignupViewModel
 
@@ -21,6 +22,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
                 SettingsViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+                ScanViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
