@@ -135,11 +135,11 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.signUpButton.setOnClickListener {
+        binding.signUpButton?.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
 
-        binding.loginButton.setOnClickListener {
+        binding.loginButton?.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }
@@ -162,9 +162,19 @@ class WelcomeActivity : AppCompatActivity() {
 
     //animation
     private fun playAnimation() {
-
-
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        ObjectAnimator.ofFloat(binding.ivMenu2, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        ObjectAnimator.ofFloat(binding.ivMenu3, View.TRANSLATION_X, -30f, 30f).apply {
             duration = 6000
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
@@ -173,10 +183,9 @@ class WelcomeActivity : AppCompatActivity() {
         val signup = ObjectAnimator.ofFloat(binding.signUpButton, View.ALPHA, 1f).setDuration(300)
         val title = ObjectAnimator.ofFloat(binding.tvHello, View.ALPHA, 1f).setDuration(300)
         val desc = ObjectAnimator.ofFloat(binding.tvHelloDescription, View.ALPHA, 1f).setDuration(300)
-        val tvGoogle = ObjectAnimator.ofFloat(binding.tvGoogle, View.ALPHA, 1f).setDuration(300)
         val ivGoogle = ObjectAnimator.ofFloat(binding.google, View.ALPHA, 1f).setDuration(300)
         val together = AnimatorSet().apply {
-            playTogether(login, signup, tvGoogle, ivGoogle)
+            playTogether(login, signup, ivGoogle)
         }
         AnimatorSet().apply {
             playSequentially(title, desc, together)
