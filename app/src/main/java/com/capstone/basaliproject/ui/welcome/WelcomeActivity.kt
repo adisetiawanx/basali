@@ -37,7 +37,6 @@ class WelcomeActivity : AppCompatActivity() {
     }
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var progressBar: ProgressBar
 
     private lateinit var binding: ActivityWelcomeBinding
 
@@ -49,7 +48,7 @@ class WelcomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         setupAction()
-        progressBar = binding.progressBar!!
+        val progressBar = binding.pb
 
         //google sign in
         auth = FirebaseAuth.getInstance()
@@ -69,8 +68,10 @@ class WelcomeActivity : AppCompatActivity() {
     private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
-        progressBar = binding.progressBar!!
-        progressBar.visibility = View.VISIBLE
+        val progressBar = binding.pb
+        if (progressBar != null) {
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
@@ -85,7 +86,10 @@ class WelcomeActivity : AppCompatActivity() {
         if (task.isSuccessful){
             val account : GoogleSignInAccount? = task.result
             if (account != null){
-                progressBar.visibility = View.GONE
+                val progressBar = binding.pb
+                if (progressBar != null) {
+                    progressBar.visibility = View.GONE
+                }
                 updateUI(account)
             }
         }else{
