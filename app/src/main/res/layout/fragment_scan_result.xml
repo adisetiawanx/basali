@@ -44,18 +44,18 @@
             app:layout_constraintTop_toBottomOf="@+id/ivResultScan"
             tools:text="Its a Wa aksara" />
 
-        <TextView
-            android:id="@+id/tvResultDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvResultTitle"
-            tools:text="We know because have a similaritis “ikutin metode” yang dipake" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvResultDesc"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvResultTitle"-->
+<!--            tools:text="We know because have a similaritis “ikutin metode” yang dipake" />-->
 
         <Button
             android:id="@+id/btnDone"
@@ -65,7 +65,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="22dp"
             android:layout_marginTop="60dp"
-            android:text="Done"
+            android:text="@string/done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

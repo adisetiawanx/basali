@@ -10,19 +10,19 @@ data class UpdatePhotoResponse(
 	@field:SerializedName("msg")
 	val msg: String? = null,
 
-	@field:SerializedName("data")
-	val data: Data? = null,
+//	@field:SerializedName("data")
+//	val data: Data? = null,
 
 	@field:SerializedName("userId")
 	val userId: String? = null
 ) : Parcelable
 
-@Parcelize
-data class Data(
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("url")
-	val url: String? = null
-) : Parcelable
+//@Parcelize
+//data class Data(
+//
+//	@field:SerializedName("name")
+//	val name: String? = null,
+//
+//	@field:SerializedName("url")
+//	val url: String? = null
+//) : Parcelable

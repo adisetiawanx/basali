@@ -95,4 +95,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.0")
 
     implementation ("com.github.Miihir79:DrawingCanvas:1.1.2")
+
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
+
 }
