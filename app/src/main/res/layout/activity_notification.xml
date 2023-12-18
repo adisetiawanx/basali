@@ -48,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/baseline_access_time_24" />
+
         <TextView
             android:id="@+id/tv_repeating_time"
             android:layout_width="wrap_content"
@@ -78,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button_tertiary"
+            android:background="@drawable/dialog_bg_bordered"
             android:text="@string/cancel_alarm"
             android:textColor="@color/HighlightDark"/>
         <Button
@@ -87,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button_primary"
+            android:background="@drawable/dialog_bg_filled"
             android:text="@string/set_repeating_alarm" />
 
     </LinearLayout>

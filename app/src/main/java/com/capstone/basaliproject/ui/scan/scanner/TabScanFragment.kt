@@ -1,6 +1,7 @@
 package com.capstone.basaliproject.ui.scan.scanner
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -260,6 +261,8 @@ class TabScanFragment : Fragment() {
 
         reset.setOnClickListener {
             drawingView.clearDrawingBoard()
+            val color = R.color.HighlightDark
+            drawingView.setBrushColor(color)
         }
 
         btnSave.setOnClickListener {
@@ -272,7 +275,7 @@ class TabScanFragment : Fragment() {
             // Create a ContentValues object
             val contentValues = ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, getRandomString(5))
-                put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
+                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
                 put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
             }
 
@@ -283,7 +286,7 @@ class TabScanFragment : Fragment() {
             if (uri != null) {
                 requireContext().contentResolver.openOutputStream(uri).use { outputStream ->
                     if (outputStream != null) {
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 85, outputStream)
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream)
                         currentImageUri = uri
                         showImage()
                     }

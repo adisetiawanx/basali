@@ -25,9 +25,6 @@ class LoginViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     val user = FirebaseAuth.getInstance().currentUser
                     _isEmailVerified.value = user?.isEmailVerified
-//                    if (user?.isEmailVerified == false){
-//                        FirebaseAuth.getInstance().signOut()
-//                    }
                 }
             }
     }

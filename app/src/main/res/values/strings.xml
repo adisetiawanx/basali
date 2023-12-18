@@ -26,7 +26,7 @@
     <string name="confirmation_message">A 4-digit code was sent to lucasscott3@email.com</string>
     <string name="continue_text">Continue</string>
     <string name="resend_code">Resend code</string>
-    <string name="welcome_description">Learn Balinese Character</string>
+    <string name="welcome_description">Welcome to Basali, A Platform to Learn Balinese Script.</string>
     <string name="profile_image">Profile image</string>
     <string name="welcome">Welcome,</string>
     <string name="siti_badilah">Siti Badilah</string>
@@ -124,20 +124,7 @@
     <string name="login_failed">Login Failed!</string>
     <string name="authentication_failed_or_account_didn_t_exist">Authentication failed or account didn\'t exist</string>
     <string name="msg_token_fmt">Your token is: %1$s</string>
-    <string name="verify_your_email">Verify your email!</string>
-    <string name="click_to_verify_the_email">Click to verify the email</string>
-    <string name="verify_success">Verify success!</string>
-    <string name="click_to_continue">click to continue</string>
-    <string name="verify_failed">Verify failed!</string>
-    <string name="click_to_retry">click to retry</string>
-    <string name="a_6_digit_code_was_sent_to">A 6-digit code was sent to %1$s</string>
-    <string name="resend_success">Resend success!</string>
-    <string name="the_code_has_been_resent_to">the code has been resent to %1$s</string>
-    <string name="done">Done</string>
-    <string name="reset">Reset</string>
-    <string name="save">Save</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="theme">Theme</string>
+    <string name="Hello">Hello!</string>
 
     <string name="pref_key_dark" translatable="false">key_dark_mode</string>
     <string name="pref_dark_auto" translatable="false">auto</string>
