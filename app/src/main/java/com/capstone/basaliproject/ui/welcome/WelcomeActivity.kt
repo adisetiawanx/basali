@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -21,7 +20,6 @@ import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityWelcomeBinding
 import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.confirm.ConfirmationActivity
 import com.capstone.basaliproject.ui.login.LoginActivity
 import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupActivity
@@ -63,7 +61,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding.google?.setOnClickListener {
+        binding.google.setOnClickListener {
             signInGoogle()
         }
     }
@@ -72,9 +70,7 @@ class WelcomeActivity : AppCompatActivity() {
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
         val progressBar = binding.pb
-        if (progressBar != null) {
-            progressBar.visibility = View.VISIBLE
-        }
+        progressBar.visibility = View.VISIBLE
     }
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
@@ -90,9 +86,7 @@ class WelcomeActivity : AppCompatActivity() {
             val account : GoogleSignInAccount? = task.result
             if (account != null){
                 val progressBar = binding.pb
-                if (progressBar != null) {
-                    progressBar.visibility = View.GONE
-                }
+                progressBar.visibility = View.GONE
                 updateUI(account)
             }
         }else{

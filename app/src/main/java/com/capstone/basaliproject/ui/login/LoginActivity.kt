@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -90,6 +91,17 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         val email = edEmail.text.toString()
                         showCustomDialog(getString(R.string.welcome), email)
+
+                        val user = auth.currentUser
+                        user?.getIdToken(true)
+                            ?.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val token = task.result?.token
+                                    Log.d("FirebaseToken", "Firebase Token: $token")
+                                } else {
+                                    Log.e("FirebaseToken", "Error getting Firebase Token: ${task.exception}")
+                                }
+                            }
                     }
                 }
             } else {
