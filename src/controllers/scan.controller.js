@@ -49,7 +49,8 @@ export const UserScannedAksara = async (req, res) => {
           .collection("users")
           .doc(userId)
           .collection("scannedAksara")
-          .add({
+          .doc(`${Date.now()}_${result.result}`)
+          .create({
             scannedAt: new Date(Date.now()),
             predictionResult: result.result,
             imageUrl: uploadedImageUrl,
