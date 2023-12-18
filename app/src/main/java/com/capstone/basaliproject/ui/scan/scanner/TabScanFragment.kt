@@ -136,8 +136,8 @@ class TabScanFragment : Fragment() {
     private fun uploadImage() {
         if (currentImageUri != null) {
             // Process the image here
-            Toast.makeText(requireContext(),
-                getString(R.string.image_processing_logic_goes_here), Toast.LENGTH_SHORT).show()
+            val pb = binding.progressBar
+            pb.visibility = View.VISIBLE
 
             lifecycleScope.launch {
                 currentImageUri?.let { uri ->
@@ -157,6 +157,8 @@ class TabScanFragment : Fragment() {
     }
 
     private fun postImage(file: MultipartBody.Part) {
+        val pb = binding.progressBar
+        pb.visibility = View.VISIBLE
         lifecycleScope.launch {
             val apiService = scanViewModel.getApiServiceWithToken()
 
@@ -168,12 +170,15 @@ class TabScanFragment : Fragment() {
                     val prediction = response.data?.prediction
 
                     if (!imageUrl.isNullOrEmpty() && !prediction.isNullOrEmpty()) {
+                        pb.visibility = View.GONE
                         showResultPopUp(prediction, imageUrl)
                     } else {
+                        pb.visibility = View.GONE
                         showWarning(getString(R.string.error), getString(R.string.invalid_scan_result))
                     }
                 }
                 catch (e: Exception) {
+                    pb.visibility = View.GONE
                     Log.e("ScanViewModel", "Error posting image: ${e.message}")
                     showWarning(getString(R.string.error),
                         getString(R.string.failed_to_process_the_image))
