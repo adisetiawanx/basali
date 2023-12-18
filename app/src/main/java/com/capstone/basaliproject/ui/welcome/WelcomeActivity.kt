@@ -1,5 +1,7 @@
 package com.capstone.basaliproject.ui.welcome
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -28,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
+import com.google.android.material.animation.AnimatorSetCompat.playTogether
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -48,7 +51,7 @@ class WelcomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         setupAction()
-        val progressBar = binding.pb
+        playAnimation()
 
         //google sign in
         auth = FirebaseAuth.getInstance()
@@ -154,6 +157,30 @@ class WelcomeActivity : AppCompatActivity() {
         if (currentUser != null){
             startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
             finish()
+        }
+    }
+
+    //animation
+    private fun playAnimation() {
+
+
+        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+        val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(300)
+        val signup = ObjectAnimator.ofFloat(binding.signUpButton, View.ALPHA, 1f).setDuration(300)
+        val title = ObjectAnimator.ofFloat(binding.tvHello, View.ALPHA, 1f).setDuration(300)
+        val desc = ObjectAnimator.ofFloat(binding.tvHelloDescription, View.ALPHA, 1f).setDuration(300)
+        val tvGoogle = ObjectAnimator.ofFloat(binding.tvGoogle, View.ALPHA, 1f).setDuration(300)
+        val ivGoogle = ObjectAnimator.ofFloat(binding.google, View.ALPHA, 1f).setDuration(300)
+        val together = AnimatorSet().apply {
+            playTogether(login, signup, tvGoogle, ivGoogle)
+        }
+        AnimatorSet().apply {
+            playSequentially(title, desc, together)
+            start()
         }
     }
 }
