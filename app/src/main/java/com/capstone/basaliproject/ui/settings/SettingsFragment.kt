@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentSettingsBinding
 import com.capstone.basaliproject.ui.logout.LogOutViewModel
@@ -126,6 +127,9 @@ class SettingsFragment : Fragment() {
         }
         binding.itemLanguage.setOnClickListener {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        }
+        binding.itemMode.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_navigation_settings_to_themeFragment)
         }
         binding.itemLogout.setOnClickListener {
             showCustomDialog(getString(R.string.warning), getString(R.string.yakin_ingin_logout))

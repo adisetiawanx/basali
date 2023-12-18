@@ -5,13 +5,16 @@ import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.capstone.basaliproject.databinding.ActivityMainBinding
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,6 +22,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        preferences.getString(
+            getString(R.string.pref_key_dark),
+            getString(R.string.pref_dark_auto)
+        )?.apply {
+            val mode = NightMode.valueOf(this.uppercase(Locale.US))
+            AppCompatDelegate.setDefaultNightMode(mode.value)
+        }
 
         setupBottomNav()
     }

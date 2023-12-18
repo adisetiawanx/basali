@@ -1,6 +1,7 @@
 package com.capstone.basaliproject
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -13,4 +14,14 @@ fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
     return File.createTempFile(timeStamp, ".jpg", filesDir)
 }
+
+enum class NightMode(val value: Int) {
+
+    AUTO(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
+
+    ON(AppCompatDelegate.MODE_NIGHT_YES),
+
+    OFF(AppCompatDelegate.MODE_NIGHT_NO)
+}
+
 
