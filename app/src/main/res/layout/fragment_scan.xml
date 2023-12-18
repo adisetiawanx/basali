@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="?attr/actionBarTheme"
-        app:titleTextColor="@color/black"
-        android:background="@color/white">
+        android:background="#00FFFFFF">
 
         <TextView
             android:id="@+id/toolbar_title"

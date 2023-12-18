@@ -41,7 +41,6 @@
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
         android:text="@string/confirmation_message"
-        android:textColor="@color/NeutralDarkLight"
         android:textSize="14sp"
         android:textStyle="normal"
         tools:alpha="100" />

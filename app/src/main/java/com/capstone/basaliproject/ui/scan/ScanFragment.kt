@@ -93,9 +93,10 @@ class ScanFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.custom_tab_scan_menu, menu)
-        menuItem = menu.findItem(R.menu.custom_tab_scan_menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    No time to add the function
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.custom_tab_scan_menu, menu)
+//        menuItem = menu.findItem(R.menu.custom_tab_scan_menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 }

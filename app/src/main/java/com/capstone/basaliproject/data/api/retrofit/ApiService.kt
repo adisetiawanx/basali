@@ -5,8 +5,6 @@ import com.capstone.basaliproject.data.api.response.LoginResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
 import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
 import okhttp3.RequestBody
-import okhttp3.Response
-import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.PATCH
 import retrofit2.http.POST
