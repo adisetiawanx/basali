@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
@@ -48,6 +49,8 @@ class ConfirmationActivity : AppCompatActivity() {
         binding = ActivityConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[ConfirmationViewModel::class.java]
+
+        setupConfirmationTextColor()
         setupAction()
         setupEditText()
 
@@ -250,6 +253,21 @@ class ConfirmationActivity : AppCompatActivity() {
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+    }
+
+    private fun setupConfirmationTextColor(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+        when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
+            android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
+                findViewById<TextView>(R.id.confirmation_title).setTextColor(getColor(R.color.black))
+                findViewById<TextView>(R.id.confirmation_message).setTextColor(getColor(R.color.NeutralDarkLight))
+            }
+            android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
+                findViewById<TextView>(R.id.confirmation_title).setTextColor(getColor(R.color.NeutralLightDark))
+                findViewById<TextView>(R.id.confirmation_message).setTextColor(getColor(R.color.NeutralLightLight))
+            }
+        }
     }
 
 

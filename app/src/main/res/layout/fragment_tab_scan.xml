@@ -104,7 +104,7 @@
                 android:textColor="@color/HighlightDark"
                 android:text="@string/capture"
                 android:textSize="18sp"
-                android:background="@drawable/dialog_bg_bordered"/>
+                android:background="@drawable/rounded_button_tertiary"/>
 
             <Button
                 android:id="@+id/process_button"
