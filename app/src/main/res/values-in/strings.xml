@@ -144,4 +144,6 @@
     <string name="dark_mode_off">Light mode</string>
     <string name="choose_theme">Choose Theme</string>
     <string name="display">Display</string>
+    <string name="switch_camera">Switch camera</string>
+    <string name="take_picture">Take picture</string>
 </resources>

@@ -30,9 +30,14 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startCamera()
+        binding.switchCamera.setOnClickListener {
+            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
+            else CameraSelector.DEFAULT_BACK_CAMERA
+            startCamera()
+        }
 
-        binding.captureImage.setOnClickListener{ takePhoto() }
+        binding.captureImage.setOnClickListener { takePhoto() }
+
     }
 
     private val orientationEventListener by lazy {
