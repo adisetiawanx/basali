@@ -86,6 +86,7 @@ export const getUserHistoriesScanByUserId = async (req, res) => {
     const historiesData = [];
 
     historiesScannedAksara.forEach((scannedAkasara) => {
+      const predictionId = scannedAkasara.id;
       const predictionResult = scannedAkasara.data().predictionResult;
       const scannedAt = new Date(
         scannedAkasara.data().scannedAt._seconds * 1000 +
@@ -93,6 +94,7 @@ export const getUserHistoriesScanByUserId = async (req, res) => {
       ).toDateString();
 
       historiesData.push({
+        predictionId,
         predictionResult,
         scannedAt,
       });
