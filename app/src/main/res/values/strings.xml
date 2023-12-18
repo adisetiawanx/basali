@@ -26,7 +26,7 @@
     <string name="confirmation_message">A 4-digit code was sent to lucasscott3@email.com</string>
     <string name="continue_text">Continue</string>
     <string name="resend_code">Resend code</string>
-    <string name="welcome_description">Learn Balinese Character</string>
+    <string name="welcome_description">Welcome to Basali, A Platform to Learn Balinese Script.</string>
     <string name="profile_image">Profile image</string>
     <string name="welcome">Welcome,</string>
     <string name="siti_badilah">Siti Badilah</string>
@@ -115,6 +115,7 @@
     <string name="draw">Draw</string>
     <string name="or_login_with">Continue with Google</string>
     <string name="msg_token_fmt">Your token is: %1$s</string>
+    <string name="Hello">Hello!</string>
 
 
 </resources>

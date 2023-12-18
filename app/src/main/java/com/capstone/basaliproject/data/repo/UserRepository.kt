@@ -13,18 +13,6 @@ class UserRepository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService
 ) {
-    suspend fun saveSession(user: UserModel) {
-        userPreference.saveSession(user)
-    }
-
-    fun getSession(): Flow<UserModel> {
-        return userPreference.getSession()
-    }
-
-    suspend fun logout() {
-        userPreference.logout()
-    }
-
     suspend fun register(raw: RequestBody): RegisterResponse {
         return apiService.register(raw)
     }
