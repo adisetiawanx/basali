@@ -9,10 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentHomeBinding
 import com.capstone.basaliproject.databinding.ItemAksaraHomeBinding
+import com.capstone.basaliproject.ui.learn.LearnFragment
 import com.capstone.basaliproject.ui.learn.LearnViewModel
+import com.capstone.basaliproject.ui.learn.detail.LearnDetailFragment
 import com.capstone.basaliproject.ui.learn.model.LearnModel
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.capstone.basaliproject.utils.ListAksaraAdapter
@@ -47,6 +50,13 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         // Set the RecyclerView's adapter
         binding.rvAksara.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvAksara.adapter = aksaraAdapter
+        val exploreImg = binding.ivExplore
+
+        exploreImg.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.putExtra("navItemId", R.id.navigation_learn)
+            startActivity(intent)
+        }
 
         val learnViewModel = ViewModelProvider(this)[LearnViewModel::class.java]
 
