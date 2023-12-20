@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentScanResultBinding
 
@@ -17,22 +18,15 @@ class ScanResultFragment : Fragment() {
     private var _binding: FragmentScanResultBinding? = null
     private val binding get() = _binding!!
     private lateinit var imgView: ImageView
-    private lateinit var title: TextView
-    private lateinit var desc: TextView
-    private lateinit var btnDone: Button
 
-    companion object {
-        const val ARG_IMAGE_URI = "arg_image_uri"
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentScanResultBinding.inflate(inflater, container, false)
-        val root: View = binding.root
         // Inflate the layout for this fragment
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,10 +44,16 @@ class ScanResultFragment : Fragment() {
 
         // Set the image to the ImageView
         if (imageUri != null) {
-            imgView.setImageURI(imageUri)
+            Glide.with(requireContext())
+                .load(imageUri)
+                .into(imgView)
         }
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    companion object {
+        const val ARG_IMAGE_URI = "arg_image_uri"
     }
 }

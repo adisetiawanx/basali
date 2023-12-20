@@ -1,30 +1,60 @@
 package com.capstone.basaliproject.ui.scan.history
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.basaliproject.R
+import com.capstone.basaliproject.data.api.response.DataItem
+import com.capstone.basaliproject.databinding.HistoryNestedItemBinding
 
-class NestedAdapter(private val mList: List<String>) :
-    RecyclerView.Adapter<NestedAdapter.NestedViewHolder>() {
+class NestedAdapter :
+    PagingDataAdapter<DataItem, NestedAdapter.NestedViewHolder>(DataItemDiffCallback) {
+
+    private var nestedItemClickListener: NestedItemClickListener? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NestedViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.history_nested_item, parent, false)
-        return NestedViewHolder(view)
+        val binding = HistoryNestedItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return NestedViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NestedViewHolder, position: Int) {
-        holder.mTv.text = mList[position]
+        val model = getItem(position)
+        model?.let {
+            holder.bind(it)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return mList.size
+    fun setNestedItemClickListener(listener: NestedItemClickListener) {
+        nestedItemClickListener = listener
     }
 
-    inner class NestedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val mTv: TextView = itemView.findViewById(R.id.titleNested)
+    interface NestedItemClickListener {
+        fun onItemClicked(item: DataItem)
+    }
+
+    inner class NestedViewHolder(private val binding: HistoryNestedItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: DataItem?) {
+            binding.apply {
+                titleNested.text = item?.predictionResult
+                dateNested.text = item?.scannedAt
+            }
+        }
+    }
+
+
+    object DataItemDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.predictionId == newItem.predictionId
+        }
+
+        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem == newItem
+        }
     }
 }

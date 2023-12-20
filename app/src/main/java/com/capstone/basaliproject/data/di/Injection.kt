@@ -2,6 +2,7 @@ package com.capstone.basaliproject.data.di
 
 import android.content.Context
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
+import com.capstone.basaliproject.data.database.HistoryDatabase
 import com.capstone.basaliproject.data.pref.UserPreference
 import com.capstone.basaliproject.data.pref.dataStore
 import com.capstone.basaliproject.data.repo.UserRepository
@@ -14,8 +15,9 @@ object Injection {
         val user = runBlocking {
             pref.getSession().first()
         }
+        val historyDatabase = HistoryDatabase.getDatabase(context)
         val apiService = ApiConfig.getApiService(user.token)
-        return UserRepository.getInstance(pref, apiService)
+        return UserRepository.getInstance(historyDatabase, pref, apiService)
     }
 
     fun resetIntance() {

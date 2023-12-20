@@ -2,9 +2,6 @@ package com.capstone.basaliproject.ui.scan
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -29,7 +26,6 @@ class ScanFragment : Fragment() {
     }
 
     private var _binding: FragmentScanBinding? = null
-    private var menuItem: MenuItem? = null
 
     private val binding get() = _binding!!
 
@@ -58,9 +54,6 @@ class ScanFragment : Fragment() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
-
-
-
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -93,10 +86,4 @@ class ScanFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-//    No time to add the function
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.custom_tab_scan_menu, menu)
-//        menuItem = menu.findItem(R.menu.custom_tab_scan_menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
 }

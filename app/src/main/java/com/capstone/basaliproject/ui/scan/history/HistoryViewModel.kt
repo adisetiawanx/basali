@@ -1,19 +1,24 @@
-package com.capstone.basaliproject.ui.scan.scanner
+package com.capstone.basaliproject.ui.scan.history
 
-import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.basaliproject.data.api.response.ScanResultResponse
+import androidx.paging.PagingData
+import com.capstone.basaliproject.data.api.response.DataItem
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
 import com.capstone.basaliproject.data.api.retrofit.ApiService
+import com.capstone.basaliproject.data.repo.UserRepository
 import com.capstone.basaliproject.utils.Event
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import okhttp3.MultipartBody
 
-class ScanViewModel : ViewModel() {
-    private var currentImageUri: Uri? = null
+class HistoryViewModel(private val repository: UserRepository) : ViewModel() {
+
+    fun getPagingData(): LiveData<PagingData<DataItem>> {
+        return repository.getAksaraSortedByScannedAt()
+    }
 
     suspend fun getApiServiceWithToken(): ApiService? {
         val auth = FirebaseAuth.getInstance()
@@ -30,7 +35,5 @@ class ScanViewModel : ViewModel() {
         }
     }
 
-    fun saveInstanceState(imageUri: Uri?) {
-        currentImageUri = imageUri
-    }
+
 }

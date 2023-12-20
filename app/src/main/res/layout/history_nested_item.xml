@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="#979797"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/titleNested"
                 app:layout_constraintTop_toBottomOf="@+id/titleNested"

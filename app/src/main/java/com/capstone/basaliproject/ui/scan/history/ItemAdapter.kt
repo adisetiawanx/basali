@@ -1,64 +1,82 @@
 package com.capstone.basaliproject.ui.scan.history
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.basaliproject.R
+import com.capstone.basaliproject.data.api.response.DataItem
+import com.capstone.basaliproject.databinding.HistoryEachItemBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class ItemAdapter(private val mList: List<DataModel>) :
-    RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter :
+    PagingDataAdapter<DataItem, ItemAdapter.ItemViewHolder>(DataItemDiffCallback) {
 
-    private val list = ArrayList<String>()
+    private var itemClickListener: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.history_each_item, parent, false)
-        return ItemViewHolder(view)
+        val binding = HistoryEachItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val model = mList[position]
-        holder.mTextView.text = model.itemText
-
-        val isExpandable = model.isExpandable
-        holder.expandableLayout.visibility =
-            if (isExpandable) View.VISIBLE else View.GONE
-
-        if (isExpandable) {
-            holder.mArrowImage.setImageResource(R.drawable.baseline_keyboard_arrow_up)
-        } else {
-            holder.mArrowImage.setImageResource(R.drawable.baseline_keyboard_arrow_down)
-        }
-
-        val adapter = NestedAdapter(list)
-        holder.nestedRecyclerView.layoutManager =
-            LinearLayoutManager(holder.itemView.context)
-        holder.nestedRecyclerView.setHasFixedSize(true)
-        holder.nestedRecyclerView.adapter = adapter
-
-        holder.linearLayout.setOnClickListener {
-            model.customSetExpandable(!model.isExpandable)
-            list.clear()
-            list.addAll(model.nestedList)
-            notifyItemChanged(holder.adapterPosition)
+        val model = getItem(position)
+        model?.let {
+            holder.bind(it)
         }
     }
 
-    override fun getItemCount(): Int {
-        return mList.size
+    inner class ItemViewHolder(private val binding: HistoryEachItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: DataItem?) {
+            val scannedAt = item?.scannedAt
+            val (month, year) = extractMonthYear(scannedAt)
+            binding.apply {
+                textViewMonth.text = month
+                textViewYear.text = year
+
+                linearLayout.setOnClickListener{
+                    if (item != null) {
+                        itemClickListener?.onItemClicked(item)
+                    }
+                }
+            }
+        }
     }
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val linearLayout: LinearLayout = itemView.findViewById(R.id.linear_layout)
-        val expandableLayout: RelativeLayout = itemView.findViewById(R.id.expandable_layout)
-        val mTextView: TextView = itemView.findViewById(R.id.textViewMonth)
-        val mArrowImage: ImageView = itemView.findViewById(R.id.arro_imageview)
-        val nestedRecyclerView: RecyclerView = itemView.findViewById(R.id.child_rv)
+    fun setItemClickListener(listener: ItemClickListener) {
+        itemClickListener = listener
+    }
+
+    fun extractMonthYear(scannedAt: String?): Pair<String, String> {
+        val dateFormat = SimpleDateFormat("EEE MMM dd yyyy", Locale.getDefault())
+        val date = dateFormat.parse(scannedAt)
+
+        val monthFormat = SimpleDateFormat("MMM", Locale.getDefault())
+        val yearFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+
+        val month = monthFormat.format(date)
+        val year = yearFormat.format(date)
+
+        return Pair(month, year)
+    }
+
+    object DataItemDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.predictionId == newItem.predictionId
+        }
+
+        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    interface ItemClickListener {
+        fun onItemClicked(item: DataItem)
     }
 }
