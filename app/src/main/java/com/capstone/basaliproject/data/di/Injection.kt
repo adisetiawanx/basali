@@ -1,6 +1,7 @@
 package com.capstone.basaliproject.data.di
 
 import android.content.Context
+import android.util.Log
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
 import com.capstone.basaliproject.data.pref.UserPreference
 import com.capstone.basaliproject.data.pref.dataStore
@@ -15,6 +16,7 @@ object Injection {
             pref.getSession().first()
         }
         val apiService = ApiConfig.getApiService(user.token)
+        Log.d("ApiService", "Token: ${user.token}")
         return UserRepository.getInstance(pref, apiService)
     }
 

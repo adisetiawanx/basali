@@ -1,19 +1,22 @@
 package com.capstone.basaliproject.data.api.retrofit
 
 import com.capstone.basaliproject.data.api.response.ConfirmationResponse
+import com.capstone.basaliproject.data.api.response.HistoryResponse
 import com.capstone.basaliproject.data.api.response.LoginResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
 import com.capstone.basaliproject.data.api.response.ScanResultResponse
 import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -45,4 +48,9 @@ interface ApiService {
     suspend fun postImageToScan(
         @Part file: MultipartBody.Part
     ): ScanResultResponse
+
+    @GET("/api/scan/aksara")
+    fun getHistory(
+        @Query("q") query: String
+    ): Call<HistoryResponse>
 }

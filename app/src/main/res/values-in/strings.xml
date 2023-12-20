@@ -152,4 +152,7 @@
     <string name="failed_to_process_the_image">Failed to process the image</string>
     <string name="your_work_image">Your work image</string>
     <string name="good_job_we_have_detected_that_it_is">Good job! We have detected that it is</string>
+    <string name="retry">Retry</string>
+    <string name="failed_to_get_history_data_failed_to_get_data_please_log_back_into_the_application_if_this_continues_to_happen">Failed to get history data, Failed to get data, please log back into the application if this continues to happen</string>
+    <string name="failed_to_load_data">Failed to load data</string>
 </resources>

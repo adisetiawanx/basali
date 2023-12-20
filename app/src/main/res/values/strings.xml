@@ -83,7 +83,7 @@
     <string name="alarm_message">Notification message</string>
 
     <string name="pangangge_swara">Panganggĕ Swara</string>
-    <string name="desc_pangangge_swara">Swara script (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ) is a script used for syllables that do not have a consonant at the beginning, or in other words syllables that only consist of vowels. The Balinese script has 14 vowel characters inherited from the Sanskrit writing tradition.</string>
+    <string name="desc_pangangge_swara">Swara script (ᬳᬓ᭄ᬱᬭᬲ᭄ᬯᬭ}}) is a script used for syllables that do not have a consonant at the beginning, or in other words syllables that only consist of vowels. The Balinese script has 14 vowel characters inherited from the Sanskrit writing tradition.</string>
 
     <string name="aksara_wyanjana">Aksara Wyañjana</string>
     <string name="desc_aksara_wyanjana">Wyañjana script (ᬳᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ) is a consonant script with the inherent vowel /a/. As a script derived from Brahmi, the Balinese script has 33 wyañjana scripts to write the 33 consonant sounds used in Sanskrit and Kawi.</string>
@@ -159,6 +159,9 @@
     <string name="failed_to_process_the_image">Failed to process the image</string>
     <string name="your_work_image">Your work image</string>
     <string name="good_job_we_have_detected_that_it_is">Good job! We have detected that it is</string>
+    <string name="retry">Retry</string>
+    <string name="failed_to_get_history_data_failed_to_get_data_please_log_back_into_the_application_if_this_continues_to_happen">Failed to get history data, Failed to get data, please log back into the application if this continues to happen</string>
+    <string name="failed_to_load_data">Failed to load data</string>
     <string name="draw_dialog_desc">Want to test your Balinese script character writing skills? draw your handwriting below.</string>
 
 </resources>

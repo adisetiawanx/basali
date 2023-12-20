@@ -33,6 +33,7 @@ import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentTabScanBinding
 import com.capstone.basaliproject.reduceFileImage
 import com.capstone.basaliproject.ui.ViewModelFactory
+import com.capstone.basaliproject.ui.scan.history.HistoryViewModel
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity.Companion.CAMERAX_RESULT
 import com.capstone.basaliproject.uriToFile
 import kotlinx.coroutines.launch
@@ -208,6 +209,7 @@ class TabScanFragment : Fragment() {
         }
         val dialog = builder.create()
         btnOk.setOnClickListener {
+
             dialog.cancel()
         }
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

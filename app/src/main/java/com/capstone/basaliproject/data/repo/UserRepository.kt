@@ -4,13 +4,11 @@ import com.capstone.basaliproject.data.api.response.LoginResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
 import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
 import com.capstone.basaliproject.data.api.retrofit.ApiService
-import com.capstone.basaliproject.data.pref.UserModel
 import com.capstone.basaliproject.data.pref.UserPreference
-import kotlinx.coroutines.flow.Flow
-import okhttp3.RequestBody
+ import okhttp3.RequestBody
 
 class UserRepository private constructor(
-    private val userPreference: UserPreference,
+    private val pref: UserPreference,
     private val apiService: ApiService
 ) {
     suspend fun register(raw: RequestBody): RegisterResponse {
@@ -25,15 +23,16 @@ class UserRepository private constructor(
         return apiService.updateProfilePhoto(raw)
     }
 
+
     companion object {
         @Volatile
         private var instance: UserRepository? = null
         fun getInstance(
-            userPreference: UserPreference,
+            pref: UserPreference,
             apiService: ApiService
         ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(userPreference, apiService)
+                instance ?: UserRepository(pref, apiService)
             }.also { instance = it }
 
         fun resetInstance() {
