@@ -8,7 +8,7 @@ import com.capstone.basaliproject.data.api.response.ScanResultResponse
 import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -50,8 +50,7 @@ interface ApiService {
     ): ScanResultResponse
 
     @GET("/api/scan/aksara")
-    suspend fun getAksara(
-        @Query("page") page: Int = 1,
-        @Query("size") size: Int = 20
-    ): Response<HistoryResponse>
+    fun getHistory(
+        @Query("q") query: String
+    ): Call<HistoryResponse>
 }

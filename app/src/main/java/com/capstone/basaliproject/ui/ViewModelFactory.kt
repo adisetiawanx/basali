@@ -28,7 +28,7 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
                 ScanViewModel() as T
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
-                HistoryViewModel(repository) as T
+                HistoryViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

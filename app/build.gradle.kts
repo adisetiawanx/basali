@@ -74,6 +74,8 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.8.2")
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6")
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
