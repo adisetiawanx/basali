@@ -42,11 +42,8 @@ class ScanFragment : Fragment() {
         val root: View = binding.root
 
         val toolbar = binding.toolbarScan
-        val mTitle =
-            toolbar.findViewById<View>(R.id.toolbar_title) as TextView
         val activity = requireActivity() as AppCompatActivity
         activity.setSupportActionBar(toolbar)
-        mTitle.text = getString(R.string.aksara)
         activity.supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // Setup ViewPager2 with Tabs
@@ -92,11 +89,4 @@ class ScanFragment : Fragment() {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
     }
-
-//    No time to add the function
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.custom_tab_scan_menu, menu)
-//        menuItem = menu.findItem(R.menu.custom_tab_scan_menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
 }

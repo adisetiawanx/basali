@@ -113,6 +113,8 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 FirebaseAuth.getInstance().signOut()
             }
+        } else {
+            startActivity(Intent(requireContext(), WelcomeActivity::class.java))
         }
         super.onStart()
     }

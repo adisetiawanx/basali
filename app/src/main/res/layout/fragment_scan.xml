@@ -14,13 +14,11 @@
         android:theme="?attr/actionBarTheme"
         android:background="#00FFFFFF">
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/aksara"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_gravity="center" />
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"/>
 
     </androidx.appcompat.widget.Toolbar>
 
