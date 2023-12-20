@@ -100,6 +100,7 @@ dependencies {
     implementation("androidx.exifinterface:exifinterface:1.3.7")
 
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     implementation("androidx.room:room-paging:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")

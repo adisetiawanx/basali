@@ -13,7 +13,8 @@ import com.capstone.basaliproject.data.database.RemoteKeys
 @OptIn(ExperimentalPagingApi::class)
 class HistoryRemoteMediator(
     private val database: HistoryDatabase,
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val token: String
 ) : RemoteMediator<Int, DataItem>() {
     override suspend fun load(
         loadType: LoadType,

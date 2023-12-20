@@ -5,14 +5,12 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.capstone.basaliproject.data.api.response.DataItem
 import com.capstone.basaliproject.databinding.HistoryNestedItemBinding
 
 class NestedAdapter :
-    PagingDataAdapter<DataItem, NestedAdapter.NestedViewHolder>(DataItemDiffCallback) {
-
-    private var nestedItemClickListener: NestedItemClickListener? = null
-
+    PagingDataAdapter<DataItem, NestedAdapter.NestedViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NestedViewHolder {
         val binding = HistoryNestedItemBinding.inflate(
@@ -30,17 +28,13 @@ class NestedAdapter :
         }
     }
 
-    fun setNestedItemClickListener(listener: NestedItemClickListener) {
-        nestedItemClickListener = listener
-    }
-
-    interface NestedItemClickListener {
-        fun onItemClicked(item: DataItem)
-    }
-
     inner class NestedViewHolder(private val binding: HistoryNestedItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DataItem?) {
             binding.apply {
+                Glide.with(imageviewNested.context)
+                    .load(item?.imgaeUrl)
+                    .fitCenter()
+                    .into(imageviewNested)
                 titleNested.text = item?.predictionResult
                 dateNested.text = item?.scannedAt
             }
@@ -48,13 +42,18 @@ class NestedAdapter :
     }
 
 
-    object DataItemDiffCallback : DiffUtil.ItemCallback<DataItem>() {
-        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-            return oldItem.predictionId == newItem.predictionId
-        }
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
+            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+                return oldItem == newItem
+            }
 
-        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(
+                oldItem: DataItem,
+                newItem: DataItem
+            ): Boolean {
+                return oldItem.predictionId == newItem.predictionId
+            }
         }
     }
 }
