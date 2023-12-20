@@ -22,7 +22,7 @@ data class DataItem(
 	@field:SerializedName("scannedAt")
 	val scannedAt: String? = null,
 
-	@field:SerializedName("imageUrl")
+	@field:SerializedName("imgaeUrl")
 	val imgaeUrl: String? = null,
 
 	@PrimaryKey
