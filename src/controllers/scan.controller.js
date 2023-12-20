@@ -93,13 +93,18 @@ export const getUserHistoriesScanByUserId = async (req, res) => {
       const scannedAt = new Date(
         scannedAkasara.data().scannedAt._seconds * 1000 +
           scannedAkasara.data().scannedAt._nanoseconds / 1000000
-      ).toDateString();
+      );
 
       historiesData.push({
         predictionId,
         predictionResult,
         imgaeUrl,
-        scannedAt,
+        scannedAt: {
+          hour: scannedAt.getHours(),
+          day: scannedAt.getDate(),
+          month: scannedAt.getMonth(),
+          year: scannedAt.getFullYear(),
+        },
       });
     });
 
@@ -134,12 +139,17 @@ export const getUserHistoryById = async (req, res) => {
     const scannedAt = new Date(
       historyScan.data().scannedAt._seconds * 1000 +
         historyScan.data().scannedAt._nanoseconds / 1000000
-    ).toDateString();
+    );
 
     const historyScanData = {
-      scannedAt,
       predictionResult: historyScan.data().predictionResult,
       imageUrl: historyScan.data().imageUrl,
+      scannedAt: {
+        hour: scannedAt.getHours(),
+        day: scannedAt.getDate(),
+        month: scannedAt.getMonth(),
+        year: scannedAt.getFullYear(),
+      },
     };
 
     return res.json({
