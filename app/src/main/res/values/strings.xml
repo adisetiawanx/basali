@@ -6,8 +6,6 @@
     <string name="title_settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login_image">Cloud</string>
-    <string name="login_image_2">Hedgehog</string>
     <string name="login_welcome">Welcome!</string>
     <string name="email_error">Enter the correct Email!</string>
     <string name="password_error">The password must not be less than 8 characters.</string>
