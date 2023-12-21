@@ -19,7 +19,7 @@ Basali is an app used to learn Balinese script with various features that can he
 |      Ni Made Wulandari     | C014BSX4196 | Cloud Computing | [Github](https://github.com/mdwulandari)  or [LinkedIn](http://www.linkedin.com/in/ni-made-wulandari-446860216)      |
 |     Desak Gede Inten Purnawati     | M014BSX1362 |   Machine Learning  | [Github](https://github.com/desakintan)   or [LinkedIn](https://www.linkedin.com/in/desak-inten-purnawati/)            |
 | I Dewa Gede Radya Guniatitha Utama | M014BSY1638 |   Machine Learning  | [Github](https://github.com/DewaRadya) or [LinkedIn](http://www.linkedin.com/in/idewagederadyaguniatithautama)      |
-| Moch Nasrullah Hasani | M227BSY0600 |   Machine Learning  | [Github](https://github.com/mnasrullahh) |
+| Moch Nasrullah Hasani | M227BSY0600 |   Machine Learning  | [Github](https://github.com/mnasrullahh) or [LinkedIn](https://www.linkedin.com/in/moch-nasrullah-hasani/)   |
 
 # Repositories
 
