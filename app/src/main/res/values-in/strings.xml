@@ -155,4 +155,9 @@
     <string name="retry">Retry</string>
     <string name="failed_to_get_history_data_failed_to_get_data_please_log_back_into_the_application_if_this_continues_to_happen">Failed to get history data, Failed to get data, please log back into the application if this continues to happen</string>
     <string name="failed_to_load_data">Failed to load data</string>
+    <string name="scan_your_aksara">Scan Your Aksara</string>
+    <string name="scan_your_handwriting_balinese_script_character_using_your_camera">Scan your handwriting balinese script character using your camera</string>
+    <string name="enjoy_your_journey">Enjoy Your Journey</string>
+    <string name="our_platform_provides_balinese_script_character_learning_items">our platform provides balinese script character learning items</string>
+    <string name="or_continue_with_google">Or continue with Google</string>
 </resources>

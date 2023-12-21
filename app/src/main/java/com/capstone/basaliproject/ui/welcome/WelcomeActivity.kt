@@ -6,38 +6,30 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityWelcomeBinding
-import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.login.LoginActivity
-import com.capstone.basaliproject.ui.login.LoginViewModel
 import com.capstone.basaliproject.ui.signup.SignupActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
-import com.google.android.material.animation.AnimatorSetCompat.playTogether
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 class WelcomeActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -127,16 +119,16 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         val dialog = builder.create()
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
     private fun setupAction() {
-        binding.signUpButton?.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
 
-        binding.loginButton?.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }
@@ -146,10 +138,20 @@ class WelcomeActivity : AppCompatActivity() {
 
         when (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) {
             android.content.res.Configuration.UI_MODE_NIGHT_NO -> {
-                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralDarkMid))
+                findViewById<TextView>(R.id.tv_hello).setTextColor(getColor(R.color.NeutralDarkMid))
+                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralDarkLight))
+                findViewById<TextView>(R.id.tvTitleMenu2).setTextColor(getColor(R.color.NeutralDarkMid))
+                findViewById<TextView>(R.id.tvDescMenu2).setTextColor(getColor(R.color.NeutralDarkLight))
+                findViewById<TextView>(R.id.tvTitleMenu3).setTextColor(getColor(R.color.NeutralDarkMid))
+                findViewById<TextView>(R.id.tvDescMenu3).setTextColor(getColor(R.color.NeutralDarkLight))
             }
             android.content.res.Configuration.UI_MODE_NIGHT_YES -> {
-                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.tv_hello).setTextColor(getColor(R.color.NeutralLightMid))
+                findViewById<TextView>(R.id.tv_hello_description).setTextColor(getColor(R.color.NeutralLightMid))
+                findViewById<TextView>(R.id.tvTitleMenu2).setTextColor(getColor(R.color.NeutralLightMid))
+                findViewById<TextView>(R.id.tvDescMenu2).setTextColor(getColor(R.color.NeutralLightLight))
+                findViewById<TextView>(R.id.tvTitleMenu3).setTextColor(getColor(R.color.NeutralLightMid))
+                findViewById<TextView>(R.id.tvDescMenu3).setTextColor(getColor(R.color.NeutralLightLight))
             }
         }
     }

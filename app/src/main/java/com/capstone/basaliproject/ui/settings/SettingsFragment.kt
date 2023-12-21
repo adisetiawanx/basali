@@ -201,7 +201,7 @@ class SettingsFragment : Fragment() {
             clearImageData()
             dialog.dismiss()
 
-            val defaultImageUri = Uri.parse("android.resource://${requireActivity().packageName}/${R.drawable.w_hedgehog_hug}")
+            val defaultImageUri = Uri.parse("android.resource://${requireActivity().packageName}/${R.drawable.basaliaksarawb}")
             binding.profileImage.setImageURI(defaultImageUri)
         }
 

@@ -22,6 +22,7 @@ import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityLoginBinding
 import com.capstone.basaliproject.ui.confirm.ConfirmationActivity
+import com.capstone.basaliproject.ui.signup.SignupActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
@@ -126,6 +127,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding.google?.setOnClickListener {
             signInGoogle()
+        }
+
+        binding.tvToRegister.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 
