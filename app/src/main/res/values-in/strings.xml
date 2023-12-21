@@ -164,5 +164,6 @@
     <string name="profile">Profil</string>
     <string name="profile_setting">Pengaturan Profil</string>
     <string name="kipas_bali">Kipas Bali</string>
+    <string name="edit_your_profile_picture">Ubah foto profile anda</string>
 
 </resources>

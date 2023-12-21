@@ -35,7 +35,6 @@ class TabHistoryFragment : Fragment() {
         val root: View = binding.root
 
         if (savedInstanceState == null) {
-            //code goes below here
 
             historyViewModel.isLoading.observe(viewLifecycleOwner){
                 showLoading(it)

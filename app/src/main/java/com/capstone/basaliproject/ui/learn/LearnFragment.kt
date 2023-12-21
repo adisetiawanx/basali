@@ -33,7 +33,7 @@ class LearnFragment : Fragment(), LearnAdapter.ItemClickListener {
         binding.rvLearn.layoutManager = LinearLayoutManager(context)
         binding.rvLearn.adapter = learnAdapter
 
-        val learnViewModel = ViewModelProvider(this).get(LearnViewModel::class.java)
+        val learnViewModel = ViewModelProvider(this)[LearnViewModel::class.java]
 
         // Observe the data from ViewModel and submit it to the adapter
         learnViewModel.learnData.observe(viewLifecycleOwner) { data ->

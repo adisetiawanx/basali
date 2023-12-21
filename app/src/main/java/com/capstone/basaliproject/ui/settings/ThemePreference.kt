@@ -15,8 +15,11 @@ class ThemePreference : PreferenceFragmentCompat() {
 
         val theme = findPreference<ListPreference>(getString(R.string.pref_key_dark))
         theme?.setOnPreferenceChangeListener{ _, newValue ->
-            val mode = NightMode.valueOf(newValue.toString().toUpperCase(
-                Locale.US))
+            val mode = NightMode.valueOf(
+                newValue.toString().uppercase(
+                    Locale.US
+                )
+            )
             updateTheme(mode.value)
             true
         }

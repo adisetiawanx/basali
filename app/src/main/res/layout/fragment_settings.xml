@@ -66,6 +66,7 @@
                     android:layout_marginStart="46dp"
                     android:layout_marginBottom="14dp"
                     android:layout_gravity="center|bottom"
+                    android:contentDescription="@string/edit_your_profile_picture"
                     android:src="@drawable/ic_baseline_edit_24"/>
 
             </FrameLayout>

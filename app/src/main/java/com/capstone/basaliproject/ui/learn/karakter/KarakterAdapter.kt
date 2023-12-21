@@ -12,10 +12,6 @@ import com.capstone.basaliproject.ui.learn.model.KarakterModel
 class KarakterAdapter :
     ListAdapter<KarakterModel, KarakterAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-    interface ItemClickListener {
-        fun onItemClick(items: KarakterModel, view: KarakterEachItemBinding)
-    }
-
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<KarakterModel>() {
             override fun areItemsTheSame(oldItem: KarakterModel, newItem: KarakterModel): Boolean {

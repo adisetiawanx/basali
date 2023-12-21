@@ -39,10 +39,8 @@ import com.capstone.basaliproject.uriToFile
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
 
 class SettingsFragment : Fragment() {
     private lateinit var auth : FirebaseAuth

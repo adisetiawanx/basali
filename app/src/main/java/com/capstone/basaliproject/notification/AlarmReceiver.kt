@@ -14,7 +14,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
-import com.capstone.basaliproject.ui.home.HomeFragment
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar

@@ -43,7 +43,6 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
             var month = item.scannedAt?.month.toString()
             val day = item.scannedAt?.day.toString()
             val year = item.scannedAt?.year.toString()
-            val hour = item.scannedAt?.hour.toString()
             when (month){
                 "0" -> month = "January"
                 "1" -> month = "February"
@@ -59,7 +58,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
                 "11" -> month = "December"
             }
 
-            val fullDate = "$day $month $year ($hour:00)"
+            val fullDate = "$day $month $year"
             binding.titleNested.text = item.predictionResult
             binding.dateNested.text = fullDate
 

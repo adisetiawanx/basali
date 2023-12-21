@@ -9,8 +9,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.ActivityNotificationBinding
 import com.capstone.basaliproject.notification.AlarmReceiver

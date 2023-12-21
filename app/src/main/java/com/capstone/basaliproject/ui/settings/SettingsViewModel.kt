@@ -9,7 +9,6 @@ import com.capstone.basaliproject.data.api.response.EditProfilePictureResponse
 import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
 import com.capstone.basaliproject.data.api.retrofit.ApiService
-import com.capstone.basaliproject.data.repo.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +23,7 @@ import retrofit2.Response
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class SettingsViewModel(private val userRepository: UserRepository) : ViewModel() {
+class SettingsViewModel : ViewModel() {
     private val _profileData = MutableLiveData<ProfileResponse?>()
     val profileData: LiveData<ProfileResponse?> get() = _profileData
 

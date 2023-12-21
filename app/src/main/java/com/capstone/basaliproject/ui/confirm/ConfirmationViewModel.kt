@@ -60,7 +60,7 @@ class ConfirmationViewModel : ViewModel() {
                                 val confirmationResponse = response.msg
                                 Log.d(
                                     "ConfirmationActivity",
-                                    "Email successfully verified: ${confirmationResponse}"
+                                    "Email successfully verified: $confirmationResponse"
                                 )
                             } else {
                                 _isSuccess.value = false

@@ -23,7 +23,7 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
                 LogOutViewModel() as T
             }
             modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
-                SettingsViewModel(repository) as T
+                SettingsViewModel() as T
             }
             modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
                 ScanViewModel() as T
@@ -32,7 +32,7 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
                 HistoryViewModel() as T
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(repository) as T
+                HomeViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -51,9 +51,5 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             return INSTANCE as ViewModelFactory
         }
 
-        fun refreshObject() {
-            INSTANCE = null
-            Injection.resetIntance()
-        }
     }
 }
