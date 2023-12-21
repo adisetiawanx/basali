@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupBottomNav()
+        intentFromHome()
+
     }
     private fun setupBottomNav(){
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -73,6 +75,10 @@ class MainActivity : AppCompatActivity() {
         binding.navView.visibility = View.VISIBLE
     }
 
-
+    private fun intentFromHome(){
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val navItemId = intent.getIntExtra("navItemId", R.id.navigation_home)
+        navView.selectedItemId = navItemId
+    }
 
 }

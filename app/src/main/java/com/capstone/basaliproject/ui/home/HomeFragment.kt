@@ -2,7 +2,6 @@ package com.capstone.basaliproject.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.capstone.basaliproject.MainActivity
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.databinding.FragmentHomeBinding
@@ -66,6 +66,13 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         // Set the RecyclerView's adapter
         binding.rvAksara.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvAksara.adapter = aksaraAdapter
+        val exploreImg = binding.ivExplore
+
+        exploreImg.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.putExtra("navItemId", R.id.navigation_learn)
+            startActivity(intent)
+        }
 
         val learnViewModel = ViewModelProvider(this)[LearnViewModel::class.java]
 
@@ -108,7 +115,9 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
 
     private fun historyButton() {
         binding.btnHistory.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_navigation_home_to_learnDetailFragment)
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.putExtra("navItemId", R.id.action_homeFragment_to_tabHistoryFragment)
+            startActivity(intent)
         }
     }
 
@@ -137,6 +146,8 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 FirebaseAuth.getInstance().signOut()
             }
+        } else {
+            startActivity(Intent(requireContext(), WelcomeActivity::class.java))
         }
         super.onStart()
     }

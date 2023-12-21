@@ -47,8 +47,7 @@
                     android:layout_height="120dp"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/profile_image"
-                    android:layout_gravity="center_horizontal"
-                    tools:src="@drawable/w_hedgehog_hug"/>
+                    android:layout_gravity="center_horizontal"/>
 
                 <ImageButton
                     android:id="@+id/edit_profile"

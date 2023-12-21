@@ -11,33 +11,19 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_cloud"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/login_image"
-            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.202"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guidelineHorizontal2"
-            app:layout_constraintVertical_bias="0.208"
-            app:srcCompat="@drawable/w_cloud" />
-
-        <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:contentDescription="@string/login_image_2"
+            android:background="@drawable/circle_background"
             app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/w_hedgehog_sunflo"
-            android:scaleType="fitCenter"/>
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/kipas" />
 
         <TextView
             android:id="@+id/titleTextView"

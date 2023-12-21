@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            android:background="@drawable/dialog_bg_bordered"
+            android:background="@drawable/rounded_button_tertiary"
             android:text="@string/cancel_alarm"
             android:textColor="@color/HighlightDark"/>
         <Button

@@ -32,7 +32,11 @@
         android:id="@+id/navigation_learn"
         android:name="com.capstone.basaliproject.ui.learn.LearnFragment"
         android:label="@string/title_learn_aksara"
-        tools:layout="@layout/fragment_learn" />
+        tools:layout="@layout/fragment_learn" >
+        <action
+            android:id="@+id/action_navigation_learn_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -66,7 +70,11 @@
         android:id="@+id/tabHistoryFragment"
         android:name="com.capstone.basaliproject.ui.scan.history.TabHistoryFragment"
         android:label="fragment_tab_history"
-        tools:layout="@layout/fragment_tab_history" />
+        tools:layout="@layout/fragment_tab_history" >
+        <action
+            android:id="@+id/action_tabHistoryFragment_to_navigation_learn"
+            app:destination="@id/navigation_learn" />
+    </fragment>
     <fragment
         android:id="@+id/themeFragment"
         android:name="com.capstone.basaliproject.ui.settings.ThemeFragment"

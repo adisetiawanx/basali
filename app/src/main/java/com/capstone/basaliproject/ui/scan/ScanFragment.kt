@@ -94,7 +94,6 @@ class ScanFragment : Fragment() {
             }
         })
         tabs.getTabAt(0)?.select()
-
         return root
     }
 

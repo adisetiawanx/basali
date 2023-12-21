@@ -314,6 +314,7 @@ class TabScanFragment : Fragment() {
 
         val drawingView = customView.findViewById<com.mihir.drawingcanvas.drawingView>(R.id.drawing_view)
         val btnSave = customView.findViewById<Button>(R.id.btnSave)
+        val btnCancel = customView.findViewById<Button>(R.id.btnCancel)
         val reset = customView.findViewById<TextView>(R.id.tvReset)
         val dialog = builder.create()
 
@@ -321,6 +322,10 @@ class TabScanFragment : Fragment() {
             drawingView.clearDrawingBoard()
             val color = R.color.HighlightDark
             drawingView.setBrushColor(color)
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
         }
 
         btnSave.setOnClickListener {
@@ -352,6 +357,8 @@ class TabScanFragment : Fragment() {
             }
             dialog.dismiss()
         }
+
+
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
