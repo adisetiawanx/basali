@@ -162,5 +162,7 @@
     <string name="retry">Retry</string>
     <string name="failed_to_get_history_data_failed_to_get_data_please_log_back_into_the_application_if_this_continues_to_happen">Failed to get history data, Failed to get data, please log back into the application if this continues to happen</string>
     <string name="failed_to_load_data">Failed to load data</string>
+    <string name="search">search</string>
+    <string name="find_your_history">Find your history</string>
 
 </resources>

@@ -1,14 +1,17 @@
 package com.capstone.basaliproject.data.repo
 
 import com.capstone.basaliproject.data.api.response.LoginResponse
+import com.capstone.basaliproject.data.api.response.Photo
+import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
-import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
 import com.capstone.basaliproject.data.api.retrofit.ApiService
 import com.capstone.basaliproject.data.pref.UserPreference
- import okhttp3.RequestBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Response
 
 class UserRepository private constructor(
-    private val pref: UserPreference,
+//    private val pref: UserPreference,
     private val apiService: ApiService
 ) {
     suspend fun register(raw: RequestBody): RegisterResponse {
@@ -19,11 +22,6 @@ class UserRepository private constructor(
         return apiService.login(raw)
     }
 
-    suspend fun updateProfilePhoto(raw: RequestBody): UpdatePhotoResponse {
-        return apiService.updateProfilePhoto(raw)
-    }
-
-
     companion object {
         @Volatile
         private var instance: UserRepository? = null
@@ -32,7 +30,7 @@ class UserRepository private constructor(
             apiService: ApiService
         ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(pref, apiService)
+                instance ?: UserRepository(apiService)
             }.also { instance = it }
 
         fun resetInstance() {

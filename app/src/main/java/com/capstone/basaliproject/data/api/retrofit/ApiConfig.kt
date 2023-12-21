@@ -1,6 +1,7 @@
 package com.capstone.basaliproject.data.api.retrofit
 
 import com.capstone.basaliproject.BuildConfig
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

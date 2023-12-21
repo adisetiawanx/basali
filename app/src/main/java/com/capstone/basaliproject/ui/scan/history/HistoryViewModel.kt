@@ -54,7 +54,8 @@ class HistoryViewModel : ViewModel() {
                                 if (response.isSuccessful){
                                     val responseBody = response.body()
                                     if (responseBody != null){
-                                        val sortedData = responseBody.data.sortedByDescending { it.scannedAt }
+                                        val reverse = responseBody.data.reversed()
+                                        val sortedData = reverse.sortedByDescending { it.scannedAt }
 
                                         _aksaraData.value = sortedData
                                     }

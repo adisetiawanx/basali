@@ -3,12 +3,16 @@ package com.capstone.basaliproject.data.api.retrofit
 import com.capstone.basaliproject.data.api.response.ConfirmationResponse
 import com.capstone.basaliproject.data.api.response.HistoryResponse
 import com.capstone.basaliproject.data.api.response.LoginResponse
+import com.capstone.basaliproject.data.api.response.Photo
+import com.capstone.basaliproject.data.api.response.ProfileData
+import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
 import com.capstone.basaliproject.data.api.response.ScanResultResponse
-import com.capstone.basaliproject.data.api.response.UpdatePhotoResponse
+import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -30,11 +34,6 @@ interface ApiService {
         @Body raw: RequestBody
     ): LoginResponse
 
-    @PUT("/api/user/profile/photo")
-    suspend fun updateProfilePhoto(
-        @Body raw: RequestBody
-    ): UpdatePhotoResponse
-
     @PATCH("/api/auth/verify-email")
     suspend fun verifyEmail(
         @Body raw: RequestBody
@@ -53,4 +52,8 @@ interface ApiService {
     fun getHistory(
         @Query("q") query: String
     ): Call<HistoryResponse>
+
+    @GET("/api/user/profile")
+    fun getProfile(): Call<ProfileResponse>
+
 }

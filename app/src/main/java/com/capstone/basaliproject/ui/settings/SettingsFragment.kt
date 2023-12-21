@@ -25,7 +25,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.capstone.basaliproject.R
+import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.databinding.FragmentSettingsBinding
 import com.capstone.basaliproject.ui.logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
@@ -78,28 +80,24 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        viewModelSetting.getProfileData()
+
+        loadImage()
+
         viewModel.isLogOut.observe(requireActivity()) { isLogout ->
             if (isLogout) {
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
             }
         }
 
-//        val view = layoutInflater.inflate(R.layout.fragment_settings, container, false)
-
-        // Check if the fragment is attached to an activity
         if (!isAdded) {
             return super.onCreateView(inflater, container, savedInstanceState)
         }
-
-
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setupAction()
 
-        loadImageData()
-
-        // Setup profile picture
         binding.editProfile.setOnClickListener {
             showEditPictureDialog()
         }
@@ -115,10 +113,28 @@ class SettingsFragment : Fragment() {
             val email = user.email
             tvName.text = name
             tvEmail.text = email
+
+            val sharedPreferences = requireActivity().getSharedPreferences(sharedPrefsKey, Context.MODE_PRIVATE)
+            val uriString = sharedPreferences.getString(uriKey, "")
+
+            if (!uriString.isNullOrEmpty()) {
+                val uri = Uri.parse(uriString)
+                Glide.with(requireContext())
+                    .load(uri)
+                    .into(binding.profileImage)
+            }
         }
 
         return root
 
+    }
+
+    private fun loadImage() {
+        viewModelSetting.profileData.observe(viewLifecycleOwner) { profileResponse ->
+            profileResponse?.let {
+                showImage(it)
+            }
+        }
     }
 
     private fun setupAction() {
@@ -198,7 +214,7 @@ class SettingsFragment : Fragment() {
         }
 
         deleteButton.setOnClickListener {
-            clearImageData()
+//            clearImageData()
             dialog.dismiss()
 
             val defaultImageUri = Uri.parse("android.resource://${requireActivity().packageName}/${R.drawable.w_hedgehog_hug}")
@@ -218,7 +234,7 @@ class SettingsFragment : Fragment() {
     ) {
         if (it.resultCode == CameraActivity.CAMERAX_RESULT) {
             currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
-            showImage()
+            loadImage()
         }
     }
 
@@ -231,54 +247,27 @@ class SettingsFragment : Fragment() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            showImage()
+            loadImage()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
     }
 
-    private fun showImage() {
-        currentImageUri?.let {
-            Log.d("Image URI", "showImage: $it")
-            binding.profileImage.setImageURI(it)
+    private fun showImage(profileResponse: ProfileResponse) {
+        val profileData = profileResponse.data
+        val photo = profileData?.photo
 
-            saveImageUriToSharedPreferences(it.toString())
+        if (photo != null) {
+            val imageUrl = photo.url
 
-            // Create a RequestBody from the image file
-            val file = File(it.path)
-            val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
-
-            // Call the updateProfilePhoto function from the ViewModel
-            viewModelSetting.updateProfilePhoto(requestFile)
-        }
-    }
-
-    private fun saveImageUriToSharedPreferences(uri: String) {
-        val sharedPreferences = requireActivity().getSharedPreferences(sharedPrefsKey, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString(uriKey, uri)
-        editor.apply()
-    }
-
-    private fun loadImageData() {
-        val sharedPreferences = requireActivity().getSharedPreferences(sharedPrefsKey, Context.MODE_PRIVATE)
-        val uriString = sharedPreferences.getString(uriKey, "")
-
-        if (uriString != null) {
-            if (uriString.isNotEmpty()) {
-                val uri = Uri.parse(uriString)
-                binding.profileImage.setImageURI(uri)
+            if (!imageUrl.isNullOrBlank()) {
+                Glide.with(requireContext())
+                    .load(imageUrl)
+                    .into(binding.profileImage)
             }
         }
     }
 
-    private fun clearImageData() {
-        val sharedPreferences = requireActivity().getSharedPreferences(sharedPrefsKey, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.remove(uriKey)
-        editor.apply()
-    }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA

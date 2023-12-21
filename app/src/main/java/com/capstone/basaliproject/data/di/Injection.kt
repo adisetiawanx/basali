@@ -6,8 +6,10 @@ import com.capstone.basaliproject.data.api.retrofit.ApiConfig
 import com.capstone.basaliproject.data.pref.UserPreference
 import com.capstone.basaliproject.data.pref.dataStore
 import com.capstone.basaliproject.data.repo.UserRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 
 object Injection {
     fun provideRepository(context: Context): UserRepository {
