@@ -65,3 +65,15 @@ or (for development)
 ```bash
 npm run dev
 ```
+
+## Example App
+- link: https://basali-service-cpzubjc2ba-et.a.run.app
+API endpoints:
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/auth/register (POST)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/auth/verify-email (PATCH)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/auth/resend-code (PATCH)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/user/profile (GET)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/user/profile/photo (PUT)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/user/profile/photo (DELETE)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/scan/aksara (GET)
+- https://basali-service-cpzubjc2ba-et.a.run.app/api/scan/aksara (POST)
