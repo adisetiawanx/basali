@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.basaliproject.MainActivity
@@ -67,6 +68,11 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         binding.rvAksara.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvAksara.adapter = aksaraAdapter
         val exploreImg = binding.ivExplore
+        val btnHistory = binding.btnHistory
+
+        btnHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_tabHistoryFragment)
+        }
 
         exploreImg.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java)
@@ -80,8 +86,6 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         learnViewModel.learnData.observe(viewLifecycleOwner) { data ->
             aksaraAdapter.submitList(data)
         }
-
-        historyButton()
 
         closeOnBackPressed()
 

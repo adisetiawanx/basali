@@ -1,8 +1,10 @@
 package com.capstone.basaliproject.data.api.response
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class HistoryResponse(
 
@@ -20,7 +22,7 @@ data class DataItem(
 	val predictionResult: String? = null,
 
 	@field:SerializedName("scannedAt")
-	val scannedAt: String? = null,
+	val scannedAt: ScannedAt? = null,
 
 	@field:SerializedName("imgaeUrl")
 	val imgaeUrl: String? = null,
@@ -29,3 +31,19 @@ data class DataItem(
 	@field:SerializedName("predictionId")
 	val predictionId: String
 )
+
+@Parcelize
+data class ScannedAt(
+
+	@field:SerializedName("hour")
+	val hour: Int? = null,
+
+	@field:SerializedName("month")
+	val month: Int? = null,
+
+	@field:SerializedName("year")
+	val year: Int? = null,
+
+	@field:SerializedName("day")
+	val day: Int? = null
+) : Parcelable

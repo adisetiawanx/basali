@@ -40,8 +40,28 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
             Glide.with(binding.imageviewNested.context)
                 .load(item.imgaeUrl)
                 .into(binding.imageviewNested)
+            var month = item.scannedAt?.month.toString()
+            val day = item.scannedAt?.day.toString()
+            val year = item.scannedAt?.year.toString()
+            val hour = item.scannedAt?.hour.toString()
+            when (month){
+                "0" -> month = "January"
+                "1" -> month = "February"
+                "2" -> month = "March"
+                "3" -> month = "April"
+                "4" -> month = "May"
+                "5" -> month = "June"
+                "6" -> month = "July"
+                "7" -> month = "August"
+                "8" -> month = "September"
+                "9" -> month = "October"
+                "10" -> month = "November"
+                "11" -> month = "December"
+            }
+
+            val fullDate = "$day $month $year ($hour:00)"
             binding.titleNested.text = item.predictionResult
-            binding.dateNested.text = item.scannedAt
+            binding.dateNested.text = fullDate
 
             itemView.setOnClickListener {
                 onItemClickCallback?.onItemClicked(item)

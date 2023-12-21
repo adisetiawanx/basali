@@ -55,7 +55,7 @@ class HistoryViewModel : ViewModel() {
                                     val responseBody = response.body()
                                     if (responseBody != null){
                                         val reverse = responseBody.data.reversed()
-                                        val sortedData = reverse.sortedByDescending { it.scannedAt }
+                                        val sortedData = reverse.sortedByDescending { it.scannedAt?.month }
 
                                         _aksaraData.value = sortedData
                                     }
