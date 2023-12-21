@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.capstone.basaliproject.data.api.response.EditProfilePictureResponse
 import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.data.api.retrofit.ApiConfig
 import com.capstone.basaliproject.data.api.retrofit.ApiService
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
@@ -25,6 +27,9 @@ import kotlin.coroutines.resumeWithException
 class SettingsViewModel(private val userRepository: UserRepository) : ViewModel() {
     private val _profileData = MutableLiveData<ProfileResponse?>()
     val profileData: LiveData<ProfileResponse?> get() = _profileData
+
+    private val _editProfilePictureResponse = MutableLiveData<EditProfilePictureResponse>()
+    private val _deleteProfilePictureResponse = MutableLiveData<EditProfilePictureResponse>()
 
     private suspend fun getApiServiceWithToken(): ApiService? {
         val auth = FirebaseAuth.getInstance()
@@ -56,6 +61,45 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
             }
         }
     }
+
+    suspend fun editProfilePicture(image: MultipartBody.Part) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val apiService = getApiServiceWithToken()
+                val response = apiService?.editProfilePicture(image)
+
+                if (response != null) {
+                    if (response.isSuccessful) {
+                        _editProfilePictureResponse.postValue(response.body())
+                    } else {
+                        Log.e("HomeViewModel", "${!response.isSuccessful}")
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Exception: $e")
+            }
+        }
+    }
+
+    suspend fun deleteProfilePicture() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val apiService = getApiServiceWithToken()
+                val response = apiService?.deleteProfilePicture()
+
+                if (response != null) {
+                    if (response.isSuccessful) {
+                        _deleteProfilePictureResponse.postValue(response.body())
+                    } else {
+                        Log.e("HomeViewModel", "${!response.isSuccessful}")
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Exception: $e")
+            }
+        }
+    }
+
 
     private suspend fun <T> executeDeferred(call: Call<T>): T? = suspendCancellableCoroutine { continuation ->
         call.enqueue(object : Callback<T> {

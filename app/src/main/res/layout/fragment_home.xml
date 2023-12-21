@@ -19,7 +19,7 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginStart="28dp"
-            android:src="@drawable/cam_placeholder_logo"
+            android:src="@drawable/ic_baseline_person_24"
             android:contentDescription="@string/profile_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

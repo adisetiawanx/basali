@@ -24,16 +24,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.databinding.FragmentSettingsBinding
+import com.capstone.basaliproject.reduceFileImage
 import com.capstone.basaliproject.ui.logout.LogOutViewModel
 import com.capstone.basaliproject.ui.ViewModelFactory
 import com.capstone.basaliproject.ui.scan.scanner.CameraActivity
 import com.capstone.basaliproject.ui.welcome.WelcomeActivity
+import com.capstone.basaliproject.uriToFile
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -98,10 +103,6 @@ class SettingsFragment : Fragment() {
         val root: View = binding.root
         setupAction()
 
-        binding.editProfile.setOnClickListener {
-            showEditPictureDialog()
-        }
-
         //display name and email user
         auth = FirebaseAuth.getInstance()
         val tvName = binding.tvName
@@ -138,6 +139,9 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupAction() {
+        binding.editProfile.setOnClickListener {
+            showEditPictureDialog()
+        }
         binding.itemNotifications.setOnClickListener {
             startActivity(Intent(requireActivity(), NotificationActivity::class.java))
         }
@@ -214,11 +218,13 @@ class SettingsFragment : Fragment() {
         }
 
         deleteButton.setOnClickListener {
-//            clearImageData()
+            lifecycleScope.launch {
+                viewModelSetting.deleteProfilePicture()
+            }
+
             dialog.dismiss()
 
-            val defaultImageUri = Uri.parse("android.resource://${requireActivity().packageName}/${R.drawable.basaliaksarawb}")
-            binding.profileImage.setImageURI(defaultImageUri)
+            loadImage()
         }
 
         cancelButton.setOnClickListener {
@@ -234,6 +240,18 @@ class SettingsFragment : Fragment() {
     ) {
         if (it.resultCode == CameraActivity.CAMERAX_RESULT) {
             currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
+            lifecycleScope.launch {
+                currentImageUri?.let { uri ->
+                    val imageFile = uriToFile(uri, requireContext()).reduceFileImage()
+                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                    val multipartBody = MultipartBody.Part.createFormData(
+                        "image", imageFile.name, requestImageFile
+                    )
+
+                    viewModelSetting.editProfilePicture(multipartBody)
+                }
+            }
+
             loadImage()
         }
     }
@@ -247,6 +265,17 @@ class SettingsFragment : Fragment() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
+            lifecycleScope.launch {
+                currentImageUri?.let { uri ->
+                    val imageFile = uriToFile(uri, requireContext()).reduceFileImage()
+                    val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+                    val multipartBody = MultipartBody.Part.createFormData(
+                        "image", imageFile.name, requestImageFile
+                    )
+
+                    viewModelSetting.editProfilePicture(multipartBody)
+                }
+            }
             loadImage()
         } else {
             Log.d("Photo Picker", "No media selected")

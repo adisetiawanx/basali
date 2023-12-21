@@ -162,4 +162,6 @@
     <string name="or_continue_with_google">Or continue with Google</string>
     <string name="search">search</string>
     <string name="find_your_history">Find your history</string>
+    <string name="profile">Profile</string>
+    <string name="profile_setting">Profile Setting</string>
 </resources>

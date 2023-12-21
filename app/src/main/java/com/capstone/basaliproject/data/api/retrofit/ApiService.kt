@@ -1,19 +1,18 @@
 package com.capstone.basaliproject.data.api.retrofit
 
 import com.capstone.basaliproject.data.api.response.ConfirmationResponse
+import com.capstone.basaliproject.data.api.response.EditProfilePictureResponse
 import com.capstone.basaliproject.data.api.response.HistoryResponse
 import com.capstone.basaliproject.data.api.response.LoginResponse
-import com.capstone.basaliproject.data.api.response.Photo
-import com.capstone.basaliproject.data.api.response.ProfileData
 import com.capstone.basaliproject.data.api.response.ProfileResponse
 import com.capstone.basaliproject.data.api.response.RegisterResponse
 import com.capstone.basaliproject.data.api.response.ScanResultResponse
-import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
@@ -56,4 +55,12 @@ interface ApiService {
     @GET("/api/user/profile")
     fun getProfile(): Call<ProfileResponse>
 
+    @Multipart
+    @PUT("/api/user/profile/photo")
+    suspend fun editProfilePicture(
+        @Part file: MultipartBody.Part
+    ): Response<EditProfilePictureResponse>
+
+    @DELETE("/api/user/profile/photo")
+    suspend fun deleteProfilePicture(): Response<EditProfilePictureResponse>
 }
