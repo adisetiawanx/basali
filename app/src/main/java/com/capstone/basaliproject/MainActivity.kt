@@ -1,6 +1,5 @@
 package com.capstone.basaliproject
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.capstone.basaliproject.databinding.ActivityMainBinding
-import com.capstone.basaliproject.ui.welcome.WelcomeActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {

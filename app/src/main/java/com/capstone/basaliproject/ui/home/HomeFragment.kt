@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         val btnHistory = binding.btnHistory
 
         btnHistory.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_tabHistoryFragment)
+            findNavController().navigate(R.id.navigation_scan)
         }
 
         exploreImg.setOnClickListener {
@@ -114,14 +114,6 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
                     .load(imageUrl)
                     .into(binding.ivProfile)
             }
-        }
-    }
-
-    private fun historyButton() {
-        binding.btnHistory.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            intent.putExtra("navItemId", R.id.action_homeFragment_to_tabHistoryFragment)
-            startActivity(intent)
         }
     }
 

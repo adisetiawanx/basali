@@ -14,10 +14,7 @@
             android:id="@+id/action_navigation_home_to_learnDetailFragment"
             app:destination="@id/learnDetailFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_tabHistoryFragment"
-            app:destination="@id/tabHistoryFragment" />
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_scan"
+            android:id="@+id/action_navigation_home_to_navigation_scan2"
             app:destination="@id/navigation_scan" />
     </fragment>
 
@@ -29,6 +26,9 @@
         <action
             android:id="@+id/action_navigation_scan_to_tabScanFragment"
             app:destination="@id/tabScanFragment" />
+        <action
+            android:id="@+id/action_navigation_scan_to_tabHistoryFragment"
+            app:destination="@id/tabHistoryFragment" />
     </fragment>
 
     <fragment

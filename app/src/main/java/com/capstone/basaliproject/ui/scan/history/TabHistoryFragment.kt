@@ -53,6 +53,7 @@ class TabHistoryFragment : Fragment() {
             binding.rvHistory.setHasFixedSize(true)
             binding.rvHistory.adapter = adapter
 
+
             historyViewModel.aksaraData.observe(viewLifecycleOwner){ listUsers ->
                 if (listUsers.isNotEmpty()){
                     adapter.setList(listUsers)

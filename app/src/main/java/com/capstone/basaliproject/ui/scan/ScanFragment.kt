@@ -2,25 +2,16 @@ package com.capstone.basaliproject.ui.scan
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.room.util.query
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.basaliproject.R
 import com.capstone.basaliproject.databinding.FragmentScanBinding
 import com.capstone.basaliproject.databinding.FragmentTabHistoryBinding
-import com.capstone.basaliproject.ui.ViewModelFactory
-import com.capstone.basaliproject.ui.scan.history.HistoryViewModel
 import com.capstone.basaliproject.ui.scan.history.TabHistoryFragment
 import com.capstone.basaliproject.ui.scan.scanner.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -36,12 +27,6 @@ class ScanFragment : Fragment() {
     }
 
     private var _binding: FragmentScanBinding? = null
-    private var menuItem: MenuItem? = null
-    private val historyViewModel by viewModels<HistoryViewModel> {
-        ViewModelFactory.getInstance(requireContext())
-    }
-    private lateinit var historyBinding: FragmentTabHistoryBinding
-
 
     private val binding get() = _binding!!
 
