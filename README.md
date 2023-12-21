@@ -67,8 +67,8 @@ npm run dev
 ```
 
 ## Example App
-- link: https://basali-service-cpzubjc2ba-et.a.run.app
-API endpoints:
+- link: https://basali-service-cpzubjc2ba-et.a.run.app<br>
+<br>API endpoints:
 - https://basali-service-cpzubjc2ba-et.a.run.app/api/auth/register (POST)
 - https://basali-service-cpzubjc2ba-et.a.run.app/api/auth/verify-email (PATCH)
 - https://basali-service-cpzubjc2ba-et.a.run.app/api/auth/resend-code (PATCH)
