@@ -1,0 +1,10 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="Aksara"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:textColor="@android:color/black"/>

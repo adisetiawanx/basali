@@ -7,6 +7,14 @@
     android:orientation="vertical"
     android:gravity="center">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/confirmation_title"
         android:layout_width="match_parent"
@@ -20,6 +28,8 @@
         android:textStyle="bold"
         tools:alpha="100" />
 
+
+
     <TextView
         android:id="@+id/confirmation_message"
         android:layout_width="match_parent"
@@ -31,7 +41,6 @@
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
         android:text="@string/confirmation_message"
-        android:textColor="@color/NeutralDarkLight"
         android:textSize="14sp"
         android:textStyle="normal"
         tools:alpha="100" />

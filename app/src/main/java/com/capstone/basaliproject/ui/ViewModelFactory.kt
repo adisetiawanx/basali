@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.basaliproject.data.di.Injection
 import com.capstone.basaliproject.data.repo.UserRepository
-import com.capstone.basaliproject.ui.Logout.LogOutViewModel
-import com.capstone.basaliproject.ui.login.LoginViewModel
+import com.capstone.basaliproject.ui.home.HomeViewModel
+import com.capstone.basaliproject.ui.logout.LogOutViewModel
+import com.capstone.basaliproject.ui.scan.history.HistoryViewModel
+import com.capstone.basaliproject.ui.scan.scanner.ScanViewModel
+import com.capstone.basaliproject.ui.settings.SettingsViewModel
 import com.capstone.basaliproject.ui.signup.SignupViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -16,11 +19,20 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel(repository) as T
             }
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                LoginViewModel(repository) as T
-            }
             modelClass.isAssignableFrom(LogOutViewModel::class.java) -> {
-                LogOutViewModel(repository) as T
+                LogOutViewModel() as T
+            }
+            modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
+                SettingsViewModel() as T
+            }
+            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+                ScanViewModel() as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel() as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -39,9 +51,5 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             return INSTANCE as ViewModelFactory
         }
 
-        fun refreshObject() {
-            INSTANCE = null
-            Injection.resetIntance()
-        }
     }
 }

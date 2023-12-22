@@ -15,10 +15,7 @@ object Injection {
             pref.getSession().first()
         }
         val apiService = ApiConfig.getApiService(user.token)
-        return UserRepository.getInstance(pref, apiService)
+        return UserRepository.getInstance(apiService)
     }
 
-    fun resetIntance() {
-        UserRepository.resetIntance()
-    }
 }
