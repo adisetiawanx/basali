@@ -36,7 +36,7 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private val homeViewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -102,7 +102,7 @@ class HomeFragment : Fragment(), ListAksaraAdapter.ItemClickListener {
         return root
     }
 
-    private fun showProfileImage(profileResponse: ProfileResponse) {
+    fun showProfileImage(profileResponse: ProfileResponse) {
         val profileData = profileResponse.data
         val photo = profileData?.photo
 

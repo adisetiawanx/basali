@@ -53,7 +53,7 @@ class LearnDetailFragment : Fragment() {
 
         // Handle button click
         btnDone.setOnClickListener {
-            // Do something when button is clicked
+            findNavController().navigateUp()
         }
 
         // Initialize your ViewModel
