@@ -25,7 +25,6 @@ class TabHistoryFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,11 +64,6 @@ class TabHistoryFragment : Fragment() {
         return root
     }
 
-    override fun onResume() {
-        super.onResume()
-        historyViewModel.searchHistory("")
-    }
-
     private fun showWarning(titleFill: String, descFill: String) {
         val builder = AlertDialog.Builder(requireContext())
 
@@ -96,11 +90,6 @@ class TabHistoryFragment : Fragment() {
 
     private fun showLoading(state: Boolean) {
         binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

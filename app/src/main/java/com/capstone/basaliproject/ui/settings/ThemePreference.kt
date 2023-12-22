@@ -2,6 +2,7 @@ package com.capstone.basaliproject.ui.settings
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.capstone.basaliproject.NightMode
@@ -28,6 +29,7 @@ class ThemePreference : PreferenceFragmentCompat() {
     private fun updateTheme(nightMode: Int): Boolean {
         AppCompatDelegate.setDefaultNightMode(nightMode)
         requireActivity().recreate()
+        findNavController().navigateUp()
         return true
     }
 }
